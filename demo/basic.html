@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="../dist/onscreenness.js"></script>
+	<style type="text/css">
+		body {
+			margin: 3em;
+		}
+		.example {
+			border: 1px solid black;
+			margin: 1em 0;
+			padding: 3em;
+			background: lightsteelblue;
+		}
+		.example:before {
+			content: 'onscreenness: ' attr(data-onscreenness);
+			display: block;
+			margin-bottom: .25em; 
+		}
+	</style>
+	</head>
+	<body>
+		<h2>
+			Basic Example
+		</h2>
+		<div class="example">
+			basic example element
+		</div>
+		<div class="example">
+			basic example element
+		</div>
+		<div class="example">
+			basic example element
+		</div>
+		<div class="example">
+			basic example element
+		</div>
+		<div class="example">
+			basic example element
+		</div>
+		<div class="example">
+			basic example element
+		</div>
+		<div class="example">
+			basic example element
+		</div>
+		<div class="example">
+			basic example element
+		</div>
+		<script>
+			onScreenness.collect('.example');
+		</script>
+	</body>
+</html>
