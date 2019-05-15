@@ -1,5 +1,9 @@
 
-var onScreenness = new function () {
+import {
+	roundAt
+} from './utilities';
+
+const onScreenness = new function () {
 	var queryList = [];
 
 	/**
@@ -17,15 +21,6 @@ var onScreenness = new function () {
 	 */
 	this.reset = function () {
 		queryList = [];
-	};
-
-	/**
-	 * Round at decimals
-	 * @param {number} number - any number to round
-	 * @param {number} decimals - number of decimals to round at
-	 */
-	var roundAt = function (number, decimals) {
-		return Number ( Math.round ( number + 'e' + decimals ) + 'e-' + decimals );
 	};
 
 	/**
@@ -108,3 +103,5 @@ var onScreenness = new function () {
 	window.addEventListener('resize', changeHandler, false);
 	window.addEventListener('scroll', changeHandler, false);
 };
+
+export default onScreenness;
