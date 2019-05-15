@@ -1,5 +1,4 @@
 // rollup.config.js
-import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import minify from 'rollup-plugin-babel-minify';
 
@@ -13,7 +12,6 @@ export default {
     name
   },
   plugins: [
-    resolve(),
     babel({
       exclude: 'node_modules/**' // only transpile our source code
     }),
