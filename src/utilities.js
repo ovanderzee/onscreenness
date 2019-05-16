@@ -1,6 +1,7 @@
 
 /**
  * Round at decimals
+ * @private
  * @param {number} number - any number to round
  * @param {number} decimals - number of decimals to round at
  */

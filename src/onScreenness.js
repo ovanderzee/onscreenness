@@ -25,6 +25,7 @@ const onScreenness = new function () {
 
 	/**
 	 * Calculate onscreenness figures of an element
+	 * @private
 	 * @param {object} boundingRect
 	 * @returns {object} onscreenness figures
 	 */
@@ -59,6 +60,7 @@ const onScreenness = new function () {
 
 	/** 
 	 * Updates dataset and classNames of an element
+	 * @private
 	 * @param {element} element
 	 * @param {object} presence
 	 */
@@ -84,6 +86,7 @@ const onScreenness = new function () {
 
 	/** 
 	 * Loops all elements from query collection
+	 * @private
 	 */
 	var changeHandler = function () {
 		var elementList = document.querySelectorAll ( queryList.join(', ') );
