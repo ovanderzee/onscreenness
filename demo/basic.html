@@ -28,11 +28,11 @@
 		<h2>
 			Basic Example
 		</h2>
-		<div>
+		<form>
 			<button type="button" onclick="onScreenness.collect('.example');">
 				Set initial collection
 			</button>
-			<button type="button" onclick="onScreenness.exclude('.example:first-child');">
+			<button type="button" onclick="onScreenness.exclude('.example:first-of-type');">
 				Exclude first example element
 			</button>
 			<button type="button" onclick="onScreenness.collect('h2');">
@@ -44,7 +44,7 @@
 			<button type="button" onclick="onScreenness.reset();">
 				Reset the collection
 			</button>
-		</div>
+		</form>
 		<div class="example">Basic Example Element</div>
 		<div class="example">Basic Example Element</div>
 		<div class="example">Basic Example Element</div>
