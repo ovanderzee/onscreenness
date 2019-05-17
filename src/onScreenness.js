@@ -5,21 +5,92 @@ import {
 
 const onScreenness = new function () {
 	var queryList = [];
+	var blackList = [];
 
 	/**
-	 * Add to list of unique queries
-	 * @param {string} query - querySelector
+	 * Remove dataset and classNames from queried elements
+	 * @private
+	 * @param {string} removeList - querySelector
 	 */
-	this.collect = function ( query ) {
-		if ( queryList.indexOf( query ) == -1 ) {
-			queryList.push ( query );
-		}
+	var detachIdentifiers = function ( removeList ) {
+		var elementList = removeList.length 
+							? document.querySelectorAll ( removeList.join(',') ) 
+							: [];
+
+		elementList.forEach( function ( element ) {
+			if ( !element ) {
+				return;
+			}
+			element.classList.remove('onscreen');
+			element.classList.remove('offscreen');
+			delete element.dataset['onscreenness'];
+		});
+	};
+
+	/**
+	 * Preprocess query string to normalised array
+	 * @private
+	 * @param {string} rawQuery - (multiple) querySelector
+	 */
+	var trimmedQueries = function ( rawQuery ) {
+		var queries = rawQuery.split(',');
+		return queries.filter ( ( query ) => {
+			return query.trim();
+		});
+	};
+
+	/**
+	 * Add solitary queries to a list, avoiding duplication
+	 * @private
+	 * @param {string} currentList - list with unique solitary queries
+	 * @param {string} newQueries - querySelector
+	 */
+	var addQueries = function ( currentList, newQueries ) {
+		newQueries.forEach ( ( newQuery ) => {
+			if ( currentList.indexOf ( newQuery ) == -1 ) {
+				currentList.push ( newQuery );
+			}
+		});
+	};
+
+	/**
+	 * Add query to queryList
+	 * @param {string} rawQuery - querySelector
+	 */
+	this.collect = function ( rawQuery ) {
+		var queries = trimmedQueries ( rawQuery );
+		addQueries ( queryList, queries );
+	};
+
+	/**
+	 * Add to blacklist
+	 * @param {string} rawQuery - querySelector
+	 */
+	this.exclude = function ( rawQuery ) {
+		var queries = trimmedQueries ( rawQuery );
+		detachIdentifiers ( queries );
+		addQueries ( blackList, queries );
+	};
+
+	/**
+	 * Remove query from queryList
+	 * @param {string} rawQuery - querySelector
+	 */
+	this.remove = function ( rawQuery ) {
+		var queries = trimmedQueries ( rawQuery );
+		queries.forEach ( ( query ) => {
+			if ( queryList.indexOf ( query ) > -1 ) {
+				detachIdentifiers ( [query] );
+				queryList.splice( queryList.indexOf ( query ), 1 );
+			}
+		});
 	};
 
 	/**
 	 * Empty the querylist
 	 */
 	this.reset = function () {
+		detachIdentifiers ( queryList );
 		queryList = [];
 	};
 
@@ -64,7 +135,7 @@ const onScreenness = new function () {
 	 * @param {element} element
 	 * @param {object} presence
 	 */
-	var applyIdentifiers = function ( element, presence ) {
+	var attachIdentifiers = function ( element, presence ) {
 		element.dataset['onscreenness'] = String ( presence );
 
 		var taggedOn = element.className.split(' ').indexOf ('onscreen') > -1;
@@ -92,11 +163,26 @@ const onScreenness = new function () {
 		var elementList = queryList.length 
 							? document.querySelectorAll ( queryList.join(',') ) 
 							: [];
+		var ignoreList = blackList.length 
+							? document.querySelectorAll ( blackList.join(',') ) 
+							: [];
 
-		elementList.forEach( function ( element ) {
+		elementList.forEach ( function ( element ) {
+			if ( !element ) {
+				return;
+			}
+			var ignoreMe = false;
+			ignoreList.forEach ( function ( ignore ) {
+				if ( ignore === element ) {
+					ignoreMe = true;
+				}
+			});
+			if ( ignoreMe ) {
+				return;
+			}
 			var boundingRect = element.getBoundingClientRect();
 			var presence = roundAt ( calculatePresence ( boundingRect ).surface, 3 );
-			applyIdentifiers ( element, presence );
+			attachIdentifiers ( element, presence );
 		});
 	};
 

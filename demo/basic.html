@@ -6,16 +6,21 @@
 		body {
 			margin: 3em;
 		}
+		button {
+			font-size: inherit;
+			padding: 0.333em;
+			margin: 0.333em;
+		}
 		.example {
 			border: 1px solid black;
 			margin: 1em 0;
 			padding: 3em;
 			background: lightsteelblue;
 		}
-		.example:before {
+		[data-onscreenness]:after {
 			content: 'onscreenness: ' attr(data-onscreenness);
 			display: block;
-			margin-bottom: .25em; 
+			margin: .25em auto; 
 		}
 	</style>
 	</head>
@@ -23,32 +28,30 @@
 		<h2>
 			Basic Example
 		</h2>
-		<div class="example">
-			basic example element
+		<div>
+			<button type="button" onclick="onScreenness.collect('.example');">
+				Set initial collection
+			</button>
+			<button type="button" onclick="onScreenness.exclude('.example:first-child');">
+				Exclude first example element
+			</button>
+			<button type="button" onclick="onScreenness.collect('h2');">
+				Add header
+			</button>
+			<button type="button" onclick="onScreenness.remove('h2');">
+				Remove header
+			</button>
+			<button type="button" onclick="onScreenness.reset();">
+				Reset the collection
+			</button>
 		</div>
-		<div class="example">
-			basic example element
-		</div>
-		<div class="example">
-			basic example element
-		</div>
-		<div class="example">
-			basic example element
-		</div>
-		<div class="example">
-			basic example element
-		</div>
-		<div class="example">
-			basic example element
-		</div>
-		<div class="example">
-			basic example element
-		</div>
-		<div class="example">
-			basic example element
-		</div>
-		<script>
-			onScreenness.collect('.example');
-		</script>
+		<div class="example">Basic Example Element</div>
+		<div class="example">Basic Example Element</div>
+		<div class="example">Basic Example Element</div>
+		<div class="example">Basic Example Element</div>
+		<div class="example">Basic Example Element</div>
+		<div class="example">Basic Example Element</div>
+		<div class="example">Basic Example Element</div>
+		<div class="example">Basic Example Element</div>
 	</body>
 </html>

@@ -4,15 +4,35 @@
 
 -   [collect][1]
     -   [Parameters][2]
--   [reset][3]
+-   [exclude][3]
+    -   [Parameters][4]
+-   [remove][5]
+    -   [Parameters][6]
+-   [reset][7]
 
 ## collect
 
-Add to list of unique queries
+Add to queryList
 
 ### Parameters
 
--   `query` **[string][4]** querySelector
+-   `rawQuery` **[string][8]** querySelector
+
+## exclude
+
+Add to backlist
+
+### Parameters
+
+-   `rawQuery` **[string][8]** querySelector
+
+## remove
+
+Remove query from queryLists
+
+### Parameters
+
+-   `rawQuery` **[string][8]** querySelector
 
 ## reset
 
@@ -22,6 +42,14 @@ Empty the querylist
 
 [2]: #parameters
 
-[3]: #reset
+[3]: #exclude
 
-[4]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+[4]: #parameters-1
+
+[5]: #remove
+
+[6]: #parameters-2
+
+[7]: #reset
+
+[8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
