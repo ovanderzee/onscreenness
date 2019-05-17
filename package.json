@@ -15,7 +15,9 @@
   },
   "keywords": [
     "onscreen",
-    "screen presence"
+    "offscreen",
+    "screen presence",
+    "viewport"
   ],
   "author": "Onno van der Zee",
   "license": "ISC",
