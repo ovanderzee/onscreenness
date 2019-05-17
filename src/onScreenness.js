@@ -89,7 +89,9 @@ const onScreenness = new function () {
 	 * @private
 	 */
 	var changeHandler = function () {
-		var elementList = document.querySelectorAll ( queryList.join(', ') );
+		var elementList = queryList.length 
+							? document.querySelectorAll ( queryList.join(',') ) 
+							: [];
 
 		elementList.forEach( function ( element ) {
 			var boundingRect = element.getBoundingClientRect();
