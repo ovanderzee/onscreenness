@@ -25,7 +25,7 @@ and "offscreen" when it is completely outside the viewport.
 With stylerules you can then set the elements appearance when it enters or leaves the viewport, 
 that's up to you .
 
-<a href="/ovanderzee/onscreenness/tree/master/demo">see demo folder</a>. 
+<a href="demo">see demo folder</a>. 
 
 
 ## Inner workings
@@ -34,6 +34,7 @@ that's up to you .
 * readystatechange to interactive
 * resize window
 * scrolling
+* DOM observation
 
 ### Application Programming Interface
-<a href="/ovanderzee/onscreenness/blob/master/API.md">see API description</a>. 
+<a href="API.md">see API description</a>. 

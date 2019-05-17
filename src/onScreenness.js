@@ -104,7 +104,7 @@ const onScreenness = new function () {
 		}
 	}, false);
 	window.addEventListener('resize', changeHandler, false);
-	window.addEventListener('scroll', changeHandler, false);
+	window.addEventListener('scroll', changeHandler, true);
 };
 
 export default onScreenness;
