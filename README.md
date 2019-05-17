@@ -8,8 +8,18 @@ You can sign up your elements for the onScreenness-treat using a CSS selector.
 
     let querySelector = '#myElement'
     onScreenness.collect(querySelector);
+    onScreenness.collect('.paragraph');
 
 The collect method may be called several times to build up the collection.
+
+Elements covered by a query in the collection can be exclude with an alternative query.
+
+    onScreenness.exclude('.paragraph.emphasis');
+
+CSS selectors added to the collection can be removed.
+
+    onScreenness.collect('#myElement');
+
 The element collection can also be emptied.
 
     onScreenness.reset();
@@ -17,9 +27,9 @@ The element collection can also be emptied.
 
 ## Have the onscreen presence data
 On selected events that change the contents of the viewport, the collection is iterated.
-Of any element involved is assesed to what extent its bounding rectangle is present the viewport.
+Of any element involved is assesed to what extent its bounding rectangle is present in the viewport.
 This fraction is put in the data-onscreenness attribute.
-Also, a classname is "onscreen" is assigned when the element is completely inside viewport, 
+Also, a classname "onscreen" is assigned when the element is completely inside viewport, 
 and "offscreen" when it is completely outside the viewport.
 
 With stylerules you can then set the elements appearance when it enters or leaves the viewport, 
@@ -34,7 +44,6 @@ that's up to you .
 * readystatechange to interactive
 * resize window
 * scrolling
-* DOM observation
 
 ### Application Programming Interface
 <a href="API.md">see API description</a>. 
