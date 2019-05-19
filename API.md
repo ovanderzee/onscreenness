@@ -12,7 +12,7 @@
 
 ## collect
 
-Add to queryList
+Add query to queryList
 
 ### Parameters
 
@@ -20,7 +20,7 @@ Add to queryList
 
 ## exclude
 
-Add to backlist
+Add to blacklist
 
 ### Parameters
 
@@ -28,7 +28,7 @@ Add to backlist
 
 ## remove
 
-Remove query from queryLists
+Remove query from queryList
 
 ### Parameters
 
