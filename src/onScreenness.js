@@ -1,5 +1,6 @@
 
 import {
+	commaSeperatedListToArray,
 	roundAt
 } from './utilities';
 
@@ -28,18 +29,6 @@ const onScreenness = new function () {
 	};
 
 	/**
-	 * Preprocess query string to normalised array
-	 * @private
-	 * @param {string} rawQuery - (multiple) querySelector
-	 */
-	var trimmedQueries = function ( rawQuery ) {
-		var queries = rawQuery.split(',');
-		return queries.filter ( ( query ) => {
-			return query.trim();
-		});
-	};
-
-	/**
 	 * Add solitary queries to a list, avoiding duplication
 	 * @private
 	 * @param {string} currentList - list with unique solitary queries
@@ -58,7 +47,7 @@ const onScreenness = new function () {
 	 * @param {string} rawQuery - querySelector
 	 */
 	this.collect = function ( rawQuery ) {
-		var queries = trimmedQueries ( rawQuery );
+		var queries = commaSeperatedListToArray ( rawQuery );
 		addQueries ( queryList, queries );
 	};
 
@@ -67,7 +56,7 @@ const onScreenness = new function () {
 	 * @param {string} rawQuery - querySelector
 	 */
 	this.exclude = function ( rawQuery ) {
-		var queries = trimmedQueries ( rawQuery );
+		var queries = commaSeperatedListToArray ( rawQuery );
 		detachIdentifiers ( queries );
 		addQueries ( blackList, queries );
 	};
@@ -77,7 +66,7 @@ const onScreenness = new function () {
 	 * @param {string} rawQuery - querySelector
 	 */
 	this.remove = function ( rawQuery ) {
-		var queries = trimmedQueries ( rawQuery );
+		var queries = commaSeperatedListToArray ( rawQuery );
 		queries.forEach ( ( query ) => {
 			if ( queryList.indexOf ( query ) > -1 ) {
 				detachIdentifiers ( [query] );
@@ -92,6 +81,7 @@ const onScreenness = new function () {
 	this.reset = function () {
 		detachIdentifiers ( queryList );
 		queryList = [];
+		blackList = [];
 	};
 
 	/**
@@ -193,6 +183,19 @@ const onScreenness = new function () {
 	}, false);
 	window.addEventListener('resize', changeHandler, false);
 	window.addEventListener('scroll', changeHandler, true);
+
+	/**
+	 * Current variables, for testing purposes
+	 * @private
+	 * @returns {object} current variables
+	 */
+	this.testVariables = function () {
+		return {
+			queryList: queryList,
+			blackList: blackList
+		};
+	};
+
 };
 
 export default onScreenness;
