@@ -1,6 +1,7 @@
 
 import {
 	commaSeperatedListToArray,
+	queryToArray,
 	roundAt
 } from './utilities';
 
@@ -15,11 +16,12 @@ const onScreenness = new function () {
 	 */
 	var detachIdentifiers = function ( removeList ) {
 		var elementList = removeList.length 
-							? document.querySelectorAll ( removeList.join(',') ) 
-							: [];
+			? queryToArray ( removeList.join(',') )
+			: [];
 
 		elementList.forEach( function ( element ) {
 			if ( !element ) {
+				// the elements could be deleted
 				return;
 			}
 			element.classList.remove('onscreen');
@@ -36,7 +38,7 @@ const onScreenness = new function () {
 	 */
 	var addQueries = function ( currentList, newQueries ) {
 		newQueries.forEach ( ( newQuery ) => {
-			if ( currentList.indexOf ( newQuery ) == -1 ) {
+			if ( !currentList.includes ( newQuery ) ) {
 				currentList.push ( newQuery );
 			}
 		});
@@ -68,9 +70,9 @@ const onScreenness = new function () {
 	this.remove = function ( rawQuery ) {
 		var queries = commaSeperatedListToArray ( rawQuery );
 		queries.forEach ( ( query ) => {
-			if ( queryList.indexOf ( query ) > -1 ) {
+			if ( queryList.includes ( query ) ) {
 				detachIdentifiers ( [query] );
-				queryList.splice( queryList.indexOf ( query ), 1 );
+				queryList.splice ( queryList.indexOf ( query ), 1 );
 			}
 		});
 	};
@@ -128,48 +130,48 @@ const onScreenness = new function () {
 	var attachIdentifiers = function ( element, presence ) {
 		element.dataset['onscreenness'] = String ( presence );
 
-		var taggedOn = element.className.split(' ').indexOf ('onscreen') > -1;
+		var taggedOn = element.classList.contains('onscreen');
 		if ( presence === 1 && !taggedOn ) {
-			element.className += ' onscreen';
+			element.classList.add('onscreen');
 		}
 		if ( presence < 1 && taggedOn ) {
-			element.className = element.className.replace(' onscreen', '');
+			element.classList.remove('onscreen');
 		}
 
-		var taggedOff = element.className.split(' ').indexOf ('offscreen') > -1;
+		var taggedOff = element.classList.contains('offscreen');
 		if ( presence === 0 && !taggedOff ) {
-			element.className += ' offscreen';
+			element.classList.add('offscreen');
 		}
 		if ( presence > 0 && taggedOff ) {
-			element.className = element.className.replace(' offscreen', '');
+			element.classList.remove('offscreen');
 		}
 	};
 
 	/** 
-	 * Loops all elements from query collection
+	 * List of current elements to work on
+	 * @private
+	 */
+	var composeJobList = function () {
+		var elementList = queryList.length 
+			? queryToArray ( queryList.join(',') )
+			: [];
+		var ignoreList = blackList.length 
+			? queryToArray ( blackList.join(',') )
+			: [];
+
+		if ( elementList.length ) {
+			return elementList.filter ( elm => !ignoreList.includes ( elm ) );
+		} else {
+			return [];
+		}
+	};
+
+	/** 
+	 * Loops all elements from the jobList
 	 * @private
 	 */
 	var changeHandler = function () {
-		var elementList = queryList.length 
-							? document.querySelectorAll ( queryList.join(',') ) 
-							: [];
-		var ignoreList = blackList.length 
-							? document.querySelectorAll ( blackList.join(',') ) 
-							: [];
-
-		elementList.forEach ( function ( element ) {
-			if ( !element ) {
-				return;
-			}
-			var ignoreMe = false;
-			ignoreList.forEach ( function ( ignore ) {
-				if ( ignore === element ) {
-					ignoreMe = true;
-				}
-			});
-			if ( ignoreMe ) {
-				return;
-			}
+		composeJobList().forEach ( function ( element ) {
 			var boundingRect = element.getBoundingClientRect();
 			var presence = roundAt ( calculatePresence ( boundingRect ).surface, 3 );
 			attachIdentifiers ( element, presence );
