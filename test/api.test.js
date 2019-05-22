@@ -1,9 +1,9 @@
-import onScreenness from '../src/onScreenness';
+import { onScreenness, onScreenTest } from '../src/onScreenness';
 
 let getVars;
 
 beforeAll(() => {
-  getVars = onScreenness.testVariables;
+  getVars = onScreenTest.getVariables;
 });
 
 beforeEach(() => {

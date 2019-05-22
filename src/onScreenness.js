@@ -5,7 +5,7 @@ import {
 	roundAt
 } from './utilities';
 
-const onScreenness = new function () {
+let onScreennessModule = (function () {
 	var queryList = [];
 	var blackList = [];
 
@@ -48,7 +48,7 @@ const onScreenness = new function () {
 	 * Add query to queryList
 	 * @param {string} rawQuery - querySelector
 	 */
-	this.collect = function ( rawQuery ) {
+	var collect = function ( rawQuery ) {
 		var queries = commaSeperatedListToArray ( rawQuery );
 		addQueries ( queryList, queries );
 	};
@@ -57,7 +57,7 @@ const onScreenness = new function () {
 	 * Add to blacklist
 	 * @param {string} rawQuery - querySelector
 	 */
-	this.exclude = function ( rawQuery ) {
+	var exclude = function ( rawQuery ) {
 		var queries = commaSeperatedListToArray ( rawQuery );
 		detachIdentifiers ( queries );
 		addQueries ( blackList, queries );
@@ -67,7 +67,7 @@ const onScreenness = new function () {
 	 * Remove query from queryList
 	 * @param {string} rawQuery - querySelector
 	 */
-	this.remove = function ( rawQuery ) {
+	var remove = function ( rawQuery ) {
 		var queries = commaSeperatedListToArray ( rawQuery );
 		queries.forEach ( ( query ) => {
 			if ( queryList.includes ( query ) ) {
@@ -80,7 +80,7 @@ const onScreenness = new function () {
 	/**
 	 * Empty the querylist
 	 */
-	this.reset = function () {
+	var reset = function () {
 		detachIdentifiers ( queryList );
 		queryList = [];
 		blackList = [];
@@ -186,18 +186,30 @@ const onScreenness = new function () {
 	window.addEventListener('resize', changeHandler, false);
 	window.addEventListener('scroll', changeHandler, true);
 
-	/**
-	 * Current variables, for testing purposes
-	 * @private
-	 * @returns {object} current variables
-	 */
-	this.testVariables = function () {
-		return {
-			queryList: queryList,
-			blackList: blackList
-		};
-	};
+	return {
+		publicAPI: {
+			collect: collect,
+			exclude: exclude,
+			remove: remove,
+			reset: reset
+		},
+		testSuite: {
+			/**
+			 * Current variables, for testing purposes
+			 * @private
+			 * @returns {object} current variables
+			 */
+			getVariables: function () {
+				return {
+					queryList: queryList,
+					blackList: blackList
+				};
+			}
+		}
+	}
+})();
 
-};
+const onScreenness = onScreennessModule.publicAPI;
+const onScreenTest = onScreennessModule.testSuite;
 
-export default onScreenness;
+export { onScreenness, onScreenTest };
