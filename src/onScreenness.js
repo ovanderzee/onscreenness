@@ -148,7 +148,7 @@ let onScreennessModule = (function () {
 	};
 
 	/** 
-	 * List of current elements to work on
+	 * Live list of elements to work on
 	 * @private
 	 */
 	var composeJobList = function () {
@@ -185,6 +185,14 @@ let onScreennessModule = (function () {
 	}, false);
 	window.addEventListener('resize', changeHandler, false);
 	window.addEventListener('scroll', changeHandler, true);
+	let DOMObserver = new MutationObserver( function ( mutationsList, observer ) {
+		if ( mutationsList.length ) {
+			changeHandler();
+		}
+	});
+	window.addEventListener('load', function () {
+		DOMObserver.observe( document.body, { childList: true, subtree: true } );
+	}, true);
 
 	return {
 		publicAPI: {

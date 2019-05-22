@@ -44,6 +44,7 @@ that's up to you .
 * readystatechange to interactive
 * resize window
 * scrolling
+* DOM observation
 
 ### Application Programming Interface
 <a href="API.md">see API description</a>. 
