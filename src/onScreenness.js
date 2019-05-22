@@ -204,12 +204,16 @@ let onScreennessModule = (function () {
 					queryList: queryList,
 					blackList: blackList
 				};
-			}
+			},
+			triggerEvent: changeHandler,
+			calculatePresence: calculatePresence,
+			treatElement: attachIdentifiers,
+			cleanElements: detachIdentifiers
 		}
 	}
 })();
 
-const onScreenness = onScreennessModule.publicAPI;
-const onScreenTest = onScreennessModule.testSuite;
+let onScreenness = onScreennessModule.publicAPI;
+let onScreenTest = onScreennessModule.testSuite;
 
 export { onScreenness, onScreenTest };
