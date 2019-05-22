@@ -4,7 +4,7 @@ Sign up your elements and a have their onscreen presence be assessed
 
 ## Sign up your elements
 Once bundled in your project onScreenness is available as a global object.
-You can sign up your elements for the onScreenness-treat using a CSS selector.
+You can sign up your elements for the onScreenness-treat using a CSS selector:
 
     let querySelector = '#myElement'
     onScreenness.collect(querySelector);
@@ -12,15 +12,16 @@ You can sign up your elements for the onScreenness-treat using a CSS selector.
 
 The collect method may be called several times to build up the collection.
 
-Elements covered by a query in the collection can be exclude with an alternative query.
+Elements covered by a query in the collection can be excluded with an alternative query:
 
     onScreenness.exclude('.paragraph.emphasis');
+    onScreenness.exclude('#that-paragraph');
 
-CSS selectors added to the collection can be removed.
+CSS selectors added to the collection can be removed:
 
-    onScreenness.collect('#myElement');
+    onScreenness.remove('#myElement');
 
-The element collection can also be emptied.
+All specified queries can be removed:
 
     onScreenness.reset();
 
