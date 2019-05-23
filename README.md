@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/ovanderzee/onscreenness.svg?branch=master)](https://travis-ci.com/ovanderzee/onscreenness)
+
 # onscreenness
 Sign up your elements and a have their onscreen presence be assessed
 
