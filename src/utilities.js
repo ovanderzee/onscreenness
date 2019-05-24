@@ -18,7 +18,7 @@ const roundAt = function (number, decimals) {
  */
 const commaSeperatedListToArray = function ( commaSeperatedList ) {
 	let list = commaSeperatedList.split(',');
-	let trimmed = list.map ( item => item.trim() );
+	let trimmed = list.map ( item => item.trim().replace(/\s+/g, ' ') );
 	return trimmed.filter ( item => {
 		return item.length;
 	});

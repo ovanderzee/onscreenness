@@ -10,9 +10,9 @@ test('roundAt rounds 1.005 to 1.01', () => {
 });
 
 test('commaSeperatedListToArray applies normalisation', () => {
-  let input = '  .myClass  ,  #myId   ';
+  let input = '  .myClass  ,  #myId   myElement ';
   let output = JSON.stringify(commaSeperatedListToArray(input));
-  expect(output).toBe('[".myClass","#myId"]');
+  expect(output).toBe('[".myClass","#myId myElement"]');
 });
 
 test('commaSeperatedListToArray applies sanitation', () => {
