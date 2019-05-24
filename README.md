@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.com/ovanderzee/onscreenness.svg?branch=master)](https://travis-ci.com/ovanderzee/onscreenness)
+[![Coverage Status](https://coveralls.io/repos/github/ovanderzee/onscreenness/badge.svg?branch=master)](https://coveralls.io/github/ovanderzee/onscreenness?branch=master)
 
 # onscreenness
 Sign up your elements and a have their onscreen presence be assessed
