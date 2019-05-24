@@ -39,7 +39,8 @@ describe('calculatePresence calculates presence by a bounding rectangle', functi
     Object.defineProperty(docElem, 'clientHeight', {writable: true, configurable: true, value: window.innerHeight})
   });
 
-  /* Test the functions */
+
+  /* Test scroll scenario's */
 
   test('scrolled up, the first div is visible, the last not', () => {
     let boundingRects = getBoundingRects();

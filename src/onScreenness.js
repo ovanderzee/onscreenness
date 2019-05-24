@@ -214,6 +214,7 @@ let onScreennessModule = (function () {
 				};
 			},
 			triggerEvent: changeHandler,
+			makeNodeList: composeJobList,
 			calculatePresence: calculatePresence,
 			treatElement: attachIdentifiers,
 			cleanElements: detachIdentifiers
