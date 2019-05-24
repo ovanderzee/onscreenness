@@ -2,6 +2,11 @@
 
 module.exports = {
 
+
+  "collectCoverageFrom": [
+    "src/*.*"
+  ],
+
   "setupFilesAfterEnv": [
     "<rootDir>test/setupTests.js"
   ]
