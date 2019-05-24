@@ -2,8 +2,12 @@ module.exports = function (api) {
   api.cache(true);
 
   const presets = [
-  	"@babel/preset-env",
-  	"minify"
+    ['@babel/preset-env', {
+      "useBuiltIns": "entry"
+    }],
+    ['minify', {
+      'builtIns': false
+    }]
   ]
   const overrides = [{
     comments: false,
