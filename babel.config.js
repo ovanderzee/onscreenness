@@ -1,22 +1,19 @@
+
 module.exports = function (api) {
   api.cache(true);
 
   const presets = [
-    ['@babel/preset-env', {
-      "useBuiltIns": "entry"
-    }],
-    ['minify', {
-      'builtIns': false
+    ['@babel/env', {
+      "corejs": 3,
+      "useBuiltIns": "usage"
     }]
   ]
-  const overrides = [{
-    comments: false,
-  }]
-  const plugins = [];
+  const plugins = [
+    '@babel/plugin-transform-runtime'
+  ];
 
   return {
     presets,
-    overrides,
     plugins
   };
 }

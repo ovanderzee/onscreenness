@@ -1,6 +1,15 @@
 
 ## Version History
 
+1.2.0
+
+* Coverall badge for test-coverage at 85%
+* Polyfills to have it working in MSIE 11
+
+1.1.1
+
+* Trabis badge for passing tests
+
 1.1.0
 
 * Bugfixes
@@ -20,7 +29,7 @@ With support of Babel, Rollup and Documentation it was possible to asssemble it 
 
 ## toDo, toWant
 * More classnames
-  * fillscreen
-  * reachscreen
+  * overscreen
+  * crossscreen
 * Callbacks
 * End to end tests
