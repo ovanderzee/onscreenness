@@ -30,17 +30,22 @@ All specified queries can be removed:
 
 
 ## Have the onscreen presence data
-On selected events that change the contents of the viewport, the collection is iterated.
-Of any element involved is assesed to what extent its bounding rectangle is present in the viewport.
-This fraction is put in the data-onscreenness attribute.
-Also, a classname "onscreen" is assigned when the element is completely inside viewport, 
-and "offscreen" when it is completely outside the viewport.
+When the visible part of the webpage changes, the onscreenness of the collected elements is assesed.
 
+Depending on the place the element has relative to the viewport, the element is assigned
+a class 'onscreen', 'crossscreen' or 'offscreen'.
+
+![onscreenness classes](artefacts/classes.png)
+
+When the element covers the height or width of the viewport, the class 'overscreen' is assigned.
 With stylerules you can then set the elements appearance when it enters or leaves the viewport, 
-that's up to you .
+that's up to you.
 
-<a href="demo">see demo folder</a>. 
+Also, each involved element gets an 'onscreenness' and a 'overlapping' data attribute.
+Onscreenness is the extent to which the element is inside the viewport.
+Overlapping is the extent to which the element fills the viewport.
 
+[see  demo folder](./demo)
 
 ## Inner workings
 
@@ -48,7 +53,10 @@ that's up to you .
 * readystatechange to interactive
 * resize window
 * scrolling
-* DOM observation
+* document changes
 
 ### Application Programming Interface
-<a href="API.md">see API description</a>. 
+[see API description](./API.md)
+
+### Version History
+[see version history](./CHANGELOG.md)

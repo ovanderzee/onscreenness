@@ -16,10 +16,15 @@
     "url": "https://github.com/ovanderzee/onscreenness.git"
   },
   "keywords": [
-    "onscreen",
+    "intersection",
     "offscreen",
+    "onscreen",
+    "overscreen",
+    "crossscreen",
     "screen presence",
-    "viewport"
+    "viewport",
+    "visibility",
+    "front-end"
   ],
   "author": "Onno van der Zee",
   "license": "ISC",

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="screenness-classes" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="4050px" height="2700px" viewBox="0 0 4050 2700" style="enable-background:new 0 0 4050 2700;" xml:space="preserve">
+<style type="text/css">
+<![CDATA[
+	#webpage rect{fill:#EEEEEE;}
+	text{font-family:sans-serif;font-size:300px;}
+	#viewport{fill:none;stroke:#000000;stroke-width:40;stroke-miterlimit:10;}
+	line{stroke:#000000;stroke-width:8;stroke-miterlimit:10;}
+	.yellow{fill:#CCCC29;}
+	.blue{fill:#3939A8;}
+	.green{fill:#39A871;}
+	.ruby{fill:#A83973;}
+]]>
+</style>
+<g id="drawing">
+	<g id="webpage">
+		<rect x="1376" y="4" width="892" height="2692"/>
+		<path d="M2304,8v2684h-884V8H2304 M2312-0h-900v2700h900V-0L2312-0z" style="display:none"/>
+		<path d="M2264,8v2684h-884V8H2304 M2272-0h-900v2700h900V-0L2312-0z"/>
+	</g>
+	<g>
+		<rect x="1451" y="254" class="yellow" width="742" height="1942"/>
+		<path d="M2229,258v1934h-734V258H2229 M2237,250h-750.001v1950H2237V250L2237,250z" style="display:none"/>
+		<path d="M2189,258v1934h-734V258H2229 M2197,250h-750.001v1950H2197V250L2197,250z"/>
+	</g>
+	<rect x="1522" y="975" class="blue" width="600" height="500"/>
+	<rect x="1522" y="325" class="ruby" width="600" height="500"/>
+	<rect x="1522" y="1625" class="green" width="600" height="500"/>
+	<rect id="viewport" x="1372" y="900" width="900" height="900"/>
+</g>
+<g id="state">
+	<line x1="1242" y1="540" x2="1422" y2="486"/>
+	<text transform="matrix(1 0 0 1 0 628)">webpage</text>
+	<line x1="1242" y1="1350" x2="1372" y2="1428"/>
+	<text transform="matrix(1 0 0 1 0 1438)">viewport</text>
+</g>
+<g id="classes">
+	<line x1="2410" y1="337.5" x2="1932" y2="575"/>
+	<line x1="2410" y1="1012.5" x2="1932" y2="1225"/>
+	<line x1="2410" y1="1687.5" x2="1932" y2="1875"/>
+	<line x1="2410" y1="2362.5" x2="1932" y2="2150"/>
+	<text transform="matrix(1 0 0 1 2443 425)" class="ruby">offscreen</text>
+	<text transform="matrix(1 0 0 1 2443 1100)" class="blue">onscreen</text>
+	<text transform="matrix(1 0 0 1 2443 1775)" class="green">crossscreen</text>
+	<text transform="matrix(1 0 0 1 2443 2450)" class="yellow">overscreen</text>
+</g>
+<text transform="matrix(1 0 0 1 20 2613)" style="fill:#AAAAAA;font-size:200px;">onscreenness</text>
+</svg>

@@ -93,31 +93,42 @@ let onScreennessModule = (function () {
 	 * @returns {object} onscreenness figures
 	 */
 	var calculatePresence = function ( boundingRect ) {
-		var pixelDistance = {
-			left : 0 - boundingRect.left,
+		var overhang = {
+			left: 0 - boundingRect.left,
 			right: boundingRect.right - document.documentElement.clientWidth,
 			top: 0 - boundingRect.top,
-			bottom: boundingRect.bottom - document.documentElement.clientHeight
+			bottom: boundingRect.bottom - document.documentElement.clientHeight,
 		};
-		var pixelsAbsent = {
-			left: Math.min( Math.max( pixelDistance.left, 0 ), boundingRect.width ),
-			right: Math.min( Math.max( pixelDistance.right, 0 ), boundingRect.width ),
-			top: Math.min( Math.max( pixelDistance.top, 0 ), boundingRect.height ),
-			bottom: Math.min( Math.max( pixelDistance.bottom, 0 ), boundingRect.height ),
+		var absence = {
+			left: Math.min( Math.max( overhang.left, 0 ), boundingRect.width ),
+			right: Math.min( Math.max( overhang.right, 0 ), boundingRect.width ),
+			top: Math.min( Math.max( overhang.top, 0 ), boundingRect.height ),
+			bottom: Math.min( Math.max( overhang.bottom, 0 ), boundingRect.height ),
 		};
-		var relativeAbsent = {
-			left: pixelsAbsent.left / boundingRect.width,
-			right: pixelsAbsent.right / boundingRect.width,
-			top: pixelsAbsent.top / boundingRect.height,
-			bottom: pixelsAbsent.bottom / boundingRect.height
+		var relativeAbsence = {
+			left: absence.left / boundingRect.width,
+			right: absence.right / boundingRect.width,
+			top: absence.top / boundingRect.height,
+			bottom: absence.bottom / boundingRect.height,
 		};
-		var horizontal = 1 - relativeAbsent.left - relativeAbsent.right;
-		var vertical = 1 - relativeAbsent.top - relativeAbsent.bottom;
+
+		var horizonPresence = 1 - relativeAbsence.left - relativeAbsence.right;
+		var verticaPresence = 1 - relativeAbsence.top - relativeAbsence.bottom;
+
+		var horizonOverlap = (
+			boundingRect.width - absence.left - absence.right
+			) / document.documentElement.clientWidth;
+		var verticaOverlap = (
+			boundingRect.height - absence.top - absence.bottom
+			) / document.documentElement.clientHeight;
 
 		return {
-			horizontal: horizontal,
-			vertical: vertical,
-			surface: horizontal * vertical
+			horizonOverlap: horizonOverlap,
+			verticaOverlap: verticaOverlap,
+			surfaceOverlap: horizonOverlap * verticaOverlap,
+			horizonPresence: horizonPresence,
+			verticaPresence: verticaPresence,
+			surfacePresence: horizonPresence * verticaPresence,
 		};
 	};
 
@@ -125,9 +136,10 @@ let onScreennessModule = (function () {
 	 * Updates dataset and classNames of an element
 	 * @private
 	 * @param {element} element
-	 * @param {object} presence
+	 * @param {object} presentness
 	 */
-	var attachIdentifiers = function ( element, presence ) {
+	var attachIdentifiers = function ( element, presentness ) {
+		var presence = roundAt ( presentness.surfacePresence, 3 );
 		element.dataset['onscreenness'] = String ( presence );
 
 		var taggedOn = element.classList.contains('onscreen');
@@ -138,12 +150,34 @@ let onScreennessModule = (function () {
 			element.classList.remove('onscreen');
 		}
 
+		var taggedCross = element.classList.contains('crossscreen');
+		if ( presence > 0 && presence < 1 && !taggedCross ) {
+			element.classList.add('crossscreen');
+		}
+		if ( ( presence === 0 || presence === 1 ) && taggedCross ) {
+			element.classList.remove('crossscreen');
+		}
+
 		var taggedOff = element.classList.contains('offscreen');
 		if ( presence === 0 && !taggedOff ) {
 			element.classList.add('offscreen');
 		}
 		if ( presence > 0 && taggedOff ) {
 			element.classList.remove('offscreen');
+		}
+
+		var horizonOverlap = roundAt ( presentness.horizonOverlap, 3 );
+		var verticaOverlap = roundAt ( presentness.verticaOverlap, 3 );
+		var overhanging = Math.max( horizonOverlap, verticaOverlap );
+		var overlapping = roundAt ( presentness.surfaceOverlap, 3 );
+		element.dataset['overlapping'] = String ( overlapping );
+
+		var taggedOver = element.classList.contains('overscreen');
+		if ( overhanging === 1 && !taggedOver ) {
+			element.classList.add('overscreen');
+		}
+		if ( overhanging < 1 && taggedOver ) {
+			element.classList.remove('overscreen');
 		}
 	};
 
@@ -173,8 +207,8 @@ let onScreennessModule = (function () {
 	var changeHandler = function () {
 		composeJobList().forEach ( function ( element ) {
 			var boundingRect = element.getBoundingClientRect();
-			var presence = roundAt ( calculatePresence ( boundingRect ).surface, 3 );
-			attachIdentifiers ( element, presence );
+			var presentness = calculatePresence ( boundingRect );
+			attachIdentifiers ( element, presentness );
 		});
 	};
 

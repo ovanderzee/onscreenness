@@ -44,18 +44,18 @@ describe('calculatePresence calculates presence by a bounding rectangle', functi
 
   test('scrolled up, the first div is visible, the last not', () => {
     let boundingRects = getBoundingRects();
-    expect ( presence ( boundingRects[0] ).surface ).toBeGreaterThanOrEqual ( 1 );
-    expect ( presence ( boundingRects[4] ).surface ).toBeGreaterThan ( 0 );
-    expect ( presence ( boundingRects[4] ).surface ).toBeLessThan ( 1 );
-    expect ( presence ( boundingRects[7] ).surface ).toBeLessThanOrEqual ( 0 );
+    expect ( presence ( boundingRects[0] ).surfacePresence ).toBeGreaterThanOrEqual ( 1 );
+    expect ( presence ( boundingRects[4] ).surfacePresence ).toBeGreaterThan ( 0 );
+    expect ( presence ( boundingRects[4] ).surfacePresence ).toBeLessThan ( 1 );
+    expect ( presence ( boundingRects[7] ).surfacePresence ).toBeLessThanOrEqual ( 0 );
   });
 
   test('scrolled dowm, the last div is visible, the first not', () => {
     let boundingRects = getBoundingRects(576);
-    expect ( presence ( boundingRects[0] ).surface ).toBeLessThanOrEqual ( 0 );
-    expect ( presence ( boundingRects[3] ).surface ).toBeGreaterThan ( 0 );
-    expect ( presence ( boundingRects[3] ).surface ).toBeLessThan ( 1 );
-    expect ( presence ( boundingRects[7] ).surface ).toBeGreaterThanOrEqual ( 1 );
+    expect ( presence ( boundingRects[0] ).surfacePresence ).toBeLessThanOrEqual ( 0 );
+    expect ( presence ( boundingRects[3] ).surfacePresence ).toBeGreaterThan ( 0 );
+    expect ( presence ( boundingRects[3] ).surfacePresence ).toBeLessThan ( 1 );
+    expect ( presence ( boundingRects[7] ).surfacePresence ).toBeGreaterThanOrEqual ( 1 );
   });
 
 });

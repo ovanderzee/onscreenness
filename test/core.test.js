@@ -60,11 +60,14 @@ describe('The eventHandlers deal with live nodeLists', function () {
     onScreenness.collect('.example');
     let nodes = liveList();
     nodes.forEach ( ( node, index ) => {
-      let onNessInt = Math.round ( (nodes.length - 1 - index) / nodes.length );
-      treat( node, onNessInt )
+      let onNess = Math.round ( ( (nodes.length - 1 - index) * 2 ) / nodes.length ) / 2;
+//      console.log('onNess ' + onNess)
+      treat( node, {surfacePresence: onNess} )
     }); 
     let first = nodes[0];
     expect(first.classList.contains('onscreen')).toBe(true);
+    let amidst = nodes[ Math.round(nodes.length / 2) ];
+    expect(amidst.classList.contains('crossscreen')).toBe(true);
     let last = nodes[nodes.length - 1];
     expect(last.classList.contains('offscreen')).toBe(true);
   });

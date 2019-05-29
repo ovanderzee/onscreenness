@@ -6,6 +6,11 @@
 		body {
 			margin: 3em;
 		}
+		section {
+			border: 1px solid mediumvioletred;
+			margin: 1em -1em;
+			padding: 0 1em;
+		}
 		button {
 			font-size: inherit;
 			padding: 0.333em;
@@ -17,8 +22,9 @@
 			padding: 3em;
 			background: lightsteelblue;
 		}
-		[data-onscreenness]:after {
-			content: 'onscreenness: ' attr(data-onscreenness);
+		section[data-onscreenness]:before,
+		div[data-onscreenness]:after {
+			content: 'onscreenness: ' attr(data-onscreenness) ', overlapping: ' attr(data-overlapping);
 			display: block;
 			margin: .25em auto; 
 		}
@@ -35,23 +41,25 @@
 			<button type="button" onclick="onScreenness.exclude('#second');">
 				Exclude second example element
 			</button>
-			<button type="button" onclick="onScreenness.collect('h2');">
-				Add header
+			<button type="button" onclick="onScreenness.collect('section');">
+				Add section
 			</button>
-			<button type="button" onclick="onScreenness.remove('h2');">
-				Remove header
+			<button type="button" onclick="onScreenness.remove('section');">
+				Remove section
 			</button>
 			<button type="button" onclick="onScreenness.reset();">
 				Reset the collection
 			</button>
 		</form>
-		<div id="first" class="example">Basic Example Element</div>
-		<div id="second" class="example">Basic Example Element</div>
-		<div id="third" class="example">Basic Example Element</div>
-		<div id="fourth" class="example">Basic Example Element</div>
-		<div id="fifth" class="example">Basic Example Element</div>
-		<div id="sixth" class="example">Basic Example Element</div>
-		<div id="seventh" class="example">Basic Example Element</div>
-		<div id="eighth" class="example">Basic Example Element</div>
+		<section>
+			<div id="first" class="example">Basic Example Element</div>
+			<div id="second" class="example">Basic Example Element</div>
+			<div id="third" class="example">Basic Example Element</div>
+			<div id="fourth" class="example">Basic Example Element</div>
+			<div id="fifth" class="example">Basic Example Element</div>
+			<div id="sixth" class="example">Basic Example Element</div>
+			<div id="seventh" class="example">Basic Example Element</div>
+			<div id="eighth" class="example">Basic Example Element</div>
+		</section>
 	</body>
 </html>

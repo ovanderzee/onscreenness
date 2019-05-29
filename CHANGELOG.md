@@ -3,12 +3,16 @@
 
 1.2.0
 
+* Polyfills to support MSIE 11
+* More classnames:
+  * overscreen
+  * crossscreen
+* New data-attribute "overlapping"
 * Coverall badge for test-coverage at 85%
-* Polyfills to have it working in MSIE 11
 
 1.1.1
 
-* Trabis badge for passing tests
+* Travis badge for passing tests
 
 1.1.0
 
@@ -22,14 +26,12 @@
 1.0.0
 
 Old code extended with some collection management methods. 
-With support of Babel, Rollup and Documentation it was possible to asssemble it in a NPM-module.
+With support of Babel, Rollup and Documentation it was possible to assemble it to a NPM-module.
 
 
 -------------------------
 
 ## toDo, toWant
-* More classnames
-  * overscreen
-  * crossscreen
 * Callbacks
 * End to end tests
+* Refine the DOM observer
