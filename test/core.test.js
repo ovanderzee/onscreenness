@@ -19,14 +19,16 @@ describe('The eventHandlers deal with live nodeLists', function () {
     onScreenness.reset();
     document.body.innerHTML = `
         <h2>Basic Example</h2>
-        <div id="first" class="example">Basic Example Element</div>
-        <div id="second" class="example">Basic Example Element</div>
-        <div id="third" class="example">Basic Example Element</div>
-        <div id="fourth" class="example">Basic Example Element</div>
-        <div id="fifth" class="example">Basic Example Element</div>
-        <div id="sixth" class="example">Basic Example Element</div>
-        <div id="seventh" class="example">Basic Example Element</div>
-        <div id="eighth" class="example">Basic Example Element</div>
+        <section>
+			<div id="first" class="example">Basic Example Element</div>
+			<div id="second" class="example">Basic Example Element</div>
+			<div id="third" class="example">Basic Example Element</div>
+			<div id="fourth" class="example">Basic Example Element</div>
+			<div id="fifth" class="example">Basic Example Element</div>
+			<div id="sixth" class="example">Basic Example Element</div>
+			<div id="seventh" class="example">Basic Example Element</div>
+			<div id="eighth" class="example">Basic Example Element</div>
+        </section>
     `;
   });
 
@@ -39,7 +41,7 @@ describe('The eventHandlers deal with live nodeLists', function () {
     expect(nodes.length).toBe(8);
   });
 
-  test('live collection of .example elements, exclude one element', () => {
+  test('live collection of .example elements, exclude one element with an alternative query', () => {
     onScreenness.collect('.example');
     onScreenness.exclude('#second');
     let nodes = liveList();
@@ -49,14 +51,16 @@ describe('The eventHandlers deal with live nodeLists', function () {
 
   /* Test treat of nodes */
 
-  test('live collection being updated with attribute', () => {
+  test('live collection being updated with same attributes', () => {
     onScreenness.collect('.example');
     trigger();
-    let mirror = document.querySelectorAll ( '.example[data-onscreenness]' );
-    expect(mirror.length).toBe(8);
+    let mirror1 = document.querySelectorAll ( '.example[data-onscreenness]' );
+    expect(mirror1.length).toBe(8);
+    let mirror2 = document.querySelectorAll ( '.example[data-overlapping]' );
+    expect(mirror1).toEqual(mirror2);
   });
 
-  test('live collection being updated with classes', () => {
+  test('live collection being updated with presence classes', () => {
     onScreenness.collect('.example');
     let nodes = liveList();
     nodes.forEach ( ( node, index ) => {
@@ -70,6 +74,29 @@ describe('The eventHandlers deal with live nodeLists', function () {
     expect(amidst.classList.contains('crossscreen')).toBe(true);
     let last = nodes[nodes.length - 1];
     expect(last.classList.contains('offscreen')).toBe(true);
+  });
+
+  test('live collection being updated with overscreen class when the element covers the screen horizontally or vertically', () => {
+    onScreenness.collect('section');
+    let node = liveList()[0];
+
+    treat( node, {
+		horizonOverlap: .5,
+		verticaOverlap: .5,
+    } );
+    expect(node.classList.contains('overscreen')).toBe(false);
+
+    treat( node, {
+		horizonOverlap: .5,
+		verticaOverlap: 1,
+    } );
+    expect(node.classList.contains('overscreen')).toBe(true);
+
+    treat( node, {
+		horizonOverlap: 1,
+		verticaOverlap: .5,
+    } );
+    expect(node.classList.contains('overscreen')).toBe(true);
   });
 
   test('removing a query immediately cleans involved elements', () => {

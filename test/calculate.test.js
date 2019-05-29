@@ -48,14 +48,24 @@ describe('calculatePresence calculates presence by a bounding rectangle', functi
     expect ( presence ( boundingRects[4] ).surfacePresence ).toBeGreaterThan ( 0 );
     expect ( presence ( boundingRects[4] ).surfacePresence ).toBeLessThan ( 1 );
     expect ( presence ( boundingRects[7] ).surfacePresence ).toBeLessThanOrEqual ( 0 );
+    
+    let surfaceOverlap0 = presence ( boundingRects[0] ).surfaceOverlap;
+    let surfaceOverlap4 = presence ( boundingRects[4] ).surfaceOverlap;
+    expect ( surfaceOverlap0 ).toBeGreaterThan ( surfaceOverlap4 );
+    expect ( presence ( boundingRects[7] ).surfaceOverlap ).toBeLessThanOrEqual ( 0 );
   });
 
-  test('scrolled dowm, the last div is visible, the first not', () => {
+  test('scrolled down, the last div is visible, the first not', () => {
     let boundingRects = getBoundingRects(576);
     expect ( presence ( boundingRects[0] ).surfacePresence ).toBeLessThanOrEqual ( 0 );
     expect ( presence ( boundingRects[3] ).surfacePresence ).toBeGreaterThan ( 0 );
     expect ( presence ( boundingRects[3] ).surfacePresence ).toBeLessThan ( 1 );
     expect ( presence ( boundingRects[7] ).surfacePresence ).toBeGreaterThanOrEqual ( 1 );
+    
+    expect ( presence ( boundingRects[0] ).surfaceOverlap ).toBeLessThanOrEqual ( 0 );
+    let surfaceOverlap3 = presence ( boundingRects[3] ).surfaceOverlap;
+    let surfaceOverlap7 = presence ( boundingRects[7] ).surfaceOverlap;
+    expect ( surfaceOverlap7 ).toBeGreaterThan ( surfaceOverlap3 );
   });
 
 });
