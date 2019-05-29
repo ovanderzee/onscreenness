@@ -59,4 +59,4 @@ Overlapping is the extent to which the element fills the viewport.
 [see API description](./API.md)
 
 ### Version History
-[see version history](./CHANGELOG.md)
+[see changelog](./CHANGELOG.md)
