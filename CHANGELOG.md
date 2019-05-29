@@ -1,6 +1,10 @@
 
 ## Version History
 
+1.2.2
+
+* Better definition of "overscreen"
+
 1.2.0
 
 * Polyfills to support MSIE 11
