@@ -76,25 +76,44 @@ describe('The eventHandlers deal with live nodeLists', function () {
     expect(last.classList.contains('offscreen')).toBe(true);
   });
 
-  test('live collection being updated with overscreen class when the element covers the screen horizontally or vertically', () => {
+  test('live collection being updated with overscreen class when '+
+  ' the element covers the screen in one aspect and is totally visible in the other aspect'+
+  ' or the element covers the screen in both aspects', () => {
     onScreenness.collect('section');
     let node = liveList()[0];
 
     treat( node, {
 		horizonOverlap: .5,
 		verticaOverlap: .5,
+		horizonPresence: 1,
+		verticaPresence: 1,
     } );
     expect(node.classList.contains('overscreen')).toBe(false);
 
+    // covers screen entirely
     treat( node, {
-		horizonOverlap: .5,
+		horizonOverlap: 1,
 		verticaOverlap: 1,
+		horizonPresence: .5,
+		verticaPresence: .5,
     } );
     expect(node.classList.contains('overscreen')).toBe(true);
 
+    // covers screen vertically and entirely visible horizontally
+    treat( node, {
+		horizonOverlap: .5,
+		verticaOverlap: 1,
+		horizonPresence: 1,
+		verticaPresence: .5,
+    } );
+    expect(node.classList.contains('overscreen')).toBe(true);
+
+    // covers screen horizontally and entirely visible vertically
     treat( node, {
 		horizonOverlap: 1,
 		verticaOverlap: .5,
+		horizonPresence: .5,
+		verticaPresence: 1,
     } );
     expect(node.classList.contains('overscreen')).toBe(true);
   });

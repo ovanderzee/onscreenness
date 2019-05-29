@@ -136,10 +136,11 @@ let onScreennessModule = (function () {
 	 * Updates dataset and classNames of an element
 	 * @private
 	 * @param {element} element
-	 * @param {object} presentness
+	 * @param {object} pp - presence properties
 	 */
-	var attachIdentifiers = function ( element, presentness ) {
-		var presence = roundAt ( presentness.surfacePresence, 3 );
+	var attachIdentifiers = function ( element, pp ) {
+//		console.log('presence properties ' + JSON.stringify(pp));
+		var presence = roundAt ( pp.surfacePresence, 3 );
 		element.dataset['onscreenness'] = String ( presence );
 
 		var taggedOn = element.classList.contains('onscreen');
@@ -166,17 +167,19 @@ let onScreennessModule = (function () {
 			element.classList.remove('offscreen');
 		}
 
-		var horizonOverlap = roundAt ( presentness.horizonOverlap, 3 );
-		var verticaOverlap = roundAt ( presentness.verticaOverlap, 3 );
-		var overhanging = Math.max( horizonOverlap, verticaOverlap );
-		var overlapping = roundAt ( presentness.surfaceOverlap, 3 );
+		var overlapping = roundAt ( pp.surfaceOverlap, 3 );
 		element.dataset['overlapping'] = String ( overlapping );
 
+		var overhanging = (
+			(pp.verticaOverlap === 1 && pp.horizonOverlap === 1) ||
+			(pp.verticaOverlap === 1 && pp.horizonPresence === 1) ||
+			(pp.horizonOverlap === 1 && pp.verticaPresence === 1)
+		);
 		var taggedOver = element.classList.contains('overscreen');
-		if ( overhanging === 1 && !taggedOver ) {
+		if ( overhanging && !taggedOver ) {
 			element.classList.add('overscreen');
 		}
-		if ( overhanging < 1 && taggedOver ) {
+		if ( !overhanging && taggedOver ) {
 			element.classList.remove('overscreen');
 		}
 	};
@@ -207,8 +210,8 @@ let onScreennessModule = (function () {
 	var changeHandler = function () {
 		composeJobList().forEach ( function ( element ) {
 			var boundingRect = element.getBoundingClientRect();
-			var presentness = calculatePresence ( boundingRect );
-			attachIdentifiers ( element, presentness );
+			var props = calculatePresence ( boundingRect );
+			attachIdentifiers ( element, props );
 		});
 	};
 
