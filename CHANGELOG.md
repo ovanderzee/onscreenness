@@ -3,6 +3,7 @@
 
 1.2.3
 
+* Package the script as an umd script.
 * Clearer texts
 
 1.2.2
