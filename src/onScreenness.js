@@ -64,7 +64,7 @@ let onScreennessModule = (function () {
 	};
 
 	/**
-	 * Remove query from queryList
+	 * Remove query from queryList and blacklist
 	 * @param {string} rawQuery - querySelector
 	 */
 	var remove = function ( rawQuery ) {

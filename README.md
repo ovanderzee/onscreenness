@@ -37,10 +37,11 @@ a class 'onscreen', 'crossscreen' or 'offscreen'.
 
 ![onscreenness classes](artefacts/classes.png)
 
-Class 'overscreen' is a special case for elements too big to appear entirely the screen.  
-The class 'overscreen' is assigned when:
+As some elements are too big to be assigned the 'onscreen' class, the 'overscreen' class was created.
+The class 'overscreen' is assigned in two cases:
 * The element covers the viewport in one aspect and is entirely visible in the other aspect.
 * The element covers the viewport entirely
+Appears together with 'crossscreen'.
 
 With stylerules you can now set the elements' appearance while it moves through the viewport, 
 that's up to you.
@@ -48,6 +49,7 @@ that's up to you.
 Also, each involved element gets an 'onscreenness' and a 'overlapping' data attribute.
 Onscreenness is the extent to which the element is inside the viewport.
 Overlapping is the extent to which the element fills the viewport.
+You could script on it.
 
 [see  demo folder](./demo)
 

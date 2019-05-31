@@ -28,7 +28,7 @@ Add to blacklist
 
 ## remove
 
-Remove query from queryList
+Remove query from queryList and blacklist
 
 ### Parameters
 

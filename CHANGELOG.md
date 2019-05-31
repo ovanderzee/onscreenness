@@ -1,6 +1,10 @@
 
 ## Version History
 
+1.2.3
+
+* Clearer texts
+
 1.2.2
 
 * Better definition of "overscreen"
@@ -30,12 +34,12 @@
 1.0.0
 
 Old code extended with some collection management methods. 
-With support of Babel, Rollup and Documentation it was possible to assemble it to a NPM-module.
+With support of Babel and Rollup it was possible to assemble it to a NPM-module.
 
 
 -------------------------
 
 ## toDo, toWant
 * Callbacks
-* End to end tests
+* Headless end to end tests
 * Refine the DOM observer

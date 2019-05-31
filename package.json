@@ -1,6 +1,6 @@
 {
   "name": "onscreenness",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Supply visibility classes and data to selected elements on your webpage.",
   "main": "dist/index.js",
   "scripts": {
