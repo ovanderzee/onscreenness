@@ -10,7 +10,7 @@ let onScreennessModule = (function () {
 	var blackList = [];
 
 	/**
-	 * Remove dataset and classNames from queried elements
+	 * Remove datasets and classNames from queried elements
 	 * @private
 	 * @param {string} removeList - querySelector
 	 */
@@ -26,7 +26,10 @@ let onScreennessModule = (function () {
 			}
 			element.classList.remove('onscreen');
 			element.classList.remove('offscreen');
+			element.classList.remove('crossscreen');
+			element.classList.remove('overscreen');
 			delete element.dataset['onscreenness'];
+			delete element.dataset['overlapping'];
 		});
 	};
 

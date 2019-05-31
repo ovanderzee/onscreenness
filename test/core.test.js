@@ -118,24 +118,68 @@ describe('The eventHandlers deal with live nodeLists', function () {
     expect(node.classList.contains('overscreen')).toBe(true);
   });
 
-  test('removing a query immediately cleans involved elements', () => {
-    onScreenness.collect('.example');
-    trigger();
-    let input = document.querySelectorAll ( '.example[data-onscreenness]' );
-    expect(input.length).toBe(8);
-    onScreenness.remove('.example');
-    let output = document.querySelectorAll ( '.example[data-onscreenness]' );
-    expect(output.length).toBe(0);
+  test('removing a query immediately cleans classes from involved elements', () => {
+    onScreenness.collect('section, .example');
+	document.querySelector('section').classList.add('overscreen');
+	document.getElementById('first').classList.add('onscreen');
+	document.getElementById('second').classList.add('crossscreen');
+	document.getElementById('third').classList.add('offscreen');
+
+    onScreenness.remove('section, .example');
+    let output1 = document.querySelectorAll ( '.overscreen' );
+    expect(output1.length).toBe(0);
+    let output2 = document.querySelectorAll ( '.onscreen' );
+    expect(output2.length).toBe(0);
+    let output3 = document.querySelectorAll ( '.crossscreen' );
+    expect(output3.length).toBe(0);
+    let output4 = document.querySelectorAll ( '.offscreen' );
+    expect(output4.length).toBe(0);
   });
 
-  test('excluding a query immediately cleans involved elements', () => {
+  test('excluding a query immediately cleans classes from involved elements', () => {
+    onScreenness.collect('section, .example');
+	document.querySelector('section').classList.add('overscreen');
+	document.getElementById('first').classList.add('onscreen');
+	document.getElementById('second').classList.add('crossscreen');
+	document.getElementById('third').classList.add('offscreen');
+
+    onScreenness.exclude('h2 + section, .example');
+    let output1 = document.querySelectorAll ( '.overscreen' );
+    expect(output1.length).toBe(0);
+    let output2 = document.querySelectorAll ( '.onscreen' );
+    expect(output2.length).toBe(0);
+    let output3 = document.querySelectorAll ( '.crossscreen' );
+    expect(output3.length).toBe(0);
+    let output4 = document.querySelectorAll ( '.offscreen' );
+    expect(output4.length).toBe(0);
+  });
+
+  test('removing a query immediately cleans data attributes from involved elements', () => {
     onScreenness.collect('.example');
     trigger();
-    let input = document.querySelectorAll ( '.example[data-onscreenness]' );
-    expect(input.length).toBe(8);
+    let input1 = document.querySelectorAll ( '.example[data-onscreenness]' );
+    expect(input1.length).toBe(8);
+    let input2 = document.querySelectorAll ( '.example[data-overlapping]' );
+    expect(input2.length).toBe(8);
+    onScreenness.remove('.example');
+    let output1 = document.querySelectorAll ( '.example[data-onscreenness]' );
+    expect(output1.length).toBe(0);
+    let output2 = document.querySelectorAll ( '.example[data-overlapping]' );
+    expect(output2.length).toBe(0);
+  });
+
+  test('excluding a query immediately cleans data attributes from involved elements', () => {
+    onScreenness.collect('.example');
+    trigger();
+    let input1 = document.querySelectorAll ( '.example[data-onscreenness]' );
+    expect(input1.length).toBe(8);
+    let input2 = document.querySelectorAll ( '.example[data-overlapping]' );
+    expect(input2.length).toBe(8);
     onScreenness.exclude('#second');
-    let output = document.querySelectorAll ( '.example[data-onscreenness]' );
-    expect(output.length).toBe(7);
+    let output1 = document.querySelectorAll ( '.example[data-onscreenness]' );
+    expect(output1.length).toBe(7);
+    let output2 = document.querySelectorAll ( '.example[data-overlapping]' );
+    expect(output2.length).toBe(7);
   });
 
 });
