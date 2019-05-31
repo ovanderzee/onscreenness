@@ -4,6 +4,7 @@
 1.2.3
 
 * Package the script as an umd script.
+* Fix bug with cleaning elements
 * Clearer texts
 
 1.2.2
