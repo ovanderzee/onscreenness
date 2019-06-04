@@ -1,4 +1,11 @@
-import { onScreenness, onScreenTest } from '../src/onScreenness';
+/**
+ * @jest-environment jsdom
+ */
+
+import {
+  onScreenness,
+  onScreenTest
+} from '../src/onScreenness';
 
 
 describe('calculatePresence calculates presence by a bounding rectangle', function () {
