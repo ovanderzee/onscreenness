@@ -4,22 +4,35 @@
 	<script src="../dist/index.js"></script>
 	<style type="text/css">
 		body {
-			margin: 3em;
+			margin: 0;
+			font-size: 16px;
+			color: #333;
 		}
-		section {
-			border: 1px solid mediumvioletred;
-			margin: 1em -1em;
-			padding: 0 1em;
+		header, form, section, footer {
+			margin: 0;
+			padding: 0 3em;
+			overflow: auto;
+		}
+
+		header, form {
+			background: #ccc;
+			color: #333;
 		}
 		button {
-			font-size: inherit;
+			font-size: 83%;
 			padding: 0.333em;
-			margin: 0.333em;
+			margin: 0 0.333em 0.333em 0;
+		}
+
+		section {
+			border: 1px solid mediumvioletred;
+			margin: 1em 3em;
+			padding: 0 1em;
 		}
 		.example {
 			border: 1px solid black;
 			margin: 1em 0;
-			padding: 3em;
+			padding: 2.333em;
 			background: lightsteelblue;
 		}
 		section[data-onscreenness]:before,
@@ -28,27 +41,53 @@
 			display: block;
 			margin: .25em auto; 
 		}
+
+		.offscreen, .crossscreen, .onscreen {
+			color: #fff;
+		}
+		.offscreen {
+			background: #A83973;
+		}
+		.crossscreen {
+			background: #39A871;
+		}
+		.onscreen {
+			background: #3939A8;
+		}
+		.overscreen {
+			background: #CCCC29;
+		}
+		
+		footer {
+			background: #333;
+			color: #ccc;
+		}
 	</style>
 	</head>
 	<body>
-		<h2>
-			Basic Example
-		</h2>
+		<header>
+			<h2>Basic Example</h2>
+		</header>
 		<form>
-			<button type="button" onclick="onScreenness.collect('.example');">
+			<button id="collect-example" type="button"
+					onclick="onScreenness.collect('.example');">
 				Set initial collection
 			</button>
-			<button type="button" onclick="onScreenness.exclude('#second');">
-				Exclude second example element
+			<button id="exclude-example" type="button"
+					onclick="onScreenness.exclude('#second');">
+				Exclude 2nd ex. element
 			</button>
-			<button type="button" onclick="onScreenness.collect('section');">
+			<button id="collect-section" type="button"
+					onclick="onScreenness.collect('section');">
 				Add section
 			</button>
-			<button type="button" onclick="onScreenness.remove('section');">
+			<button id="remove-section" type="button"
+					onclick="onScreenness.remove('section');">
 				Remove section
 			</button>
-			<button type="button" onclick="onScreenness.reset();">
-				Reset the collection
+			<button id="reset" type="button"
+					onclick="onScreenness.reset();">
+				Reset collection
 			</button>
 		</form>
 		<section>
@@ -61,5 +100,9 @@
 			<div id="seventh" class="example">Basic Example Element</div>
 			<div id="eighth" class="example">Basic Example Element</div>
 		</section>
+		<footer>
+			<h4>Basic functionality playground</h4>
+			<p>Oldest supported browser: MSIE 11</p>
+		</footer>
 	</body>
 </html>

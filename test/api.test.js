@@ -1,4 +1,12 @@
-import { onScreenness, onScreenTest } from '../src/onScreenness';
+/**
+ * @jest-environment jsdom
+ */
+
+import {
+  onScreenness,
+  onScreenTest
+} from '../src/onScreenness';
+
 
 describe('The API manages queryLists', function () {
 
