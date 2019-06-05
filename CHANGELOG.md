@@ -1,6 +1,10 @@
 
 ## Version History
 
+1.2.4
+
+* Integration tests with Puppeteer.
+
 1.2.3
 
 * Package the script as an umd script.
