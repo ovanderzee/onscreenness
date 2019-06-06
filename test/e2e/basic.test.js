@@ -69,7 +69,6 @@ describe(
 
     it('when ressetting, classes and data-attributes are immediately scrapped', async () => {
       scrapScenario (page, 'button#collect-section', 'button#reset', ( newElementsCount ) => {
-        console.log('---')
         expect( newElementsCount ).toBe( 0 );
       })
     })

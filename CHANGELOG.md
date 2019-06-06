@@ -4,6 +4,7 @@
 1.2.4
 
 * Integration tests with Puppeteer.
+* Fix breaking bug with dependency
 
 1.2.3
 
@@ -47,5 +48,5 @@ With support of Babel and Rollup it was possible to assemble it to a NPM-module.
 
 ## toDo, toWant
 * Callbacks
-* Headless end to end tests
 * Refine the DOM observer
+* automatically collect elements with data-onscreenness attribute
