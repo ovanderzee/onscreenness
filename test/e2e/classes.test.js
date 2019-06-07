@@ -1,5 +1,5 @@
 
-const interaction = require('./interaction')
+const interaction = require('./_interaction')
 const triggerEvent = interaction.triggerEvent
 const scrollDown = interaction.scrollDown
 const scrollSecondInView = interaction.scrollSecondInView

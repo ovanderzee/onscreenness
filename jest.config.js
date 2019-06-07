@@ -2,6 +2,10 @@
 
 module.exports = {
 
+  "coveragePathIgnorePatterns": [
+    "<rootDir>/test"
+  ],
+
   "preset": "jest-puppeteer",
 
   "setupFiles": [

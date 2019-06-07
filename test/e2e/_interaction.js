@@ -1,6 +1,6 @@
 
-let triggerEvent = (page) => {
-  page.evaluate(_ => {
+let triggerEvent = async (page) => {
+  await page.evaluate(_ => {
 	let resizeEvent = new FocusEvent('resize', {})
 	window.dispatchEvent(resizeEvent)
   })
@@ -8,8 +8,8 @@ let triggerEvent = (page) => {
 
 exports.triggerEvent = triggerEvent
 
-exports.scrollDown = (page) => {
-  page.evaluate(_ => {
+exports.scrollDown = async (page) => {
+  await page.evaluate(_ => {
 	window.scrollTo(0, document.body.scrollHeight)
   })
   triggerEvent(page)

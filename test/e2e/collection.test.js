@@ -1,5 +1,5 @@
 
-const triggerEvent = require('./interaction').triggerEvent
+const triggerEvent = require('./_interaction').triggerEvent
 
 describe(
   'Basic collection methods',
