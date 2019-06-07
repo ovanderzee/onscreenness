@@ -5,7 +5,7 @@
 import {
   onScreenness,
   onScreenTest
-} from '../src/onScreenness';
+} from '../../src/onScreenness';
 
 
 describe('The API manages queryLists', function () {

@@ -2,17 +2,10 @@
 
 module.exports = {
 
-  "collectCoverageFrom": [
-    "src/*.*"
+  "preset": "jest-puppeteer",
+
+  "setupFiles": [
+    "<rootDir>test/_setupFiles.js"
   ],
-
-  "globalSetup": "<rootDir>test/_globalSetup.js",
-  "globalTeardown": "<rootDir>test/_globalTeardown.js",
-
-  "setupFilesAfterEnv": [
-    "<rootDir>test/_setupFilesAfterEnv.js"
-  ],
-
-  "testEnvironment": "<rootDir>test/_puppeteer_env.js",
 
 };

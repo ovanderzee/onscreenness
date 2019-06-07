@@ -1,24 +1,16 @@
-const timeout = 10000
 // typingSpeed value is set for wait time between keystrokes. Simulates realistic typing.
-const typingSpeed = 50
-
+ const typingSpeed = 50
+ 
 describe(
   'Basic example',
   () => {
-    let page
     beforeAll(async () => {
-      jest.setTimeout(timeout)
-      page = await global.__BROWSER__.newPage()
       await page.goto(`file://${process.cwd()}/demo/basic.html`)
       await page.waitForSelector('footer')
-    }, timeout)
-
-    afterEach(async () => {
-      await page.waitFor(1000)
     })
 
-    afterAll(async () => {
-      await page.close()
+    afterEach(async () => {
+      await page.click('button#reset')
     })
 
     let triggerEvent = (page) => {
@@ -40,14 +32,18 @@ describe(
       triggerEvent(page)
     }
 
+
+
     let scrapScenario = async (page, collectBtnQry, scrapBtnQry, callback) => {
       await page.click(collectBtnQry)
       await triggerEvent(page)
+//      await page.screenshot({path: `${process.cwd()}/test/temp/${collectBtnQry}-${scrapBtnQry}_collect.png`})
 
       let involvedElements = '*[data-onscreenness]'
       let involvedElementsCount = await page.$$eval(involvedElements, elms => elms.length);
 
       await page.click(scrapBtnQry)
+//      await page.screenshot({path: `${process.cwd()}/test/temp/${collectBtnQry}-${scrapBtnQry}_scrap.png`})
 
       let newElementsCount = await page.$$eval(involvedElements, elms => elms.length);
       await expect( involvedElementsCount ).toBeGreaterThan( newElementsCount );
@@ -57,26 +53,27 @@ describe(
       }
     }
 
-
-
     it('when excluding, classes and data-attributes are immediately scrapped', async () => {
-      scrapScenario (page, 'button#collect-example', 'button#exclude-example')
+      await scrapScenario (page, 'button#collect-example', 'button#exclude-example')
     })
 
     it('when removing, classes and data-attributes are immediately scrapped', async () => {
-      scrapScenario (page, 'button#collect-section', 'button#remove-section')
+      await scrapScenario (page, 'button#collect-section', 'button#remove-section')
     })
 
     it('when ressetting, classes and data-attributes are immediately scrapped', async () => {
-      scrapScenario (page, 'button#collect-section', 'button#reset', ( newElementsCount ) => {
+      await scrapScenario (page, 'button#collect-section', 'button#reset', ( newElementsCount ) => {
         expect( newElementsCount ).toBe( 0 );
       })
     })
+
+
 
     it('an element can not have more than one on/cross/off-class at the time, and classes can change when viewport changes', async () => {
       await page.click('button#collect-example')
 
       await triggerEvent(page)
+//      await page.screenshot({path: `${process.cwd()}/test/temp/1class_1.png`})
 
       let first = '.example:first-child'
       let hasClassOnscreen1 = await page.$eval(first, elm => elm.classList.contains('onscreen'));
@@ -111,6 +108,7 @@ describe(
       await expect(hasClassOffscreen4).toBeTruthy()
 
       await scrollDown(page)
+//      await page.screenshot({path: `${process.cwd()}/test/temp/1class_A.png`})
       
       let hasClassOnscreenA = await page.$eval(first, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreenA).toBeFalsy()
@@ -141,11 +139,13 @@ describe(
       await expect(hasClassOffscreenD).toBeFalsy()
     })
 
+
+
     it('an element too big for the viewport can get the overscreen-class', async () => {
       await page.click('button#collect-section')
 
       await triggerEvent(page)
-//      await page.screenshot({path: `${process.cwd()}/1.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/temp/tooBig_1.png`})
 
       let section = 'section'
 
@@ -159,7 +159,7 @@ describe(
       await expect(hasClassOverscreen1).toBeFalsy()
 
       await scrollSecondInView(page)
-//      await page.screenshot({path: `${process.cwd()}/2.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/temp/tooBig_2.png`})
 
       let hasClassOnscreen2 = await page.$eval(section, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen2).toBeFalsy()
@@ -171,7 +171,7 @@ describe(
       await expect(hasClassOverscreen2).toBeTruthy()
 
       await scrollDown(page)
-//      await page.screenshot({path: `${process.cwd()}/3.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/temp/tooBig_3.png`})
 
       let hasClassOnscreen3 = await page.$eval(section, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen3).toBeFalsy()
@@ -183,8 +183,7 @@ describe(
       await expect(hasClassOverscreen3).toBeFalsy()
     })
 
-  },
-  timeout
+  }
 )
 
 

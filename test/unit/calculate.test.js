@@ -5,7 +5,7 @@
 import {
   onScreenness,
   onScreenTest
-} from '../src/onScreenness';
+} from '../../src/onScreenness';
 
 
 describe('calculatePresence calculates presence by a bounding rectangle', function () {

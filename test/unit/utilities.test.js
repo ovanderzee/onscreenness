@@ -6,7 +6,7 @@ import {
   commaSeperatedListToArray,
   queryToArray,
   roundAt
-} from '../src/utilities';
+} from '../../src/utilities';
 
 
 test('roundAt rounds 1.005 to 1.01', () => {
