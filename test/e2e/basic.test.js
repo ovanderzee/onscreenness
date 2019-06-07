@@ -1,6 +1,6 @@
-// typingSpeed value is set for wait time between keystrokes. Simulates realistic typing.
- const typingSpeed = 50
- 
+
+// variables 'browser' and 'page' are already here
+
 describe(
   'Basic example',
   () => {
@@ -27,8 +27,8 @@ describe(
       triggerEvent(page)
     }
 
-    let scrollSecondInView = (page) => {
-      page.$eval('.example:nth-child(2n)', elm => elm.scrollIntoView())
+    let scrollSecondInView = async (page) => {
+      await page.$eval('.example:nth-child(2n)', elm => elm.scrollIntoView())
       triggerEvent(page)
     }
 
@@ -62,8 +62,8 @@ describe(
     })
 
     it('when ressetting, classes and data-attributes are immediately scrapped', async () => {
-      await scrapScenario (page, 'button#collect-section', 'button#reset', ( newElementsCount ) => {
-        expect( newElementsCount ).toBe( 0 );
+      await scrapScenario (page, 'button#collect-section', 'button#reset', async ( newElementsCount ) => {
+        await expect( newElementsCount ).toBe( 0 );
       })
     })
 
