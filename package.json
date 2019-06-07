@@ -1,15 +1,16 @@
 {
   "name": "onscreenness",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Supply visibility classes and data to selected elements on your webpage.",
   "main": "dist/index.js",
   "scripts": {
+    "clean:dist": "clear-folder dist",
     "build:src": "rollup --config",
     "build:docs": "documentation build src/*.js --format md > API.md",
-    "build": "clear-folder dist && npm run build:src && npm run build:docs",
+    "build": "npm run clean:dist && npm run build:src && npm run build:docs",
     "start": "rollup --config --watch",
     "test:coverage": "jest --coverage",
-    "test": "clear-folder test/temp && jest"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -40,7 +41,6 @@
     "coveralls": "^3.0.4",
     "documentation": "^11.0.0",
     "jest": "^24.8.0",
-    "jest-puppeteer": "^4.2.0",
     "puppeteer": "^1.17.0",
     "rollup": "^1.14.3",
     "rollup-plugin-babel": "^4.3.2",
