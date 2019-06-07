@@ -1,12 +1,11 @@
 
-import {
-  triggerEvent,
-  scrollDown,
-  scrollSecondInView,
-} from './interaction'
-
+const interaction = require('./interaction')
+const triggerEvent = interaction.triggerEvent
+const scrollDown = interaction.scrollDown
+const scrollSecondInView = interaction.scrollSecondInView
+ 
 describe(
-  'Basic example',
+  'Basic relations between classes',
   () => {
     beforeAll(async () => {
       await page.goto(`file://${process.cwd()}/demo/basic.html`)

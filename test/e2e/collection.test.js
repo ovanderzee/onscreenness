@@ -1,7 +1,5 @@
 
-import {
-  triggerEvent,
-} from './interaction'
+const triggerEvent = require('./interaction').triggerEvent
 
 describe(
   'Basic collection methods',
