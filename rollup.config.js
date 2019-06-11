@@ -12,6 +12,7 @@ export default {
     file: 'dist/index.js',
     format: 'umd',
     name: name,
+    sourcemap: true,
   },
   plugins: [
     resolve(),
@@ -20,8 +21,6 @@ export default {
       runtimeHelpers: true
     }),
     commonjs(),
-    terser({
-      sourcemap: false
-    })
+    terser(),
   ]
 };
