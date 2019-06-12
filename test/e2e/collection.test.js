@@ -1,11 +1,12 @@
-
+const server = require('../../lib/static-server')
 const triggerEvent = require('./_interaction').triggerEvent
-
+        
 describe(
   'Basic collection methods',
   () => {
     beforeAll(async () => {
-      await page.goto(`http://localhost:8888/demo/basic.html`)
+      await server.start()
+      await page.goto(`http://localhost:${server.port}/test/basic.html`)
       await page.waitForSelector('footer')
     })
 
@@ -13,18 +14,22 @@ describe(
       await page.click('button#reset')
     })
 
+    afterAll(() => {
+      server.stop()
+    })
+
 
 
     let scrapScenario = async (page, collectBtnQry, scrapBtnQry, callback) => {
       await page.click(collectBtnQry)
       await triggerEvent(page)
-//      await page.screenshot({path: `${process.cwd()}/test/temp/${collectBtnQry}-${scrapBtnQry}_collect.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/screenshots/${collectBtnQry}-${scrapBtnQry}_collect.png`})
 
       let involvedElements = '*[data-onscreenness]'
       let involvedElementsCount = await page.$$eval(involvedElements, elms => elms.length);
 
       await page.click(scrapBtnQry)
-//      await page.screenshot({path: `${process.cwd()}/test/temp/${collectBtnQry}-${scrapBtnQry}_scrap.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/screenshots/${collectBtnQry}-${scrapBtnQry}_scrap.png`})
 
       let newElementsCount = await page.$$eval(involvedElements, elms => elms.length);
       await expect( involvedElementsCount ).toBeGreaterThan( newElementsCount );

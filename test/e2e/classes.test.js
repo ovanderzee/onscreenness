@@ -1,19 +1,24 @@
-
+const server = require('../../lib/static-server')
 const interaction = require('./_interaction')
 const triggerEvent = interaction.triggerEvent
 const scrollDown = interaction.scrollDown
 const scrollSecondInView = interaction.scrollSecondInView
- 
+
 describe(
   'Basic relations between classes',
   () => {
     beforeAll(async () => {
-      await page.goto(`http://localhost:8888/demo/basic.html`)
+      await server.start()
+      await page.goto(`http://localhost:${server.port}/test/basic.html`)
       await page.waitForSelector('footer')
     })
 
     afterEach(async () => {
       await page.click('button#reset')
+    })
+
+    afterAll(() => {
+      server.stop()
     })
 
 
@@ -22,7 +27,7 @@ describe(
       await page.click('button#collect-example')
 
       await triggerEvent(page)
-//      await page.screenshot({path: `${process.cwd()}/test/temp/1class_1.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/screenshots/1class_1.png`})
 
       let first = '.example:first-child'
       let hasClassOnscreen1 = await page.$eval(first, elm => elm.classList.contains('onscreen'));
@@ -57,7 +62,7 @@ describe(
       await expect(hasClassOffscreen4).toBeTruthy()
 
       await scrollDown(page)
-//      await page.screenshot({path: `${process.cwd()}/test/temp/1class_A.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/screenshots/1class_A.png`})
       
       let hasClassOnscreenA = await page.$eval(first, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreenA).toBeFalsy()
@@ -94,7 +99,7 @@ describe(
       await page.click('button#collect-section')
 
       await triggerEvent(page)
-//      await page.screenshot({path: `${process.cwd()}/test/temp/tooBig_1.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/screenshots/tooBig_1.png`})
 
       let section = 'section'
 
@@ -108,7 +113,7 @@ describe(
       await expect(hasClassOverscreen1).toBeFalsy()
 
       await scrollSecondInView(page)
-//      await page.screenshot({path: `${process.cwd()}/test/temp/tooBig_2.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/screenshots/tooBig_2.png`})
 
       let hasClassOnscreen2 = await page.$eval(section, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen2).toBeFalsy()
@@ -120,7 +125,7 @@ describe(
       await expect(hasClassOverscreen2).toBeTruthy()
 
       await scrollDown(page)
-//      await page.screenshot({path: `${process.cwd()}/test/temp/tooBig_3.png`})
+//      await page.screenshot({path: `${process.cwd()}/test/screenshots/tooBig_3.png`})
 
       let hasClassOnscreen3 = await page.$eval(section, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen3).toBeFalsy()
