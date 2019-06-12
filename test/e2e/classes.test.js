@@ -8,7 +8,7 @@ describe(
   'Basic relations between classes',
   () => {
     beforeAll(async () => {
-      await page.goto(`file://${process.cwd()}/demo/basic.html`)
+      await page.goto(`http://localhost:8888/demo/basic.html`)
       await page.waitForSelector('footer')
     })
 

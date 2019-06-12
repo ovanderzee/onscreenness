@@ -1,7 +1,25 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<script src="../dist/index.js"></script>
+	<meta charset="utf-8" />
+	<script type="module">
+		import onScreenness from '../src/index.js'
+		document.getElementById('collect-example').addEventListener('click', () => {
+			onScreenness.collect('.example')
+		}, false)
+		document.getElementById('exclude-example').addEventListener('click', () => {
+			onScreenness.exclude('#second')
+		}, false)
+		document.getElementById('collect-section').addEventListener('click', () => {
+			onScreenness.collect('section')
+		}, false)
+		document.getElementById('remove-section').addEventListener('click', () => {
+			onScreenness.remove('section')
+		}, false)
+		document.getElementById('reset').addEventListener('click', () => {
+			onScreenness.reset()
+		}, false)
+	</script>
 	<style type="text/css">
 		body {
 			margin: 0;
@@ -69,24 +87,19 @@
 			<h2>Basic Example</h2>
 		</header>
 		<form>
-			<button id="collect-example" type="button"
-					onclick="onScreenness.collect('.example');">
+			<button id="collect-example" type="button">
 				Set initial collection
 			</button>
-			<button id="exclude-example" type="button"
-					onclick="onScreenness.exclude('#second');">
+			<button id="exclude-example" type="button">
 				Exclude 2nd ex. element
 			</button>
-			<button id="collect-section" type="button"
-					onclick="onScreenness.collect('section');">
+			<button id="collect-section" type="button">
 				Add section
 			</button>
-			<button id="remove-section" type="button"
-					onclick="onScreenness.remove('section');">
+			<button id="remove-section" type="button">
 				Remove section
 			</button>
-			<button id="reset" type="button"
-					onclick="onScreenness.reset();">
+			<button id="reset" type="button">
 				Reset collection
 			</button>
 		</form>

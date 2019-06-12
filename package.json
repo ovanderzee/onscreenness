@@ -8,7 +8,8 @@
     "build:docs": "documentation build src/*.js --format md > API.md",
     "build": "npm run build:src && npm run build:docs",
     "start": "rollup --config --watch",
-    "test:coverage": "jest --coverage",
+    "serve": "node ./lib/static-server.js",
+    "coverage": "clear-folder coverage && jest --coverage",
     "test": "clear-folder test/temp && jest"
   },
   "repository": {
@@ -46,6 +47,7 @@
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^10.0.0",
     "rollup-plugin-node-resolve": "^5.0.1",
-    "rollup-plugin-terser": "^5.0.0"
+    "rollup-plugin-terser": "^5.0.0",
+    "static-server": "^2.2.1"
   }
 }

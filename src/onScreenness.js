@@ -1,9 +1,8 @@
-
 import {
 	commaSeperatedListToArray,
 	queryToArray,
 	roundAt
-} from './utilities';
+} from './utilities.js';
 
 let onScreennessModule = (function () {
 	var queryList = [];

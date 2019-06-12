@@ -1,5 +1,4 @@
-
-import { onScreenness } from './onScreenness';
+import { onScreenness } from './onScreenness.js';
 
 const index = onScreenness;
 
