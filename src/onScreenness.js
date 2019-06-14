@@ -5,6 +5,7 @@ import {
 } from './utilities.js';
 
 let onScreennessModule = (function () {
+	var baseQuery = '[data-onscreenness]';
 	var queryList = [];
 	var blackList = [];
 
@@ -191,18 +192,13 @@ let onScreennessModule = (function () {
 	 * @private
 	 */
 	var composeJobList = function () {
-		var elementList = queryList.length 
-			? queryToArray ( queryList.join(',') )
-			: [];
+		var fullList = [baseQuery].concat(queryList);
+		var elementList = queryToArray ( fullList.join(',') );
 		var ignoreList = blackList.length 
 			? queryToArray ( blackList.join(',') )
 			: [];
 
-		if ( elementList.length ) {
-			return elementList.filter ( elm => !ignoreList.includes ( elm ) );
-		} else {
-			return [];
-		}
+		return elementList.filter ( elm => !ignoreList.includes ( elm ) );
 	};
 
 	/** 

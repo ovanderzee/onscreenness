@@ -1,6 +1,10 @@
 
 ## Version History
 
+1.3.0
+
+* Automatic collection of elements with data-onscreenness attribute
+
 1.2.4
 
 * Integration tests with Puppeteer.
@@ -49,4 +53,3 @@ With support of Babel and Rollup it was possible to assemble it to a NPM-module.
 ## toDo, toWant
 * Callbacks
 * Refine the DOM observer
-* automatically collect elements with data-onscreenness attribute
