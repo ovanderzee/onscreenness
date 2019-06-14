@@ -3,6 +3,7 @@
 module.exports = {
 
   "coveragePathIgnorePatterns": [
+    "<rootDir>/lib",
     "<rootDir>/test"
   ],
 

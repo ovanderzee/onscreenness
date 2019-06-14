@@ -8,7 +8,7 @@
     "build:docs": "documentation build src/*.js --format md > API.md",
     "build": "npm run build:src && npm run build:docs",
     "start": "rollup --config --watch",
-    "coverage": "clear-folder coverage test/screenshots && jest --coverage",
+    "coverage": "clear-folder .nyc_output coverage test/screenshots && jest --coverage",
     "test": "clear-folder test/screenshots && jest"
   },
   "repository": {
