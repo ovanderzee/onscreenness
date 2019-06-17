@@ -21,7 +21,7 @@ exports.scrollSecondInView = async (page) => {
   triggerEvent(page)
 }
 
-exports.outputCoverageScores = (jsCoverage) => {
+exports.outputCoverageScores = async (jsCoverage) => {
   let coverageScore = []
   for (const entry of jsCoverage) {
 	let entryBytes = 0
@@ -30,5 +30,5 @@ exports.outputCoverageScores = (jsCoverage) => {
 	}
 	coverageScore.push(`Spec coverage for ${entry.url.split('/').pop()}: ${Math.round(entryBytes / entry.text.length * 10000)/100}%`)
   }
-  console.log(chalk.blue.bold(coverageScore.join('\n')))
+  await console.log(chalk.blue.bold(coverageScore.join('\n')))
 }
