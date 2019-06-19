@@ -3,6 +3,12 @@
 	<head>
 	<meta charset="utf-8" />
 	<style type="text/css">
+		:root {
+			--demo-red: #A83973;
+			--demo-yellow: #CCCC29;
+			--demo-green: #39A871;
+			--demo-blue: #3939A8;
+		}
 		body {
 			margin: 0;
 			font-size: 16px;
@@ -17,6 +23,15 @@
 		header, form {
 			background: #ccc;
 			color: #333;
+		}
+		h2 span {
+			font: inherit;
+			text-align: center;
+			background: var(--demo-red);
+			color: white;
+			border: .133em solid white;
+			padding: .133em .333em;
+			margin: .133em .333em;
 		}
 		button {
 			font-size: 83%;
@@ -46,16 +61,16 @@
 			color: #fff;
 		}
 		.offscreen {
-			background: #A83973;
+			background: var(--demo-red);
 		}
 		.crossscreen {
-			background: #39A871;
+			background: var(--demo-green);
 		}
 		.onscreen {
-			background: #3939A8;
+			background: var(--demo-blue);
 		}
 		.overscreen {
-			background: #CCCC29;
+			background: var(--demo-yellow);
 		}
 		
 		footer {
@@ -66,9 +81,9 @@
 	</head>
 	<body>
 		<header>
-			<h2>Basic Example</h2>
+			<h2>Basic Example <span>test</span></h2>
 		</header>
-		<form>
+		<form method="GET">
 			<button id="collect-example" type="button">
 				Set initial collection
 			</button>
