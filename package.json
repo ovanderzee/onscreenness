@@ -8,7 +8,7 @@
     "build:docs": "documentation build src/*.js --format md > API.md",
     "build": "npm run build:src && npm run build:docs",
     "start": "rollup --config --watch",
-    "serve": "node ./lib/start-server.js --open",
+    "serve": "node ./lib/start-server.js",
     "coverage": "clear-folder .nyc_output coverage test/screenshots && jest --coverage",
     "test": "clear-folder test/screenshots && jest"
   },
@@ -29,7 +29,9 @@
   ],
   "author": "Onno van der Zee",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "document-staging": "^0.1.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.4.4",
     "@babel/plugin-transform-runtime": "^7.4.4",

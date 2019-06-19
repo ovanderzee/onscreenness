@@ -20,7 +20,9 @@ export default {
       exclude: 'node_modules/**',
       runtimeHelpers: true
     }),
-    commonjs(),
+    commonjs({
+      include: 'node_modules/**',
+    }),
     terser(),
   ]
 };
