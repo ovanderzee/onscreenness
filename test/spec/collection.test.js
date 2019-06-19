@@ -24,7 +24,7 @@ describe(
       const [jsCoverage] = await Promise.all([
         page.coverage.stopJSCoverage(),
       ])
-      outputCoverageScores(jsCoverage)
+      await outputCoverageScores(jsCoverage)
     })
 
 

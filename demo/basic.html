@@ -4,6 +4,12 @@
 	<meta charset="utf-8" />
 	<script src="../dist/index.js"></script>
 	<style type="text/css">
+		:root {
+			--demo-red: #A83973;
+			--demo-yellow: #CCCC29;
+			--demo-green: #39A871;
+			--demo-blue: #3939A8;
+		}
 		body {
 			margin: 0;
 			font-size: 16px;
@@ -18,6 +24,15 @@
 		header, form {
 			background: #ccc;
 			color: #333;
+		}
+		h2 span {
+			font: inherit;
+			text-align: center;
+			background: var(--demo-red);
+			color: white;
+			border: .133em solid white;
+			padding: .133em .333em;
+			margin: .133em .333em;
 		}
 		button {
 			font-size: 83%;
@@ -47,16 +62,16 @@
 			color: #fff;
 		}
 		.offscreen {
-			background: #A83973;
+			background: var(--demo-red);
 		}
 		.crossscreen {
-			background: #39A871;
+			background: var(--demo-green);
 		}
 		.onscreen {
-			background: #3939A8;
+			background: var(--demo-blue);
 		}
 		.overscreen {
-			background: #CCCC29;
+			background: var(--demo-yellow);
 		}
 		
 		footer {
@@ -67,7 +82,7 @@
 	</head>
 	<body>
 		<header>
-			<h2>Basic Example</h2>
+			<h2>Basic Example <span>demo</span></h2>
 		</header>
 		<form>
 			<button id="collect-example" type="button">
@@ -90,7 +105,7 @@
 			<div id="first" class="example">Basic Example Element</div>
 			<div id="second" class="example">Basic Example Element</div>
 			<div id="third" class="example">Basic Example Element</div>
-			<div id="fourth" class="example">Basic Example Element</div>
+			<div id="fourth" class="example" data-onscreenness>Data attribute Example Element</div>
 			<div id="fifth" class="example">Basic Example Element</div>
 			<div id="sixth" class="example">Basic Example Element</div>
 			<div id="seventh" class="example">Basic Example Element</div>
