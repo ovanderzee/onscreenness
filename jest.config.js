@@ -10,7 +10,10 @@ module.exports = {
   "preset": "jest-puppeteer",
 
   "setupFiles": [
-    "<rootDir>test/_setupFiles.js"
+    "<rootDir>/test/_setupFiles.js"
   ],
 
+  "transformIgnorePatterns": [
+    "node_modules/(?!(document-staging)/)",
+  ],
 };

@@ -3,8 +3,10 @@ import {
 	queryToArray,
 	roundAt
 } from './utilities.js';
+import documentStaging from '../node_modules/document-staging/dist/index.esm.js';
 
 let onScreennessModule = (function () {
+	var baseQuery = '[data-onscreenness]';
 	var queryList = [];
 	var blackList = [];
 
@@ -191,18 +193,13 @@ let onScreennessModule = (function () {
 	 * @private
 	 */
 	var composeJobList = function () {
-		var elementList = queryList.length 
-			? queryToArray ( queryList.join(',') )
-			: [];
+		var fullList = [baseQuery].concat(queryList);
+		var elementList = queryToArray ( fullList.join(',') );
 		var ignoreList = blackList.length 
 			? queryToArray ( blackList.join(',') )
 			: [];
 
-		if ( elementList.length ) {
-			return elementList.filter ( elm => !ignoreList.includes ( elm ) );
-		} else {
-			return [];
-		}
+		return elementList.filter ( elm => !ignoreList.includes ( elm ) );
 	};
 
 	/** 
@@ -217,11 +214,6 @@ let onScreennessModule = (function () {
 		});
 	};
 
-	document.addEventListener('readystatechange', function () {
-		if ( document.readyState === 'interactive' ) {
-			changeHandler();
-		}
-	}, false);
 	window.addEventListener('resize', changeHandler, false);
 	window.addEventListener('scroll', changeHandler, true);
 	let DOMObserver = new MutationObserver( function ( mutationsList, observer ) {
@@ -229,9 +221,12 @@ let onScreennessModule = (function () {
 			changeHandler();
 		}
 	});
-	window.addEventListener('load', function () {
-		DOMObserver.observe( document.body, { childList: true, subtree: true } );
-	}, true);
+	documentStaging.onInteractive([
+		changeHandler,
+		function () {
+			DOMObserver.observe( document.body, { childList: true, subtree: true } );
+		},
+	]);
 
 	return {
 		publicAPI: {
