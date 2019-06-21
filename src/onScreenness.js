@@ -3,11 +3,7 @@ import {
 	queryToArray,
 	roundAt
 } from './utilities.js';
-//import documentStaging from '../node_modules/document-staging';
-// running es6 sources --> GET http://localhost:1248/node_modules/document-staging net::ERR_ABORTED 403 (Forbidden)
-import documentStaging from 'document-staging';
-// --> Uncaught TypeError: Failed to resolve module specifier "document-staging". 
-// --> Relative references must start with either "/", "./", or "../".
+import documentStaging from '../node_modules/document-staging/dist/index.esm.js';
 
 let onScreennessModule = (function () {
 	var baseQuery = '[data-onscreenness]';
@@ -218,9 +214,6 @@ let onScreennessModule = (function () {
 		});
 	};
 
-	documentStaging.onInteractive(
-		changeHandler
-	);
 	window.addEventListener('resize', changeHandler, false);
 	window.addEventListener('scroll', changeHandler, true);
 	let DOMObserver = new MutationObserver( function ( mutationsList, observer ) {
@@ -228,9 +221,12 @@ let onScreennessModule = (function () {
 			changeHandler();
 		}
 	});
-	documentStaging.onComplete(function () {
-		DOMObserver.observe( document.body, { childList: true, subtree: true } );
-	});
+	documentStaging.onInteractive([
+		changeHandler,
+		function () {
+			DOMObserver.observe( document.body, { childList: true, subtree: true } );
+		},
+	]);
 
 	return {
 		publicAPI: {

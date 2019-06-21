@@ -3,6 +3,7 @@
   "version": "1.3.0",
   "description": "Supply visibility classes and data to selected elements on your webpage.",
   "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "scripts": {
     "build:src": "clear-folder dist && rollup --config",
     "build:docs": "documentation build src/*.js --format md > API.md",
@@ -30,7 +31,7 @@
   "author": "Onno van der Zee",
   "license": "ISC",
   "dependencies": {
-    "document-staging": "^0.1.0"
+    "document-staging": "^0.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
