@@ -4,5 +4,6 @@ src
 .travis.yml
 test
 coverage
-.map
+*.map
+*.config.js
 .nyc_output
