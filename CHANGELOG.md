@@ -4,6 +4,7 @@
 1.3.0
 
 * Automatic collection of elements with data-onscreenness attribute
+* Output esm and umd script files
 
 1.2.4
 
