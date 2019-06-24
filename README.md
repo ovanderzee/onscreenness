@@ -15,7 +15,7 @@ You can sign up your elements for the onScreenness-treat using a CSS selector:
 
 The collect method may be called several times to build up the collection.
 
-Elements covered by a query in the collection can be excluded with an alternative query:
+Elements covered by a query in the collection can be blacklisted with an alternative query:
 
     onScreenness.exclude('.paragraph.emphasis');
     onScreenness.exclude('#that-paragraph');
@@ -30,10 +30,13 @@ All specified queries can be removed:
 
 
 ## Automatic pick-up
-Onscreenmess will also watch the html for elements with a data attribute. In this case no further scripting is needed.
+Onscreenness will also watch the html for elements with a data attribute:
 
-    <section data-onscreenness></section>
+    <section data-onscreenness>...</section>
 
+In this case no further scripting is needed. 
+Blacklisting will also work on automatically picked up elements.
+Resetting will work on such element when the collection contains a query capable of selecting it.
 
 ## Have the onscreen presence data
 When the visible part of the webpage changes, the onscreenness of the collected elements is assesed.
@@ -62,7 +65,7 @@ You could script on it.
 ## ...
 
 ### Install for vanilla javascript-app
-PLace the following code in the HEAD of your webpage:
+Place the following code in the head-section of your webpage:
 
     <script src="https://unpkg.com/onscreenness@latest"></script>
 
