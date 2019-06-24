@@ -29,6 +29,12 @@ All specified queries can be removed:
     onScreenness.reset();
 
 
+## Automatic pick-up
+Onscreenmess will also watch the html for elements with a data attribute. In this case no further scripting is needed.
+
+    <section data-onscreenness></section>
+
+
 ## Have the onscreen presence data
 When the visible part of the webpage changes, the onscreenness of the collected elements is assesed.
 
@@ -53,7 +59,13 @@ You could script on it.
 
 [see  demo folder](./demo)
 
-## Inner workings
+## ...
+
+### Install for vanilla javascript-app
+PLace the following code in the HEAD of your webpage:
+
+    <script src="https://unpkg.com/onscreenness@latest"></script>
+
 
 ### Triggers for assesment of presence
 * readystatechange to interactive
