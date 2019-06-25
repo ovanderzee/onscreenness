@@ -251,7 +251,6 @@ let onScreennessModule = (function () {
 			makeNodeList: composeJobList,
 			calculatePresence: calculatePresence,
 			treatElement: attachIdentifiers,
-			cleanElements: detachIdentifiers
 		}
 	}
 })();

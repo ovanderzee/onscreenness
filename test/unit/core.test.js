@@ -13,13 +13,11 @@ describe('The eventHandlers deal with live nodeLists', function () {
   let trigger;
   let liveList;
   let treat;
-  let clean;
 
   beforeAll(() => {
     trigger = onScreenTest.triggerEvent;
     liveList = onScreenTest.makeNodeList;
     treat = onScreenTest.treatElement;
-    clean = onScreenTest.cleanElements;
   });
 
   beforeEach(() => {

@@ -10,11 +10,9 @@ import {
 
 describe('An element with an onscreenness data attribute in the html will be in the assesment', function () {
 
-  let trigger;
   let liveList;
 
   beforeAll(() => {
-    trigger = onScreenTest.triggerEvent;
     liveList = onScreenTest.makeNodeList;
   });
 
