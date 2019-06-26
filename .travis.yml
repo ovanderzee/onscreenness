@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "lts/*"
+
 branches:
   only:
     - master
@@ -8,3 +9,22 @@ jobs:
   include:
     - stage: Produce Coverage
       script: jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+
+env:
+  global:
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+   #   via the "travis encrypt" command using the project repo's public key
+   - secure: "QLFcigZEnxtbw/dL1/b16G6cdeAcycqkvxVD9+jXcPGxxoWRhrYTSiz/XaDFHIiBrNbLB/CCMZmwwm/1JROCqLOlAKq5o35kg4QAxpEQO5fgdCXlxsFSqG/W5p8OI9aPr3fdQhg55cDFLfDsZDAZ7itminHVTVBI9w3PgSTAb1E="
+
+before_install:
+  - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+
+addons:
+  coverity_scan:
+    project:
+      name: "ovanderzee/onscreenness"
+      description: "<Your project description here>"
+    notification_email: hastalavista@dds.nl
+    build_command_prepend: ""
+    build_command: "npm run build"
+    branch_pattern: coverity_scan
