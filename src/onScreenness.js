@@ -1,14 +1,11 @@
 import {
-	commaSeperatedListToArray,
 	queryToArray,
 	roundAt
 } from './utilities.js';
+import collectionManagement from './collectionManagement.js';
 import documentStaging from '../node_modules/document-staging/dist/index.esm.js';
 
 let onScreennessModule = (function () {
-	var baseQuery = '[data-onscreenness]';
-	var queryList = [];
-	var blackList = [];
 
 	/**
 	 * Remove datasets and classNames from queried elements
@@ -32,62 +29,6 @@ let onScreennessModule = (function () {
 			delete element.dataset['onscreenness'];
 			delete element.dataset['overlapping'];
 		});
-	};
-
-	/**
-	 * Add solitary queries to a list, avoiding duplication
-	 * @private
-	 * @param {string} currentList - list with unique solitary queries
-	 * @param {string} newQueries - querySelector
-	 */
-	var addQueries = function ( currentList, newQueries ) {
-		newQueries.forEach ( ( newQuery ) => {
-			if ( !currentList.includes ( newQuery ) ) {
-				currentList.push ( newQuery );
-			}
-		});
-	};
-
-	/**
-	 * Add query to queryList
-	 * @param {string} rawQuery - querySelector
-	 */
-	var collect = function ( rawQuery ) {
-		var queries = commaSeperatedListToArray ( rawQuery );
-		addQueries ( queryList, queries );
-	};
-
-	/**
-	 * Add to blacklist
-	 * @param {string} rawQuery - querySelector
-	 */
-	var exclude = function ( rawQuery ) {
-		var queries = commaSeperatedListToArray ( rawQuery );
-		detachIdentifiers ( queries );
-		addQueries ( blackList, queries );
-	};
-
-	/**
-	 * Remove query from queryList and blacklist
-	 * @param {string} rawQuery - querySelector
-	 */
-	var remove = function ( rawQuery ) {
-		var queries = commaSeperatedListToArray ( rawQuery );
-		queries.forEach ( ( query ) => {
-			if ( queryList.includes ( query ) ) {
-				detachIdentifiers ( [query] );
-				queryList.splice ( queryList.indexOf ( query ), 1 );
-			}
-		});
-	};
-
-	/**
-	 * Empty the querylist
-	 */
-	var reset = function () {
-		detachIdentifiers ( queryList );
-		queryList = [];
-		blackList = [];
 	};
 
 	/**
@@ -186,20 +127,6 @@ let onScreennessModule = (function () {
 		if ( !overhanging && taggedOver ) {
 			element.classList.remove('overscreen');
 		}
-	};
-
-	/** 
-	 * Live list of elements to work on
-	 * @private
-	 */
-	var composeJobList = function () {
-		var fullList = [baseQuery].concat(queryList);
-		var elementList = queryToArray ( fullList.join(',') );
-		var ignoreList = blackList.length 
-			? queryToArray ( blackList.join(',') )
-			: [];
-
-		return elementList.filter ( elm => !ignoreList.includes ( elm ) );
 	};
 
 	/** 
