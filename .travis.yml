@@ -14,7 +14,7 @@ env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
    #   via the "travis encrypt" command using the project repo's public key
-   - secure: "QLFcigZEnxtbw/dL1/b16G6cdeAcycqkvxVD9+jXcPGxxoWRhrYTSiz/XaDFHIiBrNbLB/CCMZmwwm/1JROCqLOlAKq5o35kg4QAxpEQO5fgdCXlxsFSqG/W5p8OI9aPr3fdQhg55cDFLfDsZDAZ7itminHVTVBI9w3PgSTAb1E="
+   - secure: "fDhiE234di5EXSB60y8JnKsQJbi7EobCtp9fIWH7t+hYakohFIqZL7+6cJJ7sK8A3HBoES5SrbK0ozYFwi5Tl6E5ifGnwoj3+Al20ZcA/DOownL2DhdExH7pNItxm3saIGFq1yuDtrXY4sTCRv0kfNS60bkOVlxZQ9rCJYb3wZuKZJc/mXqfqkPoJwfhGRj+5SnX0XGLs7cvSmDe49iUiZQSl3I+Rd/f8XmIi3xW2oGAxMuJP04PSijMUbKILTSnWVzrU7PZMLa8R2fnLOFxO/uSefNLPMpwi2lg+JLKJ7ESYHSYJHtsVHorjxy4KCk/gp1IXBQCDR6h6HxbqYUAvl+YfrDMwT2Zh6lhadiGxmkgsbQYJ/LmEILhnEX9Zy79L+xiMn/HU7VIXhOVr3Z4bzUK9jGtffBmD9cvAjZzVsbusTkXu4Q+tU4O9RNWlf3ezUNmRC37QI1F/Fg8VLkl7Im7fuGM8bdxuXgb7EkU03f/lnaBt3jd8ia+jOqMzqlNOhXZ8LR5nAn2xStidV/5jp4htcC2jCggxDVaWI8J7IdDvfADruRWD/D8jbmF7NSuJd/GDa4pQw4OyKosoujpVPc3FSO96Tc22QR4cwwisKKGogW3w0PJERYlGlJBfzsVYIPwKwPAVABGOxiStCgArTpFlsE3DWxwgDhZ7vB4gLM="
 
 before_install:
   - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
@@ -23,7 +23,7 @@ addons:
   coverity_scan:
     project:
       name: "ovanderzee/onscreenness"
-      description: "<Your project description here>"
+      description: "Supply visibility classes and data to selected elements on your webpage."
     notification_email: hastalavista@dds.nl
     build_command_prepend: ""
     build_command: "npm run build"
