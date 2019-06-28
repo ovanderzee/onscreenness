@@ -7,3 +7,5 @@ coverage
 *.map
 *.config.js
 .nyc_output
+cov-int
+*.zip
