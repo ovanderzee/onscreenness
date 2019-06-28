@@ -1,17 +1,16 @@
-const server = require('../../lib/static-server')
+
 const interaction = require('../_spec_helper.js')
 const triggerEvent = interaction.triggerEvent
 const outputCoverageScores = interaction.outputCoverageScores
-        
+
 describe(
   'Basic collection methods',
   () => {
     beforeAll(async () => {
-      await server.start()
       await Promise.all([
         page.coverage.startJSCoverage(),
       ])
-      await page.goto(`http://localhost:${server.port}/test/basic.html`)
+      await page.goto(`${origin}/test/basic.html`)
       await page.waitForSelector('footer')
     })
 
@@ -20,7 +19,6 @@ describe(
     })
 
     afterAll(async () => {
-      await server.stop()
       const [jsCoverage] = await Promise.all([
         page.coverage.stopJSCoverage(),
       ])

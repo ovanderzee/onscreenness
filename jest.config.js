@@ -7,11 +7,16 @@ module.exports = {
     "<rootDir>/test"
   ],
 
-  "preset": "jest-puppeteer",
+  "globalSetup": "<rootDir>test/_globalSetup.js",
+
+  "globalTeardown": "<rootDir>test/_globalTeardown.js",
+
 
   "setupFiles": [
     "<rootDir>/test/_setupFiles.js"
   ],
+
+  "testEnvironment": "<rootDir>test/_puppeteer_env.js",
 
   "transformIgnorePatterns": [
     "node_modules/(?!(document-staging)/)",
