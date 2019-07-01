@@ -4,8 +4,9 @@
 [![DeepScan grade](https://deepscan.io/api/teams/4340/projects/6093/branches/49020/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=4340&pid=6093&bid=49020)
 
 # onscreenness
-Sign up your elements and a have their onscreen presence be assessed
-
+Sign up your elements and a have their onscreen presence be assessed. 
+With the html-classes and data offered here, your elements 
+can make an grand entrance on the viewport!
 
 ## Sign up your elements
 Once bundled in your project onScreenness is available as a global object.
