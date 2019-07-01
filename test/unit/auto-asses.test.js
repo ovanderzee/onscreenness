@@ -13,7 +13,7 @@ describe('An element with an onscreenness data attribute in the html will be in 
   let liveList;
 
   beforeAll(() => {
-    liveList = onScreenTest.makeNodeList;
+    liveList = onScreenTest.liveList;
   });
 
   beforeEach(() => {

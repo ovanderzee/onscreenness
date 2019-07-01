@@ -1,12 +1,13 @@
 import {
+	arrayIntersection,
 	commaSeperatedListToArray,
 	queryToArray,
-} from './utilities.js';
+} from './utilities.js'
 
-let collectionManagement = function () {
-	var baseQuery = '[data-onscreenness]';
-	var queryList = [];
-	var blackList = [];
+let collectionManagement = (function () {
+	const baseQuery = '[data-onscreenness]'
+	let queryList = []
+	let blackList = []
 
 	/**
 	 * Add solitary queries to a list, avoiding duplication
@@ -14,92 +15,94 @@ let collectionManagement = function () {
 	 * @param {string} currentList - list with unique solitary queries
 	 * @param {string} newQueries - querySelector
 	 */
-	var addQueries = function ( currentList, newQueries ) {
+	const addQueries = function ( currentList, newQueries ) {
 		newQueries.forEach ( ( newQuery ) => {
 			if ( !currentList.includes ( newQuery ) ) {
-				currentList.push ( newQuery );
+				currentList.push ( newQuery )
 			}
-		});
-	};
+		})
+	}
 
 	/**
 	 * Add query to queryList
 	 * @param {string} rawQuery - querySelector
+	 * @returns {array} normalised input
 	 */
-	var collect = function ( rawQuery ) {
-		var queries = commaSeperatedListToArray ( rawQuery );
-		addQueries ( queryList, queries );
-	};
+	const collect = function ( rawQuery ) {
+		let queries = commaSeperatedListToArray ( rawQuery )
+		addQueries ( queryList, queries )
+		return queries
+	}
 
 	/**
 	 * Add to blacklist
 	 * @param {string} rawQuery - querySelector
+	 * @returns {array} normalised input
 	 */
-	var exclude = function ( rawQuery ) {
-		var queries = commaSeperatedListToArray ( rawQuery );
-		detachIdentifiers ( queries );
-		addQueries ( blackList, queries );
-	};
+	const exclude = function ( rawQuery ) {
+		let queries = commaSeperatedListToArray ( rawQuery )
+		addQueries ( blackList, queries )
+		return queries
+	}
 
 	/**
 	 * Remove query from queryList and blacklist
 	 * @param {string} rawQuery - querySelector
+	 * @returns {array} normalised input
 	 */
-	var remove = function ( rawQuery ) {
-		var queries = commaSeperatedListToArray ( rawQuery );
-		queries.forEach ( ( query ) => {
-			if ( queryList.includes ( query ) ) {
-				detachIdentifiers ( [query] );
-				queryList.splice ( queryList.indexOf ( query ), 1 );
-			}
-		});
-	};
+	const remove = function ( rawQuery ) {
+		let queries = commaSeperatedListToArray ( rawQuery )
+		let queryIntersection = arrayIntersection ( queryList, queries )
+		queryIntersection.forEach ( ( query ) => {
+			queryList.splice ( queryList.indexOf ( query ), 1 )
+		})
+		return queryIntersection
+	}
 
 	/**
 	 * Empty the querylist
+	 * @returns {array} query for all treated items
 	 */
-	var reset = function () {
-		detachIdentifiers ( queryList );
-		queryList = [];
-		blackList = [];
-	};
+	const reset = function () {
+		queryList = []
+		blackList = []
+		return [baseQuery]
+	}
+
+
+	/**
+	 * Current variables, for testing purposes
+	 * @returns {object} current variables
+	 */
+	const getVariables = () => {
+		return {
+			queryList: queryList.concat(),
+			blackList: blackList.concat(),
+		}
+	}
 
 	/** 
 	 * Live list of elements to work on
 	 * @private
 	 */
-	var composeJobList = function () {
-		var fullList = [baseQuery].concat(queryList);
-		var elementList = queryToArray ( fullList.join(',') );
-		var ignoreList = blackList.length 
+	const buildNodeList = function () {
+		let fullList = [baseQuery].concat(queryList)
+		let elementList = queryToArray ( fullList.join(',') )
+		let ignoreList = blackList.length 
 			? queryToArray ( blackList.join(',') )
-			: [];
+			: []
 
-		return elementList.filter ( elm => !ignoreList.includes ( elm ) );
-	};
+		return elementList.filter ( elm => !ignoreList.includes ( elm ) )
+	}
 
 	return {
-		publicAPI: {
-			collect: collect,
-			exclude: exclude,
-			remove: remove,
-			reset: reset
-		},
-		testSuite: {
-			/**
-			 * Current variables, for testing purposes
-			 * @private
-			 * @returns {object} current variables
-			 */
-			getVariables: function () {
-				return {
-					queryList: queryList,
-					blackList: blackList
-				};
-			},
-			makeNodeList: composeJobList,
-		}
+		collect: collect,
+		exclude: exclude,
+		remove: remove,
+		reset: reset,
+		getVariables: getVariables,
+		buildNodeList: buildNodeList,
 	}
-};
+})()
 
-export collectionManagement;
+export default collectionManagement

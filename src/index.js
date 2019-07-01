@@ -1,5 +1,5 @@
-import { onScreenness } from './onScreenness.js';
+import { onScreenness } from './onScreenness.js'
 
-const index = onScreenness;
+const index = onScreenness
 
-export default index;
+export default index

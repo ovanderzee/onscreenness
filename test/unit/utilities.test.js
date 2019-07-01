@@ -3,6 +3,7 @@
  */
 
 import {
+  arrayIntersection,
   commaSeperatedListToArray,
   queryToArray,
   roundAt
@@ -38,5 +39,12 @@ test('queryToArray returns a plain array with references to HTMLElements', () =>
   expect(output instanceof Array).toBe(true);
   expect(output instanceof NodeList).toBe(false);
   expect(output[0] instanceof HTMLElement).toBe(true);
+});
+
+test('arrayIntersection returns intersection of two arrays', () => {
+  let array1 = [1,2,3,1,2,3]
+  let array2 = [2,3,4,2,3,4]
+  let output = arrayIntersection ( array1, array2 )
+  expect(output).toEqual([2,3]);
 });
 

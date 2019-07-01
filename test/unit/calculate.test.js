@@ -39,7 +39,7 @@ describe('calculatePresence calculates presence by a bounding rectangle', functi
   };
 
   beforeAll(() => {
-    presence = onScreenTest.calculatePresence
+    presence = onScreenTest.calculate
     // the html element, has same size and position as the viewport (the body is the scrolling part).
     let docElem = document.documentElement;
     Object.defineProperty(docElem, 'clientWidth', {writable: true, configurable: true, value: window.innerWidth})
