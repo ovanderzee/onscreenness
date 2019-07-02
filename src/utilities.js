@@ -25,9 +25,10 @@ const commaSeperatedListToArray = function ( commaSeperatedList ) {
 }
 
 /**
- * Convert a static nodeList to an array to be able to perform array operations like filter or map
+ * Create a nodeList based on query. Then convert the static nodeList to an array to be
+ * able to perform array operations like filter or map
  * @private
- * @param {nodeList} nodeList
+ * @param {string} query
  * @returns {array} array with HTMLElements
  */
 const queryToArray = function ( query ) {
@@ -39,7 +40,7 @@ const queryToArray = function ( query ) {
 }
 
 /**
- * Find the intersection betweeen two arrays
+ * Find the intersection between two arrays
  * @private
  * @param {array} array1
  * @param {array} array2
