@@ -14,7 +14,7 @@ class PuppeteerEnvironment extends NodeEnvironment {
       browserWSEndpoint: global.__BROWSER__.wsEndpoint(),
     })
     this.global.page = await browser.newPage()
-    this.global.origin = await `http://${global.__HTTPSERVER__.host}:${global.__HTTPSERVER__.port}`
+    this.global.origin = `http://${global.__HTTPSERVER__.host}:${global.__HTTPSERVER__.port}`
   }
 }
 

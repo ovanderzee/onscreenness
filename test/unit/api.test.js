@@ -3,9 +3,8 @@
  */
 
 import {
-  onScreenness,
-  onScreenTest
-} from '../../src/onScreenness.js';
+  collectionManagement
+} from '../../src/collectionManagement.js';
 
 
 describe('The API manages queryLists', function () {
@@ -13,11 +12,11 @@ describe('The API manages queryLists', function () {
   let getVars;
 
   beforeAll(() => {
-    getVars = onScreenTest.getVariables;
+    getVars = collectionManagement.getVariables;
   });
 
   beforeEach(() => {
-    onScreenness.reset();
+    collectionManagement.reset();
   });
 
 
@@ -25,30 +24,30 @@ describe('The API manages queryLists', function () {
 
   test('collect(query) adds one item to queryList', () => {
     let initialLength = getVars().queryList.length;
-    onScreenness.collect('.myClass');
+    collectionManagement.collect('.myClass');
     let resultLength = getVars().queryList.length;
     expect(resultLength).toBe(initialLength + 1);
   });
 
   test('collect(multiQuery) adds two items to queryList', () => {
     let initialLength = getVars().queryList.length;
-    onScreenness.collect('.myClass, #myId');
+    collectionManagement.collect('.myClass, #myId');
     let resultLength = getVars().queryList.length;
     expect(resultLength).toBe(initialLength + 2);
   });
 
   test('collect(multiQuery) adds only new queries to queryList', () => {
-    onScreenness.collect('.myClass');
+    collectionManagement.collect('.myClass');
     let initialLength = getVars().queryList.length;
-    onScreenness.collect('  .myClass   ,    #myId  ,  ');
+    collectionManagement.collect('  .myClass   ,    #myId  ,  ');
     let resultLength = getVars().queryList.length;
     expect(resultLength).toBe(initialLength + 1);
   });
 
   test('collect(query) cannot duplicate', () => {
-    onScreenness.collect('.myClass');
+    collectionManagement.collect('.myClass');
     let initialLength = getVars().queryList.length;
-    onScreenness.collect('.myClass');
+    collectionManagement.collect('.myClass');
     let resultLength = getVars().queryList.length;
     expect(resultLength).toBe(initialLength);
   });
@@ -58,30 +57,30 @@ describe('The API manages queryLists', function () {
 
   test('exclude(query) adds one item to blackList', () => {
     let initialLength = getVars().blackList.length;
-    onScreenness.exclude('.myClass');
+    collectionManagement.exclude('.myClass');
     let resultLength = getVars().blackList.length;
     expect(resultLength).toBe(initialLength + 1);
   });
 
   test('exclude(multiQuery) adds two items to blackList', () => {
     let initialLength = getVars().blackList.length;
-    onScreenness.exclude('.myClass, #myId');
+    collectionManagement.exclude('.myClass, #myId');
     let resultLength = getVars().blackList.length;
     expect(resultLength).toBe(initialLength + 2);
   });
 
   test('exclude(multiQuery) adds only new queries to queryList', () => {
-    onScreenness.exclude('.myClass');
+    collectionManagement.exclude('.myClass');
     let initialLength = getVars().blackList.length;
-    onScreenness.exclude('  .myClass   ,    #myId  ,  ');
+    collectionManagement.exclude('  .myClass   ,    #myId  ,  ');
     let resultLength = getVars().blackList.length;
     expect(resultLength).toBe(initialLength + 1);
   });
 
   test('exclude(query) cannot duplicate', () => {
-    onScreenness.exclude('.myClass');
+    collectionManagement.exclude('.myClass');
     let initialLength = getVars().blackList.length;
-    onScreenness.exclude('.myClass');
+    collectionManagement.exclude('.myClass');
     let resultLength = getVars().blackList.length;
     expect(resultLength).toBe(initialLength);
   });
@@ -90,25 +89,25 @@ describe('The API manages queryLists', function () {
   /* Test remove method */
 
   test('remove(query) removes one item from queryList', () => {
-    onScreenness.collect('myTag, .myClass');
+    collectionManagement.collect('myTag, .myClass');
     let initialLength = getVars().queryList.length;
-    onScreenness.remove('.myClass');
+    collectionManagement.remove('.myClass');
     let resultLength = getVars().queryList.length;
     expect(resultLength).toBe(initialLength - 1);
   });
 
   test('remove(multiQuery) removes two items from queryList', () => {
-    onScreenness.collect('myTag, .myClass, #myId');
+    collectionManagement.collect('myTag, .myClass, #myId');
     let initialLength = getVars().queryList.length;
-    onScreenness.remove('.myClass, #myId');
+    collectionManagement.remove('.myClass, #myId');
     let resultLength = getVars().queryList.length;
     expect(resultLength).toBe(initialLength - 2);
   });
 
   test('remove(garbage) removes nothing from queryList', () => {
-    onScreenness.collect('myTag, .myClass');
+    collectionManagement.collect('myTag, .myClass');
     let initialLength = getVars().queryList.length;
-    onScreenness.remove('01234');
+    collectionManagement.remove('01234');
     let resultLength = getVars().queryList.length;
     expect(resultLength).toBe(initialLength);
   });
@@ -117,15 +116,15 @@ describe('The API manages queryLists', function () {
   /* Test reset method */
 
   test('reset() clears the queryList', () => {
-    onScreenness.collect('myTag, .myClass, #myId');
-    onScreenness.reset();
+    collectionManagement.collect('myTag, .myClass, #myId');
+    collectionManagement.reset();
     let resultLength = getVars().queryList.length;
     expect(resultLength).toBe(0);
   });
 
   test('reset() clears the blackList', () => {
-    onScreenness.collect('myTag, .myClass, #myId');
-    onScreenness.reset();
+    collectionManagement.collect('myTag, .myClass, #myId');
+    collectionManagement.reset();
     let resultLength = getVars().blackList.length;
     expect(resultLength).toBe(0);
   });

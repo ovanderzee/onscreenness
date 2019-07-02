@@ -7,17 +7,22 @@ import {
   onScreenTest
 } from '../../src/onScreenness.js';
 
-
 describe('The eventHandlers deal with live nodeLists', function () {
 
+  let collect;
+  let exclude;
+  let remove;
   let trigger;
   let liveList;
   let treat;
 
   beforeAll(() => {
-    trigger = onScreenTest.triggerEvent;
-    liveList = onScreenTest.makeNodeList;
-    treat = onScreenTest.treatElement;
+    collect = onScreenness.collect;
+    exclude = onScreenness.exclude;
+    remove = onScreenness.remove;
+    trigger = onScreenTest.trigger;
+    liveList = onScreenTest.liveList;
+    treat = onScreenTest.treat;
   });
 
   beforeEach(() => {
@@ -41,14 +46,14 @@ describe('The eventHandlers deal with live nodeLists', function () {
   /* Test creation of live nodeLists */
 
   test('live collection of .example elements in this testSuite', () => {
-    onScreenness.collect('.example');
+    collect('.example');
     let nodes = liveList();
     expect(nodes.length).toBe(8);
   });
 
   test('live collection of .example elements, exclude one element with an alternative query', () => {
-    onScreenness.collect('.example');
-    onScreenness.exclude('#second');
+    collect('.example');
+    exclude('#second');
     let nodes = liveList();
     expect(nodes.length).toBe(7);
   });
@@ -57,7 +62,7 @@ describe('The eventHandlers deal with live nodeLists', function () {
   /* Test treat of nodes */
 
   test('live collection being updated with same attributes', () => {
-    onScreenness.collect('.example');
+    collect('.example');
     trigger();
     let mirror1 = document.querySelectorAll ( '.example[data-onscreenness]' );
     expect(mirror1.length).toBe(8);
@@ -66,7 +71,7 @@ describe('The eventHandlers deal with live nodeLists', function () {
   });
 
   test('live collection being updated with presence classes', () => {
-    onScreenness.collect('.example');
+    collect('.example');
     let nodes = liveList();
     nodes.forEach ( ( node, index ) => {
       let onNess = Math.round ( ( (nodes.length - 1 - index) * 2 ) / nodes.length ) / 2;
@@ -84,7 +89,7 @@ describe('The eventHandlers deal with live nodeLists', function () {
   test('live collection being updated with overscreen class when '+
   ' the element covers the screen in one aspect and is totally visible in the other aspect'+
   ' or the element covers the screen in both aspects', () => {
-    onScreenness.collect('section');
+    collect('section');
     let node = liveList()[0];
 
     treat( node, {
@@ -124,13 +129,13 @@ describe('The eventHandlers deal with live nodeLists', function () {
   });
 
   test('removing a query immediately cleans classes from involved elements', () => {
-    onScreenness.collect('section, .example');
+    collect('section, .example');
 	document.querySelector('section').classList.add('overscreen');
 	document.getElementById('first').classList.add('onscreen');
 	document.getElementById('second').classList.add('crossscreen');
 	document.getElementById('third').classList.add('offscreen');
 
-    onScreenness.remove('section, .example');
+    remove('section, .example');
     let output1 = document.querySelectorAll ( '.overscreen' );
     expect(output1.length).toBe(0);
     let output2 = document.querySelectorAll ( '.onscreen' );
@@ -142,13 +147,13 @@ describe('The eventHandlers deal with live nodeLists', function () {
   });
 
   test('excluding a query immediately cleans classes from involved elements', () => {
-    onScreenness.collect('section, .example');
+    collect('section, .example');
 	document.querySelector('section').classList.add('overscreen');
 	document.getElementById('first').classList.add('onscreen');
 	document.getElementById('second').classList.add('crossscreen');
 	document.getElementById('third').classList.add('offscreen');
 
-    onScreenness.exclude('h2 + section, .example');
+    exclude('h2 + section, .example');
     let output1 = document.querySelectorAll ( '.overscreen' );
     expect(output1.length).toBe(0);
     let output2 = document.querySelectorAll ( '.onscreen' );
@@ -160,13 +165,13 @@ describe('The eventHandlers deal with live nodeLists', function () {
   });
 
   test('removing a query immediately cleans data attributes from involved elements', () => {
-    onScreenness.collect('.example');
+    collect('.example');
     trigger();
     let input1 = document.querySelectorAll ( '.example[data-onscreenness]' );
     expect(input1.length).toBe(8);
     let input2 = document.querySelectorAll ( '.example[data-overlapping]' );
     expect(input2.length).toBe(8);
-    onScreenness.remove('.example');
+    remove('.example');
     let output1 = document.querySelectorAll ( '.example[data-onscreenness]' );
     expect(output1.length).toBe(0);
     let output2 = document.querySelectorAll ( '.example[data-overlapping]' );
@@ -174,13 +179,13 @@ describe('The eventHandlers deal with live nodeLists', function () {
   });
 
   test('excluding a query immediately cleans data attributes from involved elements', () => {
-    onScreenness.collect('.example');
+    collect('.example');
     trigger();
     let input1 = document.querySelectorAll ( '.example[data-onscreenness]' );
     expect(input1.length).toBe(8);
     let input2 = document.querySelectorAll ( '.example[data-overlapping]' );
     expect(input2.length).toBe(8);
-    onScreenness.exclude('#second');
+    exclude('#second');
     let output1 = document.querySelectorAll ( '.example[data-onscreenness]' );
     expect(output1.length).toBe(7);
     let output2 = document.querySelectorAll ( '.example[data-overlapping]' );

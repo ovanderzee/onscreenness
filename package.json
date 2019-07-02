@@ -1,6 +1,6 @@
 {
   "name": "onscreenness",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Supply visibility classes and data to selected elements on your webpage.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -8,8 +8,7 @@
     "build:src": "clear-folder dist && rollup --config",
     "build:docs": "documentation build src/*.js --format md > API.md",
     "build": "npm run build:src && npm run build:docs",
-    "start": "rollup --config --watch",
-    "serve": "node ./lib/start-server.js",
+    "start": "jest --onlyChanged --watchAll & rollup --config --watch & node ./lib/start-server.js",
     "coverage": "clear-folder .nyc_output coverage test/screenshots && jest --coverage",
     "test": "clear-folder test/screenshots && jest"
   },
