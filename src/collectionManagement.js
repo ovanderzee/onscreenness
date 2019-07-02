@@ -6,7 +6,7 @@ import {
 
 let collectionManagement = (function () {
 	const baseQuery = '[data-onscreenness]'
-	let queryList = []
+	let queryList = {}
 	let blackList = []
 
 	/**
@@ -26,11 +26,18 @@ let collectionManagement = (function () {
 	/**
 	 * Add query to queryList
 	 * @param {string} rawQuery - querySelector
+	 * @param {function} callback - function accepts element as this
 	 * @returns {array} normalised input
 	 */
-	const collect = function ( rawQuery ) {
+	const collect = function ( rawQuery, callback = null ) {
 		let queries = commaSeperatedListToArray ( rawQuery )
-		addQueries ( queryList, queries )
+		queries.forEach ( ( query ) => {
+			if ( typeof callback === 'function' ) {
+				queryList[ query ] = callback
+			} else {
+				queryList[ query ] = null
+			}
+		})
 		return queries
 	}
 
@@ -52,9 +59,10 @@ let collectionManagement = (function () {
 	 */
 	const remove = function ( rawQuery ) {
 		let queries = commaSeperatedListToArray ( rawQuery )
-		let queryIntersection = arrayIntersection ( queryList, queries )
+		let queryKeys = Object.keys( queryList )
+		let queryIntersection = arrayIntersection ( queryKeys, queries )
 		queryIntersection.forEach ( ( query ) => {
-			queryList.splice ( queryList.indexOf ( query ), 1 )
+			delete queryList[ query ]
 		})
 		return queryIntersection
 	}
@@ -64,7 +72,7 @@ let collectionManagement = (function () {
 	 * @returns {array} query for all treated items
 	 */
 	const reset = function () {
-		queryList = []
+		queryList = {}
 		blackList = []
 		return [baseQuery]
 	}
@@ -77,7 +85,8 @@ let collectionManagement = (function () {
 	 */
 	const getVariables = () => {
 		return {
-			queryList: queryList.concat(),
+			queryList: Object.assign({}, queryList),
+			queryKeys: Object.keys( queryList ),
 			blackList: blackList.concat(),
 		}
 	}
@@ -86,8 +95,8 @@ let collectionManagement = (function () {
 	 * Live list of elements to work on
 	 * @private
 	 */
-	const buildNodeList = function () {
-		let fullList = [baseQuery].concat(queryList)
+	const buildElementList = function () {
+		let fullList = [baseQuery].concat( Object.keys( queryList ) )
 		let elementList = queryToArray ( fullList.join(',') )
 		let ignoreList = blackList.length 
 			? queryToArray ( blackList.join(',') )
@@ -102,7 +111,7 @@ let collectionManagement = (function () {
 		remove: remove,
 		reset: reset,
 		getVariables: getVariables,
-		buildNodeList: buildNodeList,
+		buildElementList: buildElementList,
 	}
 })()
 

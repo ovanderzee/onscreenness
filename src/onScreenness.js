@@ -14,7 +14,7 @@ let onScreennessModule = (function () {
 	 * @private
 	 */
 	var changeHandler = function () {
-		collectionManagement.buildNodeList().forEach ( function ( element ) {
+		collectionManagement.buildElementList().forEach ( function ( element ) {
 			var boundingRect = element.getBoundingClientRect()
 			var props = coreFunctions.calculatePresence ( boundingRect )
 			coreFunctions.attachIdentifiers ( element, props )
@@ -62,7 +62,7 @@ let onScreennessModule = (function () {
 		testSuite: {
 			getVariables: collectionManagement.getVariables,
 			trigger: changeHandler,
-			liveList: collectionManagement.buildNodeList,
+			liveList: collectionManagement.buildElementList,
 			calculate: coreFunctions.calculatePresence,
 			treat: coreFunctions.attachIdentifiers,
 		}

@@ -23,32 +23,32 @@ describe('The API manages queryLists', function () {
   /* Test collect method */
 
   test('collect(query) adds one item to queryList', () => {
-    let initialLength = getVars().queryList.length;
+    let initialLength = getVars().queryKeys.length;
     collectionManagement.collect('.myClass');
-    let resultLength = getVars().queryList.length;
+    let resultLength = getVars().queryKeys.length;
     expect(resultLength).toBe(initialLength + 1);
   });
 
   test('collect(multiQuery) adds two items to queryList', () => {
-    let initialLength = getVars().queryList.length;
+    let initialLength = getVars().queryKeys.length;
     collectionManagement.collect('.myClass, #myId');
-    let resultLength = getVars().queryList.length;
+    let resultLength = getVars().queryKeys.length;
     expect(resultLength).toBe(initialLength + 2);
   });
 
   test('collect(multiQuery) adds only new queries to queryList', () => {
     collectionManagement.collect('.myClass');
-    let initialLength = getVars().queryList.length;
+    let initialLength = getVars().queryKeys.length;
     collectionManagement.collect('  .myClass   ,    #myId  ,  ');
-    let resultLength = getVars().queryList.length;
+    let resultLength = getVars().queryKeys.length;
     expect(resultLength).toBe(initialLength + 1);
   });
 
   test('collect(query) cannot duplicate', () => {
     collectionManagement.collect('.myClass');
-    let initialLength = getVars().queryList.length;
+    let initialLength = getVars().queryKeys.length;
     collectionManagement.collect('.myClass');
-    let resultLength = getVars().queryList.length;
+    let resultLength = getVars().queryKeys.length;
     expect(resultLength).toBe(initialLength);
   });
 
@@ -90,25 +90,25 @@ describe('The API manages queryLists', function () {
 
   test('remove(query) removes one item from queryList', () => {
     collectionManagement.collect('myTag, .myClass');
-    let initialLength = getVars().queryList.length;
+    let initialLength = getVars().queryKeys.length;
     collectionManagement.remove('.myClass');
-    let resultLength = getVars().queryList.length;
+    let resultLength = getVars().queryKeys.length;
     expect(resultLength).toBe(initialLength - 1);
   });
 
   test('remove(multiQuery) removes two items from queryList', () => {
     collectionManagement.collect('myTag, .myClass, #myId');
-    let initialLength = getVars().queryList.length;
+    let initialLength = getVars().queryKeys.length;
     collectionManagement.remove('.myClass, #myId');
-    let resultLength = getVars().queryList.length;
+    let resultLength = getVars().queryKeys.length;
     expect(resultLength).toBe(initialLength - 2);
   });
 
   test('remove(garbage) removes nothing from queryList', () => {
     collectionManagement.collect('myTag, .myClass');
-    let initialLength = getVars().queryList.length;
+    let initialLength = getVars().queryKeys.length;
     collectionManagement.remove('01234');
-    let resultLength = getVars().queryList.length;
+    let resultLength = getVars().queryKeys.length;
     expect(resultLength).toBe(initialLength);
   });
 
@@ -118,7 +118,7 @@ describe('The API manages queryLists', function () {
   test('reset() clears the queryList', () => {
     collectionManagement.collect('myTag, .myClass, #myId');
     collectionManagement.reset();
-    let resultLength = getVars().queryList.length;
+    let resultLength = getVars().queryKeys.length;
     expect(resultLength).toBe(0);
   });
 
