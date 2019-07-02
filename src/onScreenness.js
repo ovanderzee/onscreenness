@@ -16,8 +16,8 @@ let onScreennessModule = (function () {
 	var changeHandler = function () {
 		collectionManagement.buildNodeList().forEach ( function ( element ) {
 			var boundingRect = element.getBoundingClientRect()
-			var props = calculatePresence ( boundingRect )
-			attachIdentifiers ( element, props )
+			var props = coreFunctions.calculatePresence ( boundingRect )
+			coreFunctions.attachIdentifiers ( element, props )
 		})
 	}
 
@@ -43,19 +43,19 @@ let onScreennessModule = (function () {
 			},
 			exclude: function ( rawQuery ) {
 				documentStaging.onInteractive ([ 
-					function () { detachIdentifiers ( collectionManagement.exclude ( rawQuery ) ) },
+					function () { coreFunctions.detachIdentifiers ( collectionManagement.exclude ( rawQuery ) ) },
 					changeHandler,
 				])
 			},
 			remove: function ( rawQuery ) {
 				documentStaging.onInteractive ([ 
-					function () { detachIdentifiers ( collectionManagement.remove ( rawQuery ) ) },
+					function () { coreFunctions.detachIdentifiers ( collectionManagement.remove ( rawQuery ) ) },
 					changeHandler,
 				])
 			},
 			reset: function () {
 				documentStaging.onInteractive ([
-					function () { detachIdentifiers ( collectionManagement.reset () ) },
+					function () { coreFunctions.detachIdentifiers ( collectionManagement.reset () ) },
 				])
 			},
 		},
@@ -63,8 +63,8 @@ let onScreennessModule = (function () {
 			getVariables: collectionManagement.getVariables,
 			trigger: changeHandler,
 			liveList: collectionManagement.buildNodeList,
-			calculate: calculatePresence,
-			treat: attachIdentifiers,
+			calculate: coreFunctions.calculatePresence,
+			treat: coreFunctions.attachIdentifiers,
 		}
 	}
 })()

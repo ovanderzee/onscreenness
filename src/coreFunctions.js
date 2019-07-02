@@ -10,7 +10,7 @@ let coreFunctions = {
 	 * @private
 	 * @param {string} removeList - querySelector
 	 */
-	var detachIdentifiers = function ( removeList ) {
+	detachIdentifiers: function ( removeList ) {
 		var elementList = removeList.length 
 			? queryToArray ( removeList.join(',') )
 			: []
@@ -26,7 +26,7 @@ let coreFunctions = {
 				delete element.dataset['overlapping']
 			}
 		})
-	}
+	},
 
 	/**
 	 * Calculate onscreenness figures of an element
@@ -34,7 +34,7 @@ let coreFunctions = {
 	 * @param {object} boundingRect
 	 * @returns {object} onscreenness figures
 	 */
-	var calculatePresence = function ( boundingRect ) {
+	calculatePresence: function ( boundingRect ) {
 		var overhang = {
 			left: 0 - boundingRect.left,
 			right: boundingRect.right - document.documentElement.clientWidth,
@@ -72,17 +72,17 @@ let coreFunctions = {
 			verticaPresence: verticaPresence,
 			surfacePresence: horizonPresence * verticaPresence,
 		}
-	}
+	},
 
 	/** 
 	 * Updates dataset and classNames of an element
 	 * @private
 	 * @param {element} element
-	 * @param {object} pp - presence properties
+	 * @param {object} props - presence properties
 	 */
-	var attachIdentifiers = function ( element, pp ) {
-//		console.log('presence properties ' + JSON.stringify(pp))
-		var presence = roundAt ( pp.surfacePresence, 3 )
+	attachIdentifiers: function ( element, props ) {
+//		console.log('presence properties ' + JSON.stringify(props))
+		var presence = roundAt ( props.surfacePresence, 3 )
 		element.dataset['onscreenness'] = String ( presence )
 
 		var taggedOn = element.classList.contains('onscreen')
@@ -109,13 +109,13 @@ let coreFunctions = {
 			element.classList.remove('offscreen')
 		}
 
-		var overlapping = roundAt ( pp.surfaceOverlap, 3 )
+		var overlapping = roundAt ( props.surfaceOverlap, 3 )
 		element.dataset['overlapping'] = String ( overlapping )
 
 		var overhanging = (
-			(pp.verticaOverlap === 1 && pp.horizonOverlap === 1) ||
-			(pp.verticaOverlap === 1 && pp.horizonPresence === 1) ||
-			(pp.horizonOverlap === 1 && pp.verticaPresence === 1)
+			(props.verticaOverlap === 1 && props.horizonOverlap === 1) ||
+			(props.verticaOverlap === 1 && props.horizonPresence === 1) ||
+			(props.horizonOverlap === 1 && props.verticaPresence === 1)
 		)
 		var taggedOver = element.classList.contains('overscreen')
 		if ( overhanging && !taggedOver ) {
@@ -124,7 +124,7 @@ let coreFunctions = {
 		if ( !overhanging && taggedOver ) {
 			element.classList.remove('overscreen')
 		}
-	}
+	},
 
 }
 
