@@ -40,6 +40,7 @@ const queryToArray = function ( query ) {
 
 /**
  * Find the intersection betweeen two arrays
+ * @private
  * @param {array} array1
  * @param {array} array2
  * @return {array}

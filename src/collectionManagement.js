@@ -72,6 +72,7 @@ let collectionManagement = (function () {
 
 	/**
 	 * Current variables, for testing purposes
+	 * @private
 	 * @returns {object} current variables
 	 */
 	const getVariables = () => {
@@ -105,4 +106,4 @@ let collectionManagement = (function () {
 	}
 })()
 
-export default collectionManagement
+export { collectionManagement };

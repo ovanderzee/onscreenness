@@ -18,6 +18,8 @@ Add query to queryList
 
 -   `rawQuery` **[string][8]** querySelector
 
+Returns **[array][9]** normalised input
+
 ## exclude
 
 Add to blacklist
@@ -25,6 +27,8 @@ Add to blacklist
 ### Parameters
 
 -   `rawQuery` **[string][8]** querySelector
+
+Returns **[array][9]** normalised input
 
 ## remove
 
@@ -34,9 +38,13 @@ Remove query from queryList and blacklist
 
 -   `rawQuery` **[string][8]** querySelector
 
+Returns **[array][9]** normalised input
+
 ## reset
 
 Empty the querylist
+
+Returns **[array][9]** query for all treated items
 
 [1]: #collect
 
@@ -53,3 +61,5 @@ Empty the querylist
 [7]: #reset
 
 [8]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String
+
+[9]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array

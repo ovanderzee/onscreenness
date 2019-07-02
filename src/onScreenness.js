@@ -3,7 +3,7 @@ import {
 	queryToArray,
 	roundAt
 } from './utilities.js'
-import collectionManagement from './collectionManagement.js'
+import { collectionManagement } from './collectionManagement.js'
 import documentStaging from '../node_modules/document-staging/dist/index.esm.js'
 
 let onScreennessModule = (function () {
@@ -29,9 +29,6 @@ let onScreennessModule = (function () {
 				delete element.dataset['overlapping']
 			}
 		})
-		
-		// then everything got changed 
-		changeHandler()
 	}
 
 	/**
@@ -165,15 +162,21 @@ let onScreennessModule = (function () {
 				documentStaging.onInteractive ([ changeHandler ])
 			},
 			exclude: function ( rawQuery ) {
-				detachIdentifiers ( collectionManagement.exclude ( rawQuery ) )
+				documentStaging.onInteractive ([ 
+					function () { detachIdentifiers ( collectionManagement.exclude ( rawQuery ) ) },
+					changeHandler,
+				])
 			},
 			remove: function ( rawQuery ) {
-				detachIdentifiers ( collectionManagement.remove ( rawQuery ) )
+				documentStaging.onInteractive ([ 
+					function () { detachIdentifiers ( collectionManagement.remove ( rawQuery ) ) },
+					changeHandler,
+				])
 			},
 			reset: function () {
-				documentStaging.onInteractive ([ function () {
-					detachIdentifiers ( collectionManagement.reset() )
-				} ])
+				documentStaging.onInteractive ([
+					function () { detachIdentifiers ( collectionManagement.reset () ) },
+				])
 			},
 		},
 		testSuite: {
