@@ -129,4 +129,28 @@ describe('The API manages queryLists', function () {
     expect(resultLength).toBe(0);
   });
 
+
+  /* Test callbacks */
+
+  test('a callback function can be assigned to a query', () => {
+    let callback = function () { console.log( 'function1 for .myClass' ) }
+    let query = '.myClass'
+    collectionManagement.collect(query, callback);
+    let result = getVars().callbackObj[query];
+    expect(typeof result).toBe('function');
+    expect(result).toBe(callback);
+  });
+
+  test('a second callback come in place of the first', () => {
+    let callback = function () { console.log( 'function1 for .myClass' ) }
+    let query = '.myClass'
+    collectionManagement.collect(query, callback);
+    let callback2 = function () { console.log( 'function1 for .myClass' ) }
+    collectionManagement.collect(query, callback2);
+    let result = getVars().callbackObj[query];
+    expect(result).toBe(callback2);
+  });
+
+  //test behaviour with blacklists etc.
+
 });

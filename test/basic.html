@@ -99,6 +99,9 @@
 			<button id="reset" type="button">
 				Reset collection
 			</button>
+			<button id="callback" type="button">
+				Callback
+			</button>
 		</form>
 		<section>
 			<div id="first" class="example">Basic Example Element</div>
@@ -130,6 +133,17 @@
 		}, false)
 		document.getElementById('reset').addEventListener('click', () => {
 			onScreenness.reset()
+		}, false)
+		document.getElementById('callback').addEventListener('click', () => {
+			let onScreenNotification = function ( props ) { 
+				if ( !this.dataset['onscreenActionFlag'] ) {
+					if ( Number ( this.dataset['onscreenness'] ) > .75) {
+						console.log(`${this.id} example has been visible to the user`)
+						this.dataset['onscreenActionFlag'] = true
+					}
+				}
+			}
+			onScreenness.collect('#seventh', onScreenNotification)
 		}, false)
 	</script>
 	</body>

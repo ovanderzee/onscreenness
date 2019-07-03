@@ -54,13 +54,35 @@ The class 'overscreen' is assigned in two cases:
 * The element covers the viewport entirely
 Appears together with 'crossscreen'.
 
+### Styling
+
 With stylerules you can now set the elements' appearance while it moves through the viewport, 
 that's up to you.
+
+### Scripting
 
 Also, each involved element gets an 'onscreenness' and a 'overlapping' data attribute.
 Onscreenness is the extent to which the element is inside the viewport.
 Overlapping is the extent to which the element fills the viewport.
 You could script on it.
+
+The onscreenness properties are passed as the arguments:
+
+    let myFunction = props => { 
+        if ( props.surfacePresence > .75) {
+		    console.log('myElement has been visible to the user')
+        }
+    }
+    onScreenness.collect('#myElement', myFunction);
+
+When using a traditional function, the current element is exposed as 'this':
+
+    let myFunction = function ( props ) { 
+        if ( Number ( this.dataset['onscreenness'] ) > .75) {
+		    console.log(`${this.id} has been visible to the user`)
+        }
+    }
+    onScreenness.collect('#myElement', myFunction);
 
 [see  demo folder](./demo)
 
