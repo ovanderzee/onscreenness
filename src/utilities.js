@@ -48,15 +48,13 @@ const queryToArray = function ( query ) {
  */
 const arrayIntersection = function(array1, array2) {
     let lookup = {}
-    let results = []
-    array1.map(member => lookup[member] = 1)
-    array2.map(member => {
+    array1.forEach(member => lookup[member] = 1)
+    return array2.filter (member => {
         if (lookup[member] === 1) {
-            results.push(member)
             delete lookup[member]
+            return member
         }
     })
-    return results
 }
 
 export {
