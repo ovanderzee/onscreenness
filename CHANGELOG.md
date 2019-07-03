@@ -1,6 +1,13 @@
 
 ## Version History
 
+1.4.0
+
+* A callback function can be passed to a query
+* Refactored Module in smaller parts
+* Got rid of some dependencies
+* Deepscan badge for code quality
+
 1.3.0
 
 * Automatic collection of elements with data-onscreenness attribute
@@ -52,5 +59,5 @@ With support of Babel and Rollup it was possible to assemble it to a NPM-module.
 -------------------------
 
 ## toDo, toWant
-* Callbacks
+* Implement Puppeteer to Istanbul
 * Refine the DOM observer

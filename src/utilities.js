@@ -34,7 +34,7 @@ const commaSeperatedListToArray = function ( commaSeperatedList ) {
 const queryToArray = function ( query ) {
 	// the push.apply operation is in most browsers among the fastest
 	// https://jsperf.com/nodelist-to-array/27
-	var elementArray = []
+	let elementArray = []
 	elementArray.push.apply(elementArray, document.querySelectorAll ( query ) )
 	return elementArray
 }

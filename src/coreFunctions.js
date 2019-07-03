@@ -11,7 +11,7 @@ let coreFunctions = {
 	 * @param {string} removeList - querySelector
 	 */
 	detachIdentifiers: function ( removeList ) {
-		var elementList = removeList.length 
+		let elementList = removeList.length 
 			? queryToArray ( removeList.join(',') )
 			: []
 
@@ -35,32 +35,32 @@ let coreFunctions = {
 	 * @returns {object} onscreenness figures
 	 */
 	calculatePresence: function ( boundingRect ) {
-		var overhang = {
+		let overhang = {
 			left: 0 - boundingRect.left,
 			right: boundingRect.right - document.documentElement.clientWidth,
 			top: 0 - boundingRect.top,
 			bottom: boundingRect.bottom - document.documentElement.clientHeight,
 		}
-		var absence = {
+		let absence = {
 			left: Math.min( Math.max( overhang.left, 0 ), boundingRect.width ),
 			right: Math.min( Math.max( overhang.right, 0 ), boundingRect.width ),
 			top: Math.min( Math.max( overhang.top, 0 ), boundingRect.height ),
 			bottom: Math.min( Math.max( overhang.bottom, 0 ), boundingRect.height ),
 		}
-		var relativeAbsence = {
+		let relativeAbsence = {
 			left: absence.left / boundingRect.width,
 			right: absence.right / boundingRect.width,
 			top: absence.top / boundingRect.height,
 			bottom: absence.bottom / boundingRect.height,
 		}
 
-		var horizontalPresence = 1 - relativeAbsence.left - relativeAbsence.right
-		var verticalPresence = 1 - relativeAbsence.top - relativeAbsence.bottom
+		let horizontalPresence = 1 - relativeAbsence.left - relativeAbsence.right
+		let verticalPresence = 1 - relativeAbsence.top - relativeAbsence.bottom
 
-		var horizontalOverlap = (
+		let horizontalOverlap = (
 			boundingRect.width - absence.left - absence.right
 			) / document.documentElement.clientWidth
-		var verticalOverlap = (
+		let verticalOverlap = (
 			boundingRect.height - absence.top - absence.bottom
 			) / document.documentElement.clientHeight
 
@@ -82,10 +82,10 @@ let coreFunctions = {
 	 */
 	attachIdentifiers: function ( element, props ) {
 //		console.log('presence properties ' + JSON.stringify(props))
-		var presence = roundAt ( props.surfacePresence, 3 )
+		let presence = roundAt ( props.surfacePresence, 3 )
 		element.dataset['onscreenness'] = String ( presence )
 
-		var taggedOn = element.classList.contains('onscreen')
+		let taggedOn = element.classList.contains('onscreen')
 		if ( presence === 1 && !taggedOn ) {
 			element.classList.add('onscreen')
 		}
@@ -93,7 +93,7 @@ let coreFunctions = {
 			element.classList.remove('onscreen')
 		}
 
-		var taggedCross = element.classList.contains('crossscreen')
+		let taggedCross = element.classList.contains('crossscreen')
 		if ( presence > 0 && presence < 1 && !taggedCross ) {
 			element.classList.add('crossscreen')
 		}
@@ -101,7 +101,7 @@ let coreFunctions = {
 			element.classList.remove('crossscreen')
 		}
 
-		var taggedOff = element.classList.contains('offscreen')
+		let taggedOff = element.classList.contains('offscreen')
 		if ( presence === 0 && !taggedOff ) {
 			element.classList.add('offscreen')
 		}
@@ -109,15 +109,15 @@ let coreFunctions = {
 			element.classList.remove('offscreen')
 		}
 
-		var overlapping = roundAt ( props.surfaceOverlap, 3 )
+		let overlapping = roundAt ( props.surfaceOverlap, 3 )
 		element.dataset['overlapping'] = String ( overlapping )
 
-		var overhanging = (
+		let overhanging = (
 			(props.verticalOverlap === 1 && props.horizontalOverlap === 1) ||
 			(props.verticalOverlap === 1 && props.horizontalPresence === 1) ||
 			(props.horizontalOverlap === 1 && props.verticalPresence === 1)
 		)
-		var taggedOver = element.classList.contains('overscreen')
+		let taggedOver = element.classList.contains('overscreen')
 		if ( overhanging && !taggedOver ) {
 			element.classList.add('overscreen')
 		}

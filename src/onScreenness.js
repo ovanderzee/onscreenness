@@ -13,11 +13,11 @@ let onScreennessModule = (function () {
 	 * Loops all elements from the jobList
 	 * @private
 	 */
-	var changeHandler = function () {
+	let changeHandler = function () {
 		let callbackMap = collectionManagement.buildCallbackMap()
 		collectionManagement.buildNodeList().forEach ( function ( element ) {
-			var boundingRect = element.getBoundingClientRect()
-			var props = coreFunctions.calculatePresence ( boundingRect )
+			let boundingRect = element.getBoundingClientRect()
+			let props = coreFunctions.calculatePresence ( boundingRect )
 			coreFunctions.attachIdentifiers ( element, props )
 			let callback = callbackMap.get ( element )
 			if ( callback ) {
