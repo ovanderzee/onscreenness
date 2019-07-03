@@ -14,10 +14,15 @@ let onScreennessModule = (function () {
 	 * @private
 	 */
 	var changeHandler = function () {
+		let callbackMap = collectionManagement.buildCallbackMap()
 		collectionManagement.buildNodeList().forEach ( function ( element ) {
 			var boundingRect = element.getBoundingClientRect()
 			var props = coreFunctions.calculatePresence ( boundingRect )
 			coreFunctions.attachIdentifiers ( element, props )
+			let callback = callbackMap.get ( element )
+			if ( callback ) {
+				callback.call ( element, props )
+			}
 		})
 	}
 
@@ -37,8 +42,8 @@ let onScreennessModule = (function () {
 
 	return {
 		publicAPI: {
-			collect: function ( rawQuery ) {
-				collectionManagement.collect ( rawQuery )
+			collect: function ( rawQuery, callback ) {
+				collectionManagement.collect ( rawQuery, callback )
 				documentStaging.onInteractive ([ changeHandler ])
 			},
 			exclude: function ( rawQuery ) {
@@ -63,6 +68,7 @@ let onScreennessModule = (function () {
 			getVariables: collectionManagement.getVariables,
 			trigger: changeHandler,
 			liveList: collectionManagement.buildNodeList,
+			kickList: collectionManagement.buildCallbackMap,
 			calculate: coreFunctions.calculatePresence,
 			treat: coreFunctions.attachIdentifiers,
 		}

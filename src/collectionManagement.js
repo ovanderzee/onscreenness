@@ -8,6 +8,7 @@ let collectionManagement = (function () {
 	const baseQuery = '[data-onscreenness]'
 	let queryList = []
 	let blackList = []
+	let callbackObj = {}
 
 	/**
 	 * Add solitary queries to a list, avoiding duplication
@@ -26,11 +27,15 @@ let collectionManagement = (function () {
 	/**
 	 * Add query to queryList
 	 * @param {string} rawQuery - querySelector
+	 * @param {function} callback (optional)
 	 * @returns {array} normalised input
 	 */
-	const collect = function ( rawQuery ) {
+	const collect = function ( rawQuery, callback ) {
 		let queries = commaSeperatedListToArray ( rawQuery )
 		addQueries ( queryList, queries )
+		if ( callback && typeof callback === 'function' ) {
+			queries.forEach ( query => callbackObj[query] = callback )
+		}
 		return queries
 	}
 
@@ -69,7 +74,6 @@ let collectionManagement = (function () {
 		return [baseQuery]
 	}
 
-
 	/**
 	 * Current variables, for testing purposes
 	 * @private
@@ -79,6 +83,7 @@ let collectionManagement = (function () {
 		return {
 			queryList: queryList.concat(),
 			blackList: blackList.concat(),
+			callbackObj: Object.assign({}, callbackObj),
 		}
 	}
 
@@ -96,6 +101,21 @@ let collectionManagement = (function () {
 		return elementList.filter ( elm => !ignoreList.includes ( elm ) )
 	}
 
+	/** 
+	 * Live map of elements to execute function with
+	 * @private
+	 */
+	const buildCallbackMap = function () {
+		let callbackMap = new Map();
+		Object.entries(callbackObj).forEach ( ([ query, callback ]) => {
+			queryToArray ( query ).forEach ( elm => {
+				callbackMap.set ( elm, callback )
+			})
+		})
+
+		return callbackMap
+	}
+
 	return {
 		collect: collect,
 		exclude: exclude,
@@ -103,6 +123,7 @@ let collectionManagement = (function () {
 		reset: reset,
 		getVariables: getVariables,
 		buildNodeList: buildNodeList,
+		buildCallbackMap: buildCallbackMap,
 	}
 })()
 
