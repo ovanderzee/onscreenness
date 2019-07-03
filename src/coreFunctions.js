@@ -54,23 +54,23 @@ let coreFunctions = {
 			bottom: absence.bottom / boundingRect.height,
 		}
 
-		var horizonPresence = 1 - relativeAbsence.left - relativeAbsence.right
-		var verticaPresence = 1 - relativeAbsence.top - relativeAbsence.bottom
+		var horizontalPresence = 1 - relativeAbsence.left - relativeAbsence.right
+		var verticalPresence = 1 - relativeAbsence.top - relativeAbsence.bottom
 
-		var horizonOverlap = (
+		var horizontalOverlap = (
 			boundingRect.width - absence.left - absence.right
 			) / document.documentElement.clientWidth
-		var verticaOverlap = (
+		var verticalOverlap = (
 			boundingRect.height - absence.top - absence.bottom
 			) / document.documentElement.clientHeight
 
 		return {
-			horizonOverlap: horizonOverlap,
-			verticaOverlap: verticaOverlap,
-			surfaceOverlap: horizonOverlap * verticaOverlap,
-			horizonPresence: horizonPresence,
-			verticaPresence: verticaPresence,
-			surfacePresence: horizonPresence * verticaPresence,
+			horizontalOverlap: horizontalOverlap,
+			verticalOverlap: verticalOverlap,
+			surfaceOverlap: horizontalOverlap * verticalOverlap,
+			horizontalPresence: horizontalPresence,
+			verticalPresence: verticalPresence,
+			surfacePresence: horizontalPresence * verticalPresence,
 		}
 	},
 
@@ -113,9 +113,9 @@ let coreFunctions = {
 		element.dataset['overlapping'] = String ( overlapping )
 
 		var overhanging = (
-			(props.verticaOverlap === 1 && props.horizonOverlap === 1) ||
-			(props.verticaOverlap === 1 && props.horizonPresence === 1) ||
-			(props.horizonOverlap === 1 && props.verticaPresence === 1)
+			(props.verticalOverlap === 1 && props.horizontalOverlap === 1) ||
+			(props.verticalOverlap === 1 && props.horizontalPresence === 1) ||
+			(props.horizontalOverlap === 1 && props.verticalPresence === 1)
 		)
 		var taggedOver = element.classList.contains('overscreen')
 		if ( overhanging && !taggedOver ) {

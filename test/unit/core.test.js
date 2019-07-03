@@ -93,37 +93,37 @@ describe('The eventHandlers deal with live nodeLists', function () {
     let node = liveList()[0];
 
     treat( node, {
-		horizonOverlap: .5,
-		verticaOverlap: .5,
-		horizonPresence: 1,
-		verticaPresence: 1,
+		horizontalOverlap: .5,
+		verticalOverlap: .5,
+		horizontalPresence: 1,
+		verticalPresence: 1,
     } );
     expect(node.classList.contains('overscreen')).toBe(false);
 
     // covers screen entirely
     treat( node, {
-		horizonOverlap: 1,
-		verticaOverlap: 1,
-		horizonPresence: .5,
-		verticaPresence: .5,
+		horizontalOverlap: 1,
+		verticalOverlap: 1,
+		horizontalPresence: .5,
+		verticalPresence: .5,
     } );
     expect(node.classList.contains('overscreen')).toBe(true);
 
     // covers screen vertically and entirely visible horizontally
     treat( node, {
-		horizonOverlap: .5,
-		verticaOverlap: 1,
-		horizonPresence: 1,
-		verticaPresence: .5,
+		horizontalOverlap: .5,
+		verticalOverlap: 1,
+		horizontalPresence: 1,
+		verticalPresence: .5,
     } );
     expect(node.classList.contains('overscreen')).toBe(true);
 
     // covers screen horizontally and entirely visible vertically
     treat( node, {
-		horizonOverlap: 1,
-		verticaOverlap: .5,
-		horizonPresence: .5,
-		verticaPresence: 1,
+		horizontalOverlap: 1,
+		verticalOverlap: .5,
+		horizontalPresence: .5,
+		verticalPresence: 1,
     } );
     expect(node.classList.contains('overscreen')).toBe(true);
   });
