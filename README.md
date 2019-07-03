@@ -70,7 +70,7 @@ The onscreenness properties are passed as the arguments:
 
     let myFunction = props => { 
         if ( props.surfacePresence > .75) {
-		    console.log('myElement has been visible to the user')
+            console.log('myElement has been visible to the user')
         }
     }
     onScreenness.collect('#myElement', myFunction);
@@ -79,7 +79,7 @@ When using a traditional function, the current element is exposed as 'this':
 
     let myFunction = function ( props ) { 
         if ( Number ( this.dataset['onscreenness'] ) > .75) {
-		    console.log(`${this.id} has been visible to the user`)
+            console.log(`${this.id} has been visible to the user`)
         }
     }
     onScreenness.collect('#myElement', myFunction);
