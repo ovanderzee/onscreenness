@@ -3,5 +3,3 @@
 node_modules
 coverage
 test/screenshots
-cov-int
-*.zip
