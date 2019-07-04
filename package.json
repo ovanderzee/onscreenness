@@ -1,6 +1,6 @@
 {
   "name": "onscreenness",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Supply visibility classes and data to selected elements on your webpage.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",

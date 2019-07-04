@@ -54,12 +54,10 @@ The class 'overscreen' is assigned in two cases:
 * The element covers the viewport entirely
 Appears together with 'crossscreen'.
 
-### Styling
+### Styling and scripting
 
 With stylerules you can now set the elements' appearance while it moves through the viewport, 
 that's up to you.
-
-### Scripting
 
 Also, each involved element gets an 'onscreenness' and a 'overlapping' data attribute.
 Onscreenness is the extent to which the element is inside the viewport.
