@@ -3,10 +3,8 @@
  */
 
 import {
-  onScreenness,
-  onScreenTest
-} from '../../src/onScreenness.js';
-
+  coreFunctions
+} from '../../src/coreFunctions.js';
 
 describe('calculatePresence calculates presence by a bounding rectangle', function () {
 
@@ -39,7 +37,7 @@ describe('calculatePresence calculates presence by a bounding rectangle', functi
   };
 
   beforeAll(() => {
-    presence = onScreenTest.calculate
+    presence = coreFunctions.calculatePresence
     // the html element, has same size and position as the viewport (the body is the scrolling part).
     let docElem = document.documentElement;
     Object.defineProperty(docElem, 'clientWidth', {writable: true, configurable: true, value: window.innerWidth})
@@ -51,28 +49,32 @@ describe('calculatePresence calculates presence by a bounding rectangle', functi
 
   test('scrolled up, the first div is visible, the last not', () => {
     let boundingRects = getBoundingRects();
-    expect ( presence ( boundingRects[0] ).surfacePresence ).toBeGreaterThanOrEqual ( 1 );
-    expect ( presence ( boundingRects[4] ).surfacePresence ).toBeGreaterThan ( 0 );
-    expect ( presence ( boundingRects[4] ).surfacePresence ).toBeLessThan ( 1 );
-    expect ( presence ( boundingRects[7] ).surfacePresence ).toBeLessThanOrEqual ( 0 );
+    let presence0 = presence ( boundingRects[0] );
+    let presence4 = presence ( boundingRects[4] );
+    let presence7 = presence ( boundingRects[7] );
     
-    let surfaceOverlap0 = presence ( boundingRects[0] ).surfaceOverlap;
-    let surfaceOverlap4 = presence ( boundingRects[4] ).surfaceOverlap;
-    expect ( surfaceOverlap0 ).toBeGreaterThan ( surfaceOverlap4 );
-    expect ( presence ( boundingRects[7] ).surfaceOverlap ).toBeLessThanOrEqual ( 0 );
+    expect ( presence0.surfacePresence ).toBeGreaterThanOrEqual ( 1 );
+    expect ( presence4.surfacePresence ).toBeGreaterThan ( 0 );
+    expect ( presence4.surfacePresence ).toBeLessThan ( 1 );
+    expect ( presence7.surfacePresence ).toBeLessThanOrEqual ( 0 );
+    
+    expect ( presence0.surfaceOverlap ).toBeGreaterThan ( presence4.surfaceOverlap );
+    expect ( presence7.surfaceOverlap ).toBeLessThanOrEqual ( 0 );
   });
 
   test('scrolled down, the last div is visible, the first not', () => {
     let boundingRects = getBoundingRects(576);
-    expect ( presence ( boundingRects[0] ).surfacePresence ).toBeLessThanOrEqual ( 0 );
-    expect ( presence ( boundingRects[3] ).surfacePresence ).toBeGreaterThan ( 0 );
-    expect ( presence ( boundingRects[3] ).surfacePresence ).toBeLessThan ( 1 );
-    expect ( presence ( boundingRects[7] ).surfacePresence ).toBeGreaterThanOrEqual ( 1 );
+    let presence0 = presence ( boundingRects[0] );
+    let presence3 = presence ( boundingRects[3] );
+    let presence7 = presence ( boundingRects[7] );
+
+    expect ( presence0.surfacePresence ).toBeLessThanOrEqual ( 0 );
+    expect ( presence3.surfacePresence ).toBeGreaterThan ( 0 );
+    expect ( presence3.surfacePresence ).toBeLessThan ( 1 );
+    expect ( presence7.surfacePresence ).toBeGreaterThanOrEqual ( 1 );
     
-    expect ( presence ( boundingRects[0] ).surfaceOverlap ).toBeLessThanOrEqual ( 0 );
-    let surfaceOverlap3 = presence ( boundingRects[3] ).surfaceOverlap;
-    let surfaceOverlap7 = presence ( boundingRects[7] ).surfaceOverlap;
-    expect ( surfaceOverlap7 ).toBeGreaterThan ( surfaceOverlap3 );
+    expect ( presence0.surfaceOverlap ).toBeLessThanOrEqual ( 0 );
+    expect ( presence7.surfaceOverlap ).toBeGreaterThan ( presence3.surfaceOverlap );
   });
 
 });
