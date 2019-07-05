@@ -1,6 +1,12 @@
 
 ## Version History
 
+1.4.1
+
+* Class mutations and overhang data available to callback functions
+* Prevent onscreen elements with full width or height to become overscreen, 
+* Enhanced tests and readme
+
 1.4.0
 
 * A callback function can be passed to a query
