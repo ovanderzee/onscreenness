@@ -64,7 +64,14 @@ let coreFunctions = {
 			boundingRect.height - absence.top - absence.bottom
 			) / document.documentElement.clientHeight
 
+		let widthRatio = boundingRect.width / document.documentElement.clientWidth
+		let heightRatio = boundingRect.height / document.documentElement.clientHeight
+
 		return {
+			overhang: overhang,
+			widthRatio: widthRatio,
+			heightRatio: heightRatio,
+			areaRatio: widthRatio * heightRatio,
 			horizontalOverlap: horizontalOverlap,
 			verticalOverlap: verticalOverlap,
 			surfaceOverlap: horizontalOverlap * verticalOverlap,
@@ -118,16 +125,14 @@ let coreFunctions = {
 		let overlapping = roundAt ( props.surfaceOverlap, 3 )
 		element.dataset['overlapping'] = String ( overlapping )
 
-		let overhanging = (
-			(props.verticalOverlap === 1 && props.horizontalOverlap === 1) ||
-			(props.verticalOverlap === 1 && props.horizontalPresence === 1) ||
-			(props.horizontalOverlap === 1 && props.verticalPresence === 1)
-		)
+		let horizontalOverhang = props.widthRatio > 1 && props.horizontalOverlap === 1 && props.verticalPresence === 1
+		let verticalOverhang = props.heightRatio > 1 && props.verticalOverlap === 1 && props.horizontalPresence === 1
+		let overscreen = props.surfaceOverlap === 1 || horizontalOverhang || verticalOverhang
 		let taggedOver = element.classList.contains('overscreen')
-		if ( overhanging && !taggedOver ) {
+		if ( overscreen && !taggedOver ) {
 			noteAndUpdate({addClass: 'overscreen'})
 		}
-		if ( !overhanging && taggedOver ) {
+		if ( !overscreen && taggedOver ) {
 			noteAndUpdate({removeClass: 'overscreen'})
 		}
 

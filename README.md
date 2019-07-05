@@ -50,9 +50,11 @@ a class 'onscreen', 'crossscreen' or 'offscreen'.
 
 As some elements are too big to be assigned the 'onscreen' class, the 'overscreen' class was created.
 The class 'overscreen' is assigned in two cases:
+
 * The element covers the viewport in one aspect and is entirely visible in the other aspect.
-* The element covers the viewport entirely
-Appears together with 'crossscreen'.
+* The element covers the viewport entirely.
+
+Class 'overscreen' appears together with 'crossscreen'.
 
 ### Styling and scripting
 

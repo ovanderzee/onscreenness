@@ -88,44 +88,65 @@ describe('The eventHandlers deal with live nodeLists', function () {
     expect(last.classList.contains('offscreen')).toBe(true);
   });
 
-  test('live collection being updated with overscreen class when '+
-  ' the element covers the screen in one aspect and is totally visible in the other aspect'+
+  test('live collection being updated with overscreen class when' +
+  ' the element covers the screen in one aspect and is totally visible in the other aspect' +
   ' or the element covers the screen in both aspects', () => {
     collect('section');
     let node = liveList()[0];
 
+    // box in the middle of the sceen
     treat( node, {
+    	widthRatio: .5,
+    	heightRatio: .5,
+    	areaRatio: .25,
 		horizontalOverlap: .5,
 		verticalOverlap: .5,
+		surfaceOverlap: .25,
 		horizontalPresence: 1,
 		verticalPresence: 1,
+		surfacePresence: 1,
     } );
     expect(node.classList.contains('overscreen')).toBe(false);
 
-    // covers screen entirely
+    // covers screen just entirely
     treat( node, {
+    	widthRatio: 1,
+    	heightRatio: 1,
+    	areaRatio: 1,
 		horizontalOverlap: 1,
 		verticalOverlap: 1,
-		horizontalPresence: .5,
-		verticalPresence: .5,
+		surfaceOverlap: 1,
+		horizontalPresence: 1,
+		verticalPresence: 1,
+		surfacePresence: 1,
     } );
     expect(node.classList.contains('overscreen')).toBe(true);
 
     // covers screen vertically and entirely visible horizontally
     treat( node, {
-		horizontalOverlap: .5,
+		heightRatio: 1.2,
+		widthRatio: 0.8,
+		areaRatio: 0.96,
+		horizontalOverlap: 0.8,
 		verticalOverlap: 1,
+		surfaceOverlap: 0.8,
 		horizontalPresence: 1,
-		verticalPresence: .5,
+		verticalPresence: 0.833,
+		surfacePresence: 0.833,
     } );
     expect(node.classList.contains('overscreen')).toBe(true);
 
     // covers screen horizontally and entirely visible vertically
     treat( node, {
+		widthRatio: 1.5,
+		heightRatio: .5,
+		areaRatio: .75,
 		horizontalOverlap: 1,
 		verticalOverlap: .5,
-		horizontalPresence: .5,
+		surfaceOverlap: .5,
+		horizontalPresence: .667,
 		verticalPresence: 1,
+		surfacePresence: .667,
     } );
     expect(node.classList.contains('overscreen')).toBe(true);
   });
@@ -200,7 +221,6 @@ describe('The eventHandlers deal with live nodeLists', function () {
   test('a callback-function will executed when onscreenness is assesed', () => {
     collect('#fifth', () => {
     	window.spyProof = true;
-    	console.log ( ' typeof collectionManagement ' + typeof collectionManagement)
     });
     window.spyProof = false;
     trigger();
