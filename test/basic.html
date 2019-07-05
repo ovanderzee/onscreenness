@@ -136,11 +136,8 @@
 		}, false)
 		document.getElementById('callback').addEventListener('click', () => {
 			let onScreenNotification = function ( props ) { 
-				if ( !this.dataset['onscreenActionFlag'] ) {
-					if ( Number ( this.dataset['onscreenness'] ) > .75) {
-						console.log(`${this.id} example has been visible to the user`)
-						this.dataset['onscreenActionFlag'] = true
-					}
+				if ( props.addClass === 'onscreen') {
+					console.log(`${this.id} is fully visible to the user`)
 				}
 			}
 			onScreenness.collect('#seventh', onScreenNotification)

@@ -14,6 +14,7 @@ describe('The eventHandlers deal with live nodeLists', function () {
   let remove;
   let trigger;
   let liveList;
+  let kickList;
   let treat;
 
   beforeAll(() => {
@@ -22,6 +23,7 @@ describe('The eventHandlers deal with live nodeLists', function () {
     remove = onScreenness.remove;
     trigger = onScreenTest.trigger;
     liveList = onScreenTest.liveList;
+    kickList = onScreenTest.kickList;
     treat = onScreenTest.treat;
   });
 
@@ -192,6 +194,28 @@ describe('The eventHandlers deal with live nodeLists', function () {
     expect(output2.length).toBe(7);
   });
 
+
+  /* Test callbacks */
+
+  test('a callback-function will executed when onscreenness is assesed', () => {
+    collect('#fifth', () => {
+    	window.spyProof = true;
+    	console.log ( ' typeof collectionManagement ' + typeof collectionManagement)
+    });
+    window.spyProof = false;
+    trigger();
+    expect(window.spyProof).toBe(true);
+  });
+
+  test('excluding is also effective on the execution of callback functions', () => {
+    collect('#fifth', function () {
+    	window.spyProof = true;
+    });
+    exclude('.example');
+    window.spyProof = false;
+    trigger();
+    expect(window.spyProof).toBe(false);
+  });
 });
 
 

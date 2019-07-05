@@ -81,32 +81,38 @@ let coreFunctions = {
 	 * @param {object} props - presence properties
 	 */
 	attachIdentifiers: function ( element, props ) {
+		let mutations = {}
+		let noteAndUpdate = record => {
+			Object.assign(mutations, record)
+			record.addClass ? element.classList.add(record.addClass) : element.classList.remove(record.removeClass)
+		}
+
 //		console.log('presence properties ' + JSON.stringify(props))
 		let presence = roundAt ( props.surfacePresence, 3 )
 		element.dataset['onscreenness'] = String ( presence )
 
 		let taggedOn = element.classList.contains('onscreen')
 		if ( presence === 1 && !taggedOn ) {
-			element.classList.add('onscreen')
+			noteAndUpdate({addClass: 'onscreen'})
 		}
 		if ( presence < 1 && taggedOn ) {
-			element.classList.remove('onscreen')
+			noteAndUpdate({removeClass: 'onscreen'})
 		}
 
 		let taggedCross = element.classList.contains('crossscreen')
 		if ( presence > 0 && presence < 1 && !taggedCross ) {
-			element.classList.add('crossscreen')
+			noteAndUpdate({addClass: 'crossscreen'})
 		}
 		if ( ( presence === 0 || presence === 1 ) && taggedCross ) {
-			element.classList.remove('crossscreen')
+			noteAndUpdate({removeClass: 'crossscreen'})
 		}
 
 		let taggedOff = element.classList.contains('offscreen')
 		if ( presence === 0 && !taggedOff ) {
-			element.classList.add('offscreen')
+			noteAndUpdate({addClass: 'offscreen'})
 		}
 		if ( presence > 0 && taggedOff ) {
-			element.classList.remove('offscreen')
+			noteAndUpdate({removeClass: 'offscreen'})
 		}
 
 		let overlapping = roundAt ( props.surfaceOverlap, 3 )
@@ -119,11 +125,13 @@ let coreFunctions = {
 		)
 		let taggedOver = element.classList.contains('overscreen')
 		if ( overhanging && !taggedOver ) {
-			element.classList.add('overscreen')
+			noteAndUpdate({addClass: 'overscreen'})
 		}
 		if ( !overhanging && taggedOver ) {
-			element.classList.remove('overscreen')
+			noteAndUpdate({removeClass: 'overscreen'})
 		}
+
+		return mutations
 	},
 
 }

@@ -14,7 +14,8 @@ let onScreennessModule = (function () {
 		collectionManagement.buildNodeList().forEach ( function ( element ) {
 			let boundingRect = element.getBoundingClientRect()
 			let props = coreFunctions.calculatePresence ( boundingRect )
-			coreFunctions.attachIdentifiers ( element, props )
+			let mutations = coreFunctions.attachIdentifiers ( element, props )
+			Object.assign(props, mutations)
 			let callback = callbackMap.get ( element )
 			if ( callback ) {
 				callback.call ( element, props )
