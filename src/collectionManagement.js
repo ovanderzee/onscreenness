@@ -51,7 +51,7 @@ let collectionManagement = (function () {
 	}
 
 	/**
-	 * Remove query from queryList and blacklist
+	 * Remove query from queryList
 	 * @param {string} rawQuery - querySelector
 	 * @returns {array} normalised input
 	 */
@@ -65,7 +65,7 @@ let collectionManagement = (function () {
 	}
 
 	/**
-	 * Empty the querylist
+	 * Empty the querylist and blacklist
 	 * @returns {array} query for all treated items
 	 */
 	const reset = function () {

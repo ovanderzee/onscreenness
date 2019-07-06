@@ -67,3 +67,4 @@ With support of Babel and Rollup it was possible to assemble it to a NPM-module.
 ## toDo, toWant
 * Implement Puppeteer to Istanbul
 * Refine the DOM observer
+* tendency classes: enterscreen, leavescreen
