@@ -1,7 +1,8 @@
-
+const pageMethods = require('../_page_methods.js')
 const interaction = require('../_spec_helper.js')
 const triggerEvent = interaction.triggerEvent
 const outputCoverageScores = interaction.outputCoverageScores
+const pti = require('puppeteer-to-istanbul')
 
 describe(
   'Basic collection methods',
@@ -22,7 +23,8 @@ describe(
       const [jsCoverage] = await Promise.all([
         page.coverage.stopJSCoverage(),
       ])
-      await outputCoverageScores(jsCoverage)
+//      await outputCoverageScores(jsCoverage)
+      pti.write(jsCoverage)
     })
 
 
@@ -33,12 +35,12 @@ describe(
 //      await page.screenshot({path: `${process.cwd()}/test/screenshots/${collectBtnQry}-${scrapBtnQry}_collect.png`})
 
       let involvedElements = '*[data-onscreenness]'
-      let involvedElementsCount = await page.$$eval(involvedElements, elms => elms.length);
+      let involvedElementsCount = await pageMethods(page).$$eval(involvedElements, elms => elms.length);
 
       await page.click(scrapBtnQry)
 //      await page.screenshot({path: `${process.cwd()}/test/screenshots/${collectBtnQry}-${scrapBtnQry}_scrap.png`})
 
-      let newElementsCount = await page.$$eval(involvedElements, elms => elms.length);
+      let newElementsCount = await pageMethods(page).$$eval(involvedElements, elms => elms.length);
       await expect( involvedElementsCount ).toBeGreaterThan( newElementsCount );
       
       if (callback) {

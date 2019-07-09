@@ -2,15 +2,16 @@
 
 module.exports = {
 
-  "coveragePathIgnorePatterns": [
-    "<rootDir>/lib",
-    "<rootDir>/test"
+  "collectCoverageFrom": [
+    "**/src/*.{js,jsx}",
+    "!**/lib/**",
+    "!**/node_modules/**",
+    "!**/test/**",
   ],
 
   "globalSetup": "<rootDir>test/_globalSetup.js",
 
   "globalTeardown": "<rootDir>test/_globalTeardown.js",
-
 
   "setupFiles": [
     "<rootDir>/test/_setupFiles.js"

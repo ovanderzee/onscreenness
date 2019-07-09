@@ -1,9 +1,10 @@
-
+const pageMethods = require('../_page_methods.js')
 const interaction = require('../_spec_helper.js')
 const triggerEvent = interaction.triggerEvent
 const scrollDown = interaction.scrollDown
 const scrollSecondInView = interaction.scrollSecondInView
 const outputCoverageScores = interaction.outputCoverageScores
+const pti = require('puppeteer-to-istanbul')
 
 describe(
   'Basic collection methods',
@@ -24,7 +25,8 @@ describe(
       const [jsCoverage] = await Promise.all([
         page.coverage.stopJSCoverage(),
       ])
-      await outputCoverageScores(jsCoverage)
+//      await outputCoverageScores(jsCoverage)
+      pti.write(jsCoverage)
     })
 
 
@@ -36,66 +38,66 @@ describe(
 //      await page.screenshot({path: `${process.cwd()}/test/screenshots/1class_1.png`})
 
       let first = '.example:first-child'
-      let hasClassOnscreen1 = await page.$eval(first, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreen1 = await pageMethods(page).$eval(first, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen1).toBeTruthy()
-      let hasClassCrossscreen1 = await page.$eval(first, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreen1 = await pageMethods(page).$eval(first, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreen1).toBeFalsy()
-      let hasClassOffscreen1 = await page.$eval(first, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreen1 = await pageMethods(page).$eval(first, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreen1).toBeFalsy()
 
       let fourth = '.example:nth-child(4n)'
-      let hasClassOnscreen2 = await page.$eval(fourth, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreen2 = await pageMethods(page).$eval(fourth, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen2).toBeFalsy()
-      let hasClassCrossscreen2 = await page.$eval(fourth, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreen2 = await pageMethods(page).$eval(fourth, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreen2).toBeTruthy()
-      let hasClassOffscreen2 = await page.$eval(fourth, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreen2 = await pageMethods(page).$eval(fourth, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreen2).toBeFalsy()
 
       let fifth = '.example:nth-child(5n)'
-      let hasClassOnscreen3 = await page.$eval(fifth, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreen3 = await pageMethods(page).$eval(fifth, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen3).toBeFalsy()
-      let hasClassCrossscreen3 = await page.$eval(fifth, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreen3 = await pageMethods(page).$eval(fifth, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreen3).toBeFalsy()
-      let hasClassOffscreen3 = await page.$eval(fifth, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreen3 = await pageMethods(page).$eval(fifth, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreen3).toBeTruthy()
 
       let last = '.example:last-child'
-      let hasClassOnscreen4 = await page.$eval(last, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreen4 = await pageMethods(page).$eval(last, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen4).toBeFalsy()
-      let hasClassCrossscreen4 = await page.$eval(last, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreen4 = await pageMethods(page).$eval(last, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreen4).toBeFalsy()
-      let hasClassOffscreen4 = await page.$eval(last, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreen4 = await pageMethods(page).$eval(last, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreen4).toBeTruthy()
 
       await scrollDown(page)
 //      await page.screenshot({path: `${process.cwd()}/test/screenshots/1class_A.png`})
       
-      let hasClassOnscreenA = await page.$eval(first, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreenA = await pageMethods(page).$eval(first, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreenA).toBeFalsy()
-      let hasClassCrossscreenA = await page.$eval(first, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreenA = await pageMethods(page).$eval(first, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreenA).toBeFalsy()
-      let hasClassOffscreenA = await page.$eval(first, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreenA = await pageMethods(page).$eval(first, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreenA).toBeTruthy()
 
-      let hasClassOnscreenB = await page.$eval(fourth, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreenB = await pageMethods(page).$eval(fourth, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreenB).toBeFalsy()
-      let hasClassCrossscreenB = await page.$eval(fourth, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreenB = await pageMethods(page).$eval(fourth, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreenB).toBeFalsy()
-      let hasClassOffscreenB = await page.$eval(fourth, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreenB = await pageMethods(page).$eval(fourth, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreenB).toBeTruthy()
 
-      let hasClassOnscreenC = await page.$eval(fifth, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreenC = await pageMethods(page).$eval(fifth, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreenC).toBeFalsy()
-      let hasClassCrossscreenC = await page.$eval(fifth, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreenC = await pageMethods(page).$eval(fifth, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreenC).toBeTruthy()
-      let hasClassOffscreenC = await page.$eval(fifth, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreenC = await pageMethods(page).$eval(fifth, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreenC).toBeFalsy()
 
-      let hasClassOnscreenD = await page.$eval(last, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreenD = await pageMethods(page).$eval(last, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreenD).toBeTruthy()
-      let hasClassCrossscreenD = await page.$eval(last, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreenD = await pageMethods(page).$eval(last, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreenD).toBeFalsy()
-      let hasClassOffscreenD = await page.$eval(last, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreenD = await pageMethods(page).$eval(last, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreenD).toBeFalsy()
     })
 
@@ -109,37 +111,37 @@ describe(
 
       let section = 'section'
 
-      let hasClassOnscreen1 = await page.$eval(section, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreen1 = await pageMethods(page).$eval(section, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen1).toBeFalsy()
-      let hasClassCrossscreen1 = await page.$eval(section, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreen1 = await pageMethods(page).$eval(section, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreen1).toBeTruthy()
-      let hasClassOffscreen1 = await page.$eval(section, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreen1 = await pageMethods(page).$eval(section, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreen1).toBeFalsy()
-      let hasClassOverscreen1 = await page.$eval(section, elm => elm.classList.contains('overscreen'));
+      let hasClassOverscreen1 = await pageMethods(page).$eval(section, elm => elm.classList.contains('overscreen'));
       await expect(hasClassOverscreen1).toBeFalsy()
 
       await scrollSecondInView(page)
 //      await page.screenshot({path: `${process.cwd()}/test/screenshots/tooBig_2.png`})
 
-      let hasClassOnscreen2 = await page.$eval(section, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreen2 = await pageMethods(page).$eval(section, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen2).toBeFalsy()
-      let hasClassCrossscreen2 = await page.$eval(section, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreen2 = await pageMethods(page).$eval(section, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreen2).toBeTruthy()
-      let hasClassOffscreen2 = await page.$eval(section, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreen2 = await pageMethods(page).$eval(section, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreen2).toBeFalsy()
-      let hasClassOverscreen2 = await page.$eval(section, elm => elm.classList.contains('overscreen'));
+      let hasClassOverscreen2 = await pageMethods(page).$eval(section, elm => elm.classList.contains('overscreen'));
       await expect(hasClassOverscreen2).toBeTruthy()
 
       await scrollDown(page)
 //      await page.screenshot({path: `${process.cwd()}/test/screenshots/tooBig_3.png`})
 
-      let hasClassOnscreen3 = await page.$eval(section, elm => elm.classList.contains('onscreen'));
+      let hasClassOnscreen3 = await pageMethods(page).$eval(section, elm => elm.classList.contains('onscreen'));
       await expect(hasClassOnscreen3).toBeFalsy()
-      let hasClassCrossscreen3 = await page.$eval(section, elm => elm.classList.contains('crossscreen'));
+      let hasClassCrossscreen3 = await pageMethods(page).$eval(section, elm => elm.classList.contains('crossscreen'));
       await expect(hasClassCrossscreen3).toBeTruthy()
-      let hasClassOffscreen3 = await page.$eval(section, elm => elm.classList.contains('offscreen'));
+      let hasClassOffscreen3 = await pageMethods(page).$eval(section, elm => elm.classList.contains('offscreen'));
       await expect(hasClassOffscreen3).toBeFalsy()
-      let hasClassOverscreen3 = await page.$eval(section, elm => elm.classList.contains('overscreen'));
+      let hasClassOverscreen3 = await pageMethods(page).$eval(section, elm => elm.classList.contains('overscreen'));
       await expect(hasClassOverscreen3).toBeFalsy()
     })
 

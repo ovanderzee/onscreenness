@@ -16,6 +16,14 @@ class PuppeteerEnvironment extends NodeEnvironment {
     this.global.page = await browser.newPage()
     this.global.origin = `http://${global.__HTTPSERVER__.host}:${global.__HTTPSERVER__.port}`
   }
+
+  async teardown() {
+    await super.teardown();
+  }
+
+  runScript(script) {
+    return super.runScript(script);
+  }
 }
 
 module.exports = PuppeteerEnvironment
