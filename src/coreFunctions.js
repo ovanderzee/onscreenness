@@ -90,8 +90,13 @@ let coreFunctions = {
 	attachIdentifiers: function ( element, props ) {
 		let mutations = {}
 		let noteAndUpdate = record => {
-			Object.assign(mutations, record)
-			record.addClass ? element.classList.add(record.addClass) : element.classList.remove(record.removeClass)
+			if ( record.addClass ) {
+				mutations.addClass = mutations.addClass ? `${mutations.addClass} ${record.addClass}` : record.addClass
+				element.classList.add(record.addClass)
+			} else {
+				mutations.removeClass = mutations.removeClass ? `${mutations.removeClass} ${record.removeClass}` : record.removeClass
+				element.classList.remove(record.removeClass)
+			}
 		}
 
 //		console.log('presence properties ' + JSON.stringify(props))
