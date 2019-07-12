@@ -99,47 +99,33 @@ let coreFunctions = {
 			}
 		}
 
-//		console.log('presence properties ' + JSON.stringify(props))
+		let considerUpdate = ( className, applyCondition ) => {
+			let tagged = element.classList.contains( className )
+			if ( applyCondition && !tagged ) {
+				noteAndUpdate({addClass: className})
+			}
+			if ( !applyCondition && tagged ) {
+				noteAndUpdate({removeClass: className})
+			}
+		}
+
+		// Presence
 		let presence = roundAt ( props.surfacePresence, 3 )
 		element.dataset['onscreenness'] = String ( presence )
 
-		let taggedOn = element.classList.contains('onscreen')
-		if ( presence === 1 && !taggedOn ) {
-			noteAndUpdate({addClass: 'onscreen'})
-		}
-		if ( presence < 1 && taggedOn ) {
-			noteAndUpdate({removeClass: 'onscreen'})
-		}
+		considerUpdate ( 'onscreen', presence === 1 )
+		considerUpdate ( 'crossscreen', presence > 0 && presence < 1 )
+		considerUpdate ( 'offscreen', presence === 0 )
 
-		let taggedCross = element.classList.contains('crossscreen')
-		if ( presence > 0 && presence < 1 && !taggedCross ) {
-			noteAndUpdate({addClass: 'crossscreen'})
-		}
-		if ( ( presence === 0 || presence === 1 ) && taggedCross ) {
-			noteAndUpdate({removeClass: 'crossscreen'})
-		}
-
-		let taggedOff = element.classList.contains('offscreen')
-		if ( presence === 0 && !taggedOff ) {
-			noteAndUpdate({addClass: 'offscreen'})
-		}
-		if ( presence > 0 && taggedOff ) {
-			noteAndUpdate({removeClass: 'offscreen'})
-		}
-
+		// Overlapping
 		let overlapping = roundAt ( props.surfaceOverlap, 3 )
 		element.dataset['overlapping'] = String ( overlapping )
 
 		let horizontalOverhang = props.widthRatio > 1 && props.horizontalOverlap === 1 && props.verticalPresence === 1
 		let verticalOverhang = props.heightRatio > 1 && props.verticalOverlap === 1 && props.horizontalPresence === 1
 		let overscreen = props.surfaceOverlap === 1 || horizontalOverhang || verticalOverhang
-		let taggedOver = element.classList.contains('overscreen')
-		if ( overscreen && !taggedOver ) {
-			noteAndUpdate({addClass: 'overscreen'})
-		}
-		if ( !overscreen && taggedOver ) {
-			noteAndUpdate({removeClass: 'overscreen'})
-		}
+
+		considerUpdate ( 'overscreen', overscreen )
 
 		return mutations
 	},
