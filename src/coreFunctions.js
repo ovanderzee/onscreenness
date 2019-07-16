@@ -73,6 +73,18 @@ let coreFunctions = (function () {
 		let widthRatio = boundingRect.width / document.documentElement.clientWidth
 		let heightRatio = boundingRect.height / document.documentElement.clientHeight
 
+		// Dynamics
+		let horizontalDecentering = ( boundingRect.left
+			- (document.documentElement.clientWidth/2)
+			+ (boundingRect.width/2)
+		)
+		let verticalDecentering = ( boundingRect.top
+			- (document.documentElement.clientHeight/2)
+			+ (boundingRect.height/2)
+		)
+		let absoluteDecentering = Math.hypot( horizontalDecentering, verticalDecentering )
+		let positiveDecentering = ( horizontalDecentering + verticalDecentering ) > 0
+
 		return {
 			time: time,
 			overhang: overhang,
@@ -137,6 +149,16 @@ let coreFunctions = (function () {
 
 		considerUpdate ( 'overscreen', overscreen )
 
+		// Dynamics
+		let lastProps = propsMap.get( element )
+		if ( lastProps ) {
+			mutations.timelapse = props.time - lastProps.time
+			mutations.nearing = Math.abs(lastProps.surfaceDecentering) - Math.abs(props.surfaceDecentering)
+			mutations.scrollspeed = mutations.nearing / (mutations.timelapse/1000)
+
+			considerUpdate ( 'nearingscreen', mutations.nearing > 0 )
+			considerUpdate ( 'leavingscreen', mutations.nearing < 0 )
+		}
 
 		propsMap.set( element, props )
 		return mutations
