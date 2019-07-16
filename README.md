@@ -87,7 +87,7 @@ When using a traditional function, the current element is exposed as 'this':
 The function can be run when the classname changes:
 
     let myFunction = function ( props ) { 
-        if ( props.addClass === 'onscreen') {
+        if ( props.addClass.indexOf( 'onscreen' ) > -1 ) {
             console.log(`${this.id} has been fully visible to the user`)
         }
     }
