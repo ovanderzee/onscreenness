@@ -15,10 +15,9 @@ let onScreennessModule = (function () {
 			let boundingRect = element.getBoundingClientRect()
 			let props = coreFunctions.calculatePresence ( boundingRect )
 			let mutations = coreFunctions.attachIdentifiers ( element, props )
-			Object.assign(props, mutations)
 			let callback = callbackMap.get ( element )
 			if ( callback ) {
-				callback.call ( element, props )
+				callback.call ( element, Object.assign(props, mutations) )
 			}
 		})
 	}

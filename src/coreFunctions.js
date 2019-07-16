@@ -3,14 +3,16 @@ import {
 	roundAt
 } from './utilities.js'
 
-let coreFunctions = {
+let coreFunctions = (function () {
+
+	let propsMap = new WeakMap()
 
 	/**
 	 * Remove datasets and classNames from queried elements
 	 * @private
 	 * @param {string} removeList - querySelector
 	 */
-	detachIdentifiers: function ( removeList ) {
+	const detachIdentifiers = function ( removeList ) {
 		let elementList = removeList.length 
 			? queryToArray ( removeList.join(',') )
 			: []
@@ -26,7 +28,7 @@ let coreFunctions = {
 				delete element.dataset['overlapping']
 			}
 		})
-	},
+	}
 
 	/**
 	 * Calculate onscreenness figures of an element
@@ -34,7 +36,9 @@ let coreFunctions = {
 	 * @param {object} boundingRect
 	 * @returns {object} onscreenness figures
 	 */
-	calculatePresence: function ( boundingRect ) {
+	const calculatePresence = function ( boundingRect ) {
+		let time = Date.now()
+
 		let overhang = {
 			left: 0 - boundingRect.left,
 			right: boundingRect.right - document.documentElement.clientWidth,
@@ -54,9 +58,11 @@ let coreFunctions = {
 			bottom: absence.bottom / boundingRect.height,
 		}
 
+		// Presence
 		let horizontalPresence = 1 - relativeAbsence.left - relativeAbsence.right
 		let verticalPresence = 1 - relativeAbsence.top - relativeAbsence.bottom
 
+		// Overlapping
 		let horizontalOverlap = (
 			boundingRect.width - absence.left - absence.right
 			) / document.documentElement.clientWidth
@@ -68,10 +74,14 @@ let coreFunctions = {
 		let heightRatio = boundingRect.height / document.documentElement.clientHeight
 
 		return {
+			time: time,
 			overhang: overhang,
 			widthRatio: widthRatio,
 			heightRatio: heightRatio,
 			areaRatio: widthRatio * heightRatio,
+			horizontalDecentering: horizontalDecentering,
+			verticalDecentering: verticalDecentering,
+			surfaceDecentering: positiveDecentering ? absoluteDecentering : 0 - absoluteDecentering,
 			horizontalOverlap: horizontalOverlap,
 			verticalOverlap: verticalOverlap,
 			surfaceOverlap: horizontalOverlap * verticalOverlap,
@@ -79,7 +89,7 @@ let coreFunctions = {
 			verticalPresence: verticalPresence,
 			surfacePresence: horizontalPresence * verticalPresence,
 		}
-	},
+	}
 
 	/** 
 	 * Updates dataset and classNames of an element
@@ -87,7 +97,7 @@ let coreFunctions = {
 	 * @param {element} element
 	 * @param {object} props - presence properties
 	 */
-	attachIdentifiers: function ( element, props ) {
+	const attachIdentifiers = function ( element, props ) {
 		let mutations = {}
 		let noteAndUpdate = record => {
 			if ( record.addClass ) {
@@ -99,12 +109,12 @@ let coreFunctions = {
 			}
 		}
 
-		let considerUpdate = ( className, applyCondition ) => {
-			let tagged = element.classList.contains( className )
-			if ( applyCondition && !tagged ) {
+		let considerUpdate = ( className, applicableCondition ) => {
+			let hasClass = element.classList.contains( className )
+			if ( applicableCondition && !hasClass ) {
 				noteAndUpdate({addClass: className})
 			}
-			if ( !applyCondition && tagged ) {
+			if ( !applicableCondition && hasClass ) {
 				noteAndUpdate({removeClass: className})
 			}
 		}
@@ -127,9 +137,17 @@ let coreFunctions = {
 
 		considerUpdate ( 'overscreen', overscreen )
 
-		return mutations
-	},
 
-}
+		propsMap.set( element, props )
+		return mutations
+	}
+	
+	return {
+		detachIdentifiers: detachIdentifiers,
+		calculatePresence: calculatePresence,
+		attachIdentifiers: attachIdentifiers,
+	}
+
+})()
 
 export { coreFunctions }
