@@ -54,7 +54,10 @@ The class 'overscreen' is assigned in two cases:
 * The element covers the viewport in one aspect and is entirely visible in the other aspect.
 * The element covers the viewport entirely.
 
-Class 'overscreen' appears together with 'crossscreen'.
+Class 'overscreen' appears together with 'crossscreen', except when it covers the viewport exactly.
+
+Apart from the classes that describe the state, there are two classes 'nearingscreen' and 'leavingscreen'.
+With these you know what to expect later on.
 
 ### Styling and scripting
 

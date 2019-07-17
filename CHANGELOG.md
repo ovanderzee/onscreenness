@@ -1,6 +1,14 @@
 
 ## Version History
 
+1.5,0
+
+* More classnames:
+  * nearingscreen
+  * leavingscreen
+* Bugfixed: props object now also reports multiple classname additions/removals
+* Followed GitHub recommendations on lodash and diff
+
 1.4.1
 
 * Class mutations and overhang data available to callback functions
@@ -65,6 +73,5 @@ With support of Babel and Rollup it was possible to assemble it to a NPM-module.
 -------------------------
 
 ## toDo, toWant
-* Implement Puppeteer to Istanbul
+* Implement Puppeteer to Istanbul (Hmmmm)
 * Refine the DOM observer
-* tendency classes: enterscreen, leavescreen
