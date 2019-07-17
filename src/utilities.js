@@ -57,7 +57,20 @@ const arrayIntersection = function(array1, array2) {
     })
 }
 
+/**
+ * Check all arguments for being a number with the same sign
+ * @private
+ * @param {iterable numbers}
+ * @return {boolean} equality
+ */
+const signEquality = function ()  {
+	let positives = [...arguments].filter( arg => arg >= 0 )
+	let negatives = [...arguments].filter( arg => arg <= 0 )
+	return positives.length === arguments.length || negatives.length === arguments.length
+} 
+
 export {
+	signEquality,
 	arrayIntersection,
 	commaSeperatedListToArray,
 	queryToArray,

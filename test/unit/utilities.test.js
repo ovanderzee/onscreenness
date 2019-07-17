@@ -3,6 +3,7 @@
  */
 
 import {
+  signEquality,
   arrayIntersection,
   commaSeperatedListToArray,
   queryToArray,
@@ -48,3 +49,37 @@ test('arrayIntersection returns intersection of two arrays', () => {
   expect(output).toEqual([2,3]);
 });
 
+test('signEquality returns true when all args are numbers with the sane sign, including zero', () => {
+  expect( signEquality ( 0, 1, 2, 3 ) ).toBe(true)
+  expect( signEquality ( 0, -1, -2, -3 ) ).toBe(true)
+});
+
+test('signEquality returns true when all args are strings with equal signed numbers, including zero', () => {
+  expect( signEquality ( '0', '1', '2', '3' ) ).toBe(true)
+  expect( signEquality ( '0', ' -1 ', '-2', '-3' ) ).toBe(true)
+});
+
+test('signEquality returns false when the args evaluate to numbers with mixed signs', () => {
+  expect( signEquality ( 0, -1, 2, -3 ) ).toBe(false)
+  expect( signEquality ( '0', '-1', '2', '-3' ) ).toBe(false)
+});
+
+test('signEquality strips whitespace, but no other not-numerics', () => {
+  expect( signEquality ( ' 0 ', ' 1 ' ) ).toBe(true)
+  expect( signEquality ( ' 0 ', ' 1cm ' ) ).toBe(false)
+});
+
+test('signEquality can handle array spreads', () => {
+  expect( signEquality ( ...[0, 1, 2 ,3] ) ).toBe(true)
+  expect( signEquality ( 0, 1, ...[2 ,3] ) ).toBe(true)
+  expect( signEquality ( 0, 1, ...[-2, 3] ) ).toBe(false)
+});
+
+test('signEquality can\'t handle arrays, sets, objects or NaN', () => {
+  expect( signEquality ( [0, 1, 2, 3] ) ).toBe(false)
+  expect( signEquality ( 0, [1, 2, 3] ) ).toBe(false)
+  expect( signEquality ( 0, '[1 ,2]' ) ).toBe(false)
+  expect( signEquality ( 0, 1, new Set([1, 2, 3, 4, 5]) ) ).toBe(false)
+  expect( signEquality ( 0, {x: 5} ) ).toBe(false)
+  expect( signEquality ( 0, ' {x: 5} ' ) ).toBe(false)
+});
