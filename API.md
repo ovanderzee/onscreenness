@@ -33,7 +33,7 @@ Returns **[array][10]** normalised input
 
 ## remove
 
-Remove query from queryList and blacklist
+Remove query from queryList
 
 ### Parameters
 
@@ -43,7 +43,7 @@ Returns **[array][10]** normalised input
 
 ## reset
 
-Empty the querylist
+Empty the querylist and blacklist
 
 Returns **[array][10]** query for all treated items
 

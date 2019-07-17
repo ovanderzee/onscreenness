@@ -152,7 +152,7 @@ describe('The eventHandlers deal with live nodeLists', function () {
   });
 
 
-  test('live collection being updated with dynamic classes when the page is scrolled', () => {
+  test('live collection being updated with dynamic classes when the page is scrolled down', () => {
     collect('#fourth');
     let node = liveList()[0];
     let mutations
@@ -172,24 +172,20 @@ describe('The eventHandlers deal with live nodeLists', function () {
 		surfaceDecentering: 50,
 		time: 1500000000250,
     } );
-    console.log('node.className ' + node.className)
-    console.log('1 mutations ' + JSON.stringify(mutations) )
     expect(mutations.nearing).toBe(100);
     expect(mutations.scrollspeed).toBe(400);
     expect(node.classList.contains('nearingscreen')).toBe(true);
 
-    // 75px down, cross zero => strange outcomes
+    // 75px down, cross zero => element always leaves the viewport
     mutations = treat( node, {
 		horizontalDecentering: 0,
 		verticalDecentering: -25,
 		surfaceDecentering: -25,
 		time: 1500000000500,
     } );
-    console.log('node.className ' + node.className)
-    console.log('2 mutations ' + JSON.stringify(mutations) )
-    expect(mutations.nearing).toBe(25);
-    expect(mutations.scrollspeed).toBe(100);
-    expect(node.classList.contains('nearingscreen')).toBe(true);
+    expect(mutations.nearing).toBe(-25);
+    expect(mutations.scrollspeed).toBe(-300);
+    expect(node.classList.contains('leavingscreen')).toBe(true);
 
     // 125px down
     mutations = treat( node, {
@@ -198,10 +194,56 @@ describe('The eventHandlers deal with live nodeLists', function () {
 		surfaceDecentering: -150,
 		time: 1500000000750,
     } );
-    console.log('node.className ' + node.className)
-    console.log('3 mutations ' + JSON.stringify(mutations) )
     expect(mutations.nearing).toBe(-125);
     expect(mutations.scrollspeed).toBe(-500);
+    expect(node.classList.contains('leavingscreen')).toBe(true);
+  });
+
+
+  test('live collection being updated with dynamic classes when the page is scrolled up', () => {
+    collect('#fourth');
+    let node = liveList()[0];
+    let mutations
+
+    // initial at the bottom
+    treat( node, {
+		horizontalDecentering: 0,
+		verticalDecentering: -150,
+		surfaceDecentering: -150,
+		time: 1500000000000,
+    } );
+
+    // 125px up
+    mutations = treat( node, {
+		horizontalDecentering: 0,
+		verticalDecentering: -25,
+		surfaceDecentering: -25,
+		time: 1500000000250,
+    } );
+    expect(mutations.nearing).toBe(125);
+    expect(mutations.scrollspeed).toBe(500);
+    expect(node.classList.contains('nearingscreen')).toBe(true);
+
+    // 75px up, cross zero => element always leaves the viewport
+    mutations = treat( node, {
+		horizontalDecentering: 0,
+		verticalDecentering: 50,
+		surfaceDecentering: 50,
+		time: 1500000000500,
+    } );
+    expect(mutations.nearing).toBe(-50);
+    expect(mutations.scrollspeed).toBe(-300);
+    expect(node.classList.contains('leavingscreen')).toBe(true);
+
+    // 100px up
+    mutations = treat( node, {
+		horizontalDecentering: 0,
+		verticalDecentering: 150,
+		surfaceDecentering: 150,
+		time: 1500000000750,
+    } );
+    expect(mutations.nearing).toBe(-100);
+    expect(mutations.scrollspeed).toBe(-400);
     expect(node.classList.contains('leavingscreen')).toBe(true);
   });
 

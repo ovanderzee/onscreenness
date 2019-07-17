@@ -1,4 +1,5 @@
 import {
+	signEquality,
 	queryToArray,
 	roundAt
 } from './utilities.js'
@@ -152,8 +153,16 @@ let coreFunctions = (function () {
 		// Dynamics
 		let lastProps = propsMap.get( element )
 		if ( lastProps ) {
-			mutations.timelapse = props.time - lastProps.time
-			mutations.nearing = Math.abs(lastProps.surfaceDecentering) - Math.abs(props.surfaceDecentering)
+			if ( signEquality ( lastProps.surfaceDecentering, props.surfaceDecentering ) ) {
+				// normal
+				mutations.nearing = Math.abs( lastProps.surfaceDecentering ) - Math.abs( props.surfaceDecentering )
+				mutations.timelapse = props.time - lastProps.time
+			} else {
+				// surfaceDecentering across zero => do calculations with only the part after passing zero
+				let fraction = Math.abs ( props.surfaceDecentering / ( lastProps.surfaceDecentering - props.surfaceDecentering ) )
+				mutations.nearing = 0 - Math.abs(props.surfaceDecentering)
+				mutations.timelapse = ( props.time - lastProps.time ) * fraction
+			}
 			mutations.scrollspeed = mutations.nearing / (mutations.timelapse/1000)
 
 			considerUpdate ( 'nearingscreen', mutations.nearing > 0 )
