@@ -7,28 +7,35 @@ Sign up your elements and a have their onscreen presence be assessed.
 With the html-classes and data offered here, your elements 
 can make an grand entrance on the viewport!
 
+
+## Setup
+onScreenness is available from unpkg.com and jsdelivr.net and can thus be used in vanilla javascript apps.
+With the packages on npmjs.com, onScreenness can be used in angular, vue etcetera.
+
+[see setup guide](./SETUP.md)
+
+
 ## Sign up your elements
-Once bundled in your project onScreenness is available as a global object.
 You can sign up your elements for the onScreenness-treat using a CSS selector:
 
     let querySelector = '#myElement'
-    onScreenness.collect(querySelector);
-    onScreenness.collect('.paragraph');
+    onScreenness.collect(querySelector)
+    onScreenness.collect('.paragraph')
 
 The collect method may be called several times to build up the collection.
 
 Elements covered by a query in the collection can be blacklisted with an alternative query:
 
-    onScreenness.exclude('.paragraph.emphasis');
-    onScreenness.exclude('#that-paragraph');
+    onScreenness.exclude('.paragraph.emphasis')
+    onScreenness.exclude('#that-paragraph')
 
 CSS selectors added to the collection can be removed:
 
-    onScreenness.remove('#myElement');
+    onScreenness.remove('#myElement')
 
 All specified queries can be removed:
 
-    onScreenness.reset();
+    onScreenness.reset()
 
 
 ## Automatic pick-up
@@ -36,7 +43,11 @@ Onscreenness will also watch the html for elements with a data attribute:
 
     <section data-onscreenness>...</section>
 
-In this case no further scripting is needed. 
+In this case no further scripting is not scrictly needed, 
+but can be desired to prevent onScreenness to be shaken out of the tree. 
+
+    onScreenness.collect()
+
 Blacklisting will also work on automatically picked up elements.
 Resetting will work on such element when the collection contains a query capable of selecting it.
 
@@ -98,22 +109,17 @@ The function can be run when the classname changes:
 
 [see  demo folder](./demo)
 
-## ...
 
-### Install for vanilla javascript-app
-Place the following code in the head-section of your webpage:
-
-    <script src="https://unpkg.com/onscreenness@latest"></script>
-
-
-### Triggers for assesment of presence
+## Triggers for assesment of presence
 * readystatechange to interactive
 * resize window
 * scrolling
 * document changes
 
-### Application Programming Interface
+
+## Application Programming Interface
 [see API description](./API.md)
 
-### Version History
+
+## Version History
 [see changelog](./CHANGELOG.md)
