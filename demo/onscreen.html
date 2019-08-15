@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="../dist/index.js"></script>
+	<link
+		href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800|Roboto"
+		rel="stylesheet"
+	/>
+	<style type="text/css">
+	
+/* variables */
+
+:root {
+	--text-color: #021033;
+	--light-blue: #2590ce;
+	--opaque-light-blue: #2590ce7f;
+	--flat-blue: #2271b3;
+	--brand-blue: #1656a7;
+	--dark-blue: #063971;
+}
+	
+/* element layout */
+
+body {
+	font: 16px/1 "Roboto", sans-serif;
+	color: var(--text-color);
+}
+h1 {
+	color: var(--dark-blue);
+	font: bold 16px/1.06 "Nunito", sans-serif;
+	margin: 1em 0;
+	font-size: 2.5em;
+	font-weight: normal;
+}
+h2 {
+	color: var(--dark-blue);
+	font: bold 16px/1.06 "Nunito", sans-serif;
+	margin: 1em 0;
+	font-size: 1.65em;
+}
+h3 {
+	color: var(--dark-blue);
+	font: bold 16px/1.06 "Nunito", sans-serif;
+	margin: 1em 0;
+	font-size: 1.31em;
+	letter-spacing: .8px;
+}
+a {
+	display: inline-block;
+	color: var(--brand-blue);
+}
+a: active, a: hover, a: focus {
+    color: var(--dark-blue);
+}
+
+/* page layout */
+
+body {
+	display: flex;
+	flex-wrap: wrap;
+}
+body > * {
+	flex: 1 0 calc(100% - 4rem);
+	margin: 1rem ;
+	padding: 1rem;
+}
+body > section {
+	background: var(--opaque-light-blue);
+	border-radius: .75rem 6rem .75rem 2.25rem;
+}
+@media (min-width: 640px) {
+	body > section {
+		flex: 0 1 calc(50% - 4rem);
+	}
+}
+
+/* graph layout */
+
+.circle-graph-webcontent {
+	text-align: center;
+}
+.circle-graph-webcontent svg.circle-graph {
+	font: 16px/1 "Roboto", sans-serif;
+	margin: 0 auto
+}
+.circle-graph-webcontent svg.circle-graph circle {
+	-webkit-transition: stroke-dashoffset 1s ease-in 0s;
+	transition: stroke-dashoffset 1s ease-in 0s
+}
+.circle-graph-webcontent.on-screen svg.circle-graph circle {
+	-webkit-transition: stroke-dashoffset 2s ease-in 500ms;
+	transition: stroke-dashoffset 2s ease-in 500ms
+}
+
+	</style>
+	</head>
+	<body>
+		<h2>
+			Using onscreen class
+		</h2>
+		<section>
+
+<div id="ffzu_" class="wide-mood-webcontent">
+	<div class="wide-mood-inner">
+		<h1><strong>De beleggingshypotheek<br>
+voor starters</strong></h1>
+
+<ul>
+	<li>Speciaal voor woningen en appartementen</li>
+	<li>Financier tot 80% van de marktwaarde in verhuurde staat</li>
+	<li>Verbouw tot 25% van de marktwaarde in verhuurde staat</li>
+	<li>Door heel Nederland, ook buiten de grote steden</li>
+</ul>
+<a class="btn btn-action" href="/aanvraag-via-intermediair"> Vrijblijvend aanvragen</a></p>
+	</div>
+</div>
+
+		</section>
+		<section>
+			<div id="flan_" class="row circle-graph-webcontent">
+				<svg height="160" width="160" viewBox="0 0 160 160" class="circle-graph">
+					<circle cx="80" cy="80" r="72" stroke="var(--brand-blue)" closeoffset="0" stroke-width="16" stroke-dasharray="452.38896" fill="transparent" transform="rotate(-90 80 80)">
+					</circle>
+					<text x="80" y="80" fill="var(--brand-blue)" font-size="43.191361727654" text-anchor="middle" dominant-baseline="auto"><tspan dy="14.397120575885" alignment-baseline="auto">4.1%</tspan></text>
+				</svg>
+				<h2>Ons rentepercentage</h2>
+			</div>
+			<style type="text/css">
+				#flan_ .circle-graph circle {
+					stroke-dashoffset: 452.38896;
+				}
+				#flan_.onscreen .circle-graph circle {
+					stroke-dashoffset: 0;
+				}
+			</style>
+		</section>
+		<script>
+			onScreenness.collect('#flan_');
+		</script>
+	</body>
+</html>
