@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<script src="../dist/index.js"></script>
+	<style type="text/css">
+		body {
+			background: powderblue;
+			margin: 3em;
+			width: 150vw;
+			height: 150vh;
+
+		}
+		section {
+			padding: 25vw;
+		}
+		.example {
+			background: darkmagenta;
+			border: 1em darkmagenta solid;
+			border-radius: 45%;
+			color: darkorange;
+			font: bolder 1em/1.333 sans-serif;
+			display: table-cell;
+			padding: 1.5em;
+			width: 10em;
+			height: 10em;
+			text-align: center;
+			vertical-align: middle;
+			transition: background ease 250ms
+		}
+		.example.leavingscreen {
+			background: transparent;
+			transition: background ease 1s
+		}
+	</style>
+	</head>
+	<body>
+		<h2>
+			Using nearingscreen and leavingscreen classes
+		</h2>
+		<section>
+			<div class="example" data-onscreenness draggable="true">
+				Scroll the body as you please - up, down, left, right...
+			</div>
+		</section>
+		<script>
+			let calcDegs = function (osnObj) {
+				console.log('hi');
+			}
+			onScreenness.collect('.example', calcDegs)
+		</script>
+	</body>
+</html>
