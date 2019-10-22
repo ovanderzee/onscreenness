@@ -5,7 +5,7 @@ import documentStaging from '../node_modules/document-staging/dist/index.esm.js'
 
 let onScreennessModule = (function () {
 
-	/** 
+	/**
 	 * Loops all elements from the jobList
 	 * @private
 	 */
@@ -43,13 +43,13 @@ let onScreennessModule = (function () {
 				documentStaging.onInteractive ([ changeHandler ])
 			},
 			exclude: function ( rawQuery ) {
-				documentStaging.onInteractive ([ 
+				documentStaging.onInteractive ([
 					function () { coreFunctions.detachIdentifiers ( collectionManagement.exclude ( rawQuery ) ) },
 					changeHandler,
 				])
 			},
 			remove: function ( rawQuery ) {
-				documentStaging.onInteractive ([ 
+				documentStaging.onInteractive ([
 					function () { coreFunctions.detachIdentifiers ( collectionManagement.remove ( rawQuery ) ) },
 					changeHandler,
 				])
