@@ -1,11 +1,7 @@
-/**
- * @jest-environment jsdom
- */
-
 import {
   onScreenness,
   onScreenTest
-} from '../../src/onScreenness.js';
+} from './onScreenness.js';
 
 describe('The eventHandlers deal with live nodeLists', function () {
 

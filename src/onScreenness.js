@@ -1,7 +1,7 @@
 
 import { collectionManagement } from './collectionManagement.js'
 import { coreFunctions } from './coreFunctions.js'
-import documentStaging from '../node_modules/document-staging/dist/index.esm.js'
+import documentStaging from '../node_modules/document-staging/dist/index.js'
 
 let onScreennessModule = (function () {
 

@@ -1,8 +1,8 @@
 import {
 	arrayIntersection,
-	commaSeperatedListToArray,
-	queryToArray,
-} from './utilities.js'
+	arrayFromCommaSeparatedList,
+	arrayFromQuery,
+} from 'my-lib'
 
 let collectionManagement = (function () {
 	const baseQuery = '[data-onscreenness]'
@@ -31,7 +31,7 @@ let collectionManagement = (function () {
 	 * @returns {array} normalised input
 	 */
 	const collect = function ( rawQuery, callback ) {
-		let queries = commaSeperatedListToArray ( rawQuery )
+		let queries = arrayFromCommaSeparatedList ( rawQuery )
 		addQueries ( queryList, queries )
 		if ( callback && typeof callback === 'function' ) {
 			queries.forEach ( query => callbackObj[query] = callback )
@@ -45,7 +45,7 @@ let collectionManagement = (function () {
 	 * @returns {array} normalised input
 	 */
 	const exclude = function ( rawQuery ) {
-		let queries = commaSeperatedListToArray ( rawQuery )
+		let queries = arrayFromCommaSeparatedList ( rawQuery )
 		addQueries ( blackList, queries )
 		return queries
 	}
@@ -56,7 +56,7 @@ let collectionManagement = (function () {
 	 * @returns {array} normalised input
 	 */
 	const remove = function ( rawQuery ) {
-		let queries = commaSeperatedListToArray ( rawQuery )
+		let queries = arrayFromCommaSeparatedList ( rawQuery )
 		let queryIntersection = arrayIntersection ( queryList, queries )
 		queryIntersection.forEach ( ( query ) => {
 			queryList.splice ( queryList.indexOf ( query ), 1 )
@@ -87,28 +87,28 @@ let collectionManagement = (function () {
 		}
 	}
 
-	/** 
+	/**
 	 * Live list of elements to work on
 	 * @private
 	 */
 	const buildNodeList = function () {
 		let fullList = [baseQuery].concat(queryList)
-		let elementList = queryToArray ( fullList.join(',') )
-		let ignoreList = blackList.length 
-			? queryToArray ( blackList.join(',') )
+		let elementList = arrayFromQuery ( fullList.join(',') )
+		let ignoreList = blackList.length
+			? arrayFromQuery ( blackList.join(',') )
 			: []
 
 		return elementList.filter ( elm => !ignoreList.includes ( elm ) )
 	}
 
-	/** 
+	/**
 	 * Live map of elements to execute function with
 	 * @private
 	 */
 	const buildCallbackMap = function () {
 		let callbackMap = new Map();
 		Object.entries(callbackObj).forEach ( ([ query, callback ]) => {
-			queryToArray ( query ).forEach ( elm => {
+			arrayFromQuery ( query ).forEach ( elm => {
 				callbackMap.set ( elm, callback )
 			})
 		})

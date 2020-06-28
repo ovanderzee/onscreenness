@@ -1,11 +1,7 @@
-/**
- * @jest-environment jsdom
- */
-
 import {
   onScreenness,
   onScreenTest
-} from '../../src/onScreenness.js';
+} from './onScreenness.js';
 
 
 describe('An element with an onscreenness data attribute in the html will be in the assesment', function () {

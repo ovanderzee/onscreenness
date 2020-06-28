@@ -1,10 +1,6 @@
-/**
- * @jest-environment jsdom
- */
-
 import {
   collectionManagement
-} from '../../src/collectionManagement.js';
+} from './collectionManagement.js';
 
 
 describe('The API manages queryLists', function () {

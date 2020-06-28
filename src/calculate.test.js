@@ -1,10 +1,6 @@
-/**
- * @jest-environment jsdom
- */
-
 import {
   coreFunctions
-} from '../../src/coreFunctions.js';
+} from './coreFunctions.js';
 
 describe('calculatePresence calculates presence by a bounding rectangle', function () {
 
