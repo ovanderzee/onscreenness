@@ -7,7 +7,7 @@
 		rel="stylesheet"
 	/>
 	<style type="text/css">
-	
+
 /* variables */
 
 :root {
@@ -18,7 +18,7 @@
 	--brand-blue: #1656a7;
 	--dark-blue: #063971;
 }
-	
+
 /* element layout */
 
 body {
@@ -45,33 +45,29 @@ h3 {
 	font-size: 1.31em;
 	letter-spacing: .8px;
 }
+p {
+	margin: 1em 0;
+	font-size: 1.25em;
+	line-height: 1.4;
+}
 a {
 	display: inline-block;
 	color: var(--brand-blue);
 }
 a: active, a: hover, a: focus {
-    color: var(--dark-blue);
+  color: var(--dark-blue);
 }
 
 /* page layout */
 
-body {
-	display: flex;
-	flex-wrap: wrap;
-}
 body > * {
-	flex: 1 0 calc(100% - 4rem);
+	max-width: 32rem;
 	margin: 1rem ;
-	padding: 1rem;
 }
 body > section {
 	background: var(--opaque-light-blue);
 	border-radius: .75rem 6rem .75rem 2.25rem;
-}
-@media (min-width: 640px) {
-	body > section {
-		flex: 0 1 calc(50% - 4rem);
-	}
+	padding: 1rem;
 }
 
 /* graph layout */
@@ -95,47 +91,53 @@ body > section {
 	</style>
 	</head>
 	<body>
-		<h2>
-			Using onscreen class
-		</h2>
-		<section>
+		<h1>
+			Using onscreen class, scroll up and down
+		</h1>
+		<section class="generic">
 
-<div id="ffzu_" class="wide-mood-webcontent">
-	<div class="wide-mood-inner">
-		<h1><strong>De beleggingshypotheek<br>
-voor starters</strong></h1>
+			<div class="pitch-webcontent">
+        <h2>For large and small real estate investments</h2>
+        <p>
+					We are there for investors who are just starting out and for those who already have a large portfolio. For those who want to buy an apartment, or an entire commercial building. We think growth is important. It is therefore not necessary to switch if your portfolio grows.
+				</p>
+      </div>
 
-<ul>
-	<li>Speciaal voor woningen en appartementen</li>
-	<li>Financier tot 80% van de marktwaarde in verhuurde staat</li>
-	<li>Verbouw tot 25% van de marktwaarde in verhuurde staat</li>
-	<li>Door heel Nederland, ook buiten de grote steden</li>
-</ul>
-<a class="btn btn-action" href="/aanvraag-via-intermediair"> Vrijblijvend aanvragen</a></p>
-	</div>
-</div>
+			<div class="pitch-webcontent">
+        <h2>We see value in what is not yet there</h2>
+        <p>
+					Because we do nothing but finance real estate, our knowledge of the market is great. We dare to think in terms of opportunities. For example, create value that is not yet there, by co-financing your renovation. In addition, we finance investment properties throughout the European Union.
+				</p>
+			</div>
+
+			<div class="pitch-webcontent">
+        <h2>You decide how to apply for a mortgage</h2>
+        <p>
+					With us you can apply for an investment mortgage through a financial intermediary, but also independently. You will receive a non-binding proposal with indicative interest. If our proposal appeals to you, we will guide you in the process until the deed has passed the notary.
+				</p>
+      </div>
 
 		</section>
-		<section>
-			<div id="flan_" class="row circle-graph-webcontent">
+		<section class="special">
+			<div class="row circle-graph-webcontent">
 				<svg height="160" width="160" viewBox="0 0 160 160" class="circle-graph">
 					<circle cx="80" cy="80" r="72" stroke="var(--brand-blue)" closeoffset="0" stroke-width="16" stroke-dasharray="452.38896" fill="transparent" transform="rotate(-90 80 80)">
 					</circle>
-					<text x="80" y="80" fill="var(--brand-blue)" font-size="43.191361727654" text-anchor="middle" dominant-baseline="auto"><tspan dy="14.397120575885" alignment-baseline="auto">4.1%</tspan></text>
+					<text x="80" y="80" fill="var(--brand-blue)" font-size="43.191361727654" text-anchor="middle" dominant-baseline="auto"><tspan dy="14.397120575885" alignment-baseline="auto">1.4%</tspan></text>
 				</svg>
-				<h2>Ons rentepercentage</h2>
+				<h2>Our interest rate</h2>
 			</div>
 			<style type="text/css">
-				#flan_ .circle-graph circle {
+				.circle-graph-webcontent .circle-graph circle {
 					stroke-dashoffset: 452.38896;
 				}
-				#flan_.onscreen .circle-graph circle {
+				.circle-graph-webcontent.onscreen .circle-graph circle {
 					stroke-dashoffset: 0;
 				}
 			</style>
 		</section>
 		<script>
-			onScreenness.collect('#flan_');
+			onScreenness.collect('.circle-graph-webcontent');
 		</script>
 	</body>
 </html>
