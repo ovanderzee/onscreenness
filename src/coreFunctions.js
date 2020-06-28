@@ -1,8 +1,8 @@
 import {
-	signEquality,
-	queryToArray,
-	roundAt
-} from './utilities.js'
+	isEqualSigns,
+	arrayFromQuery,
+	roundAtDecimals,
+} from 'my-lib'
 
 let coreFunctions = (function () {
 
@@ -14,8 +14,8 @@ let coreFunctions = (function () {
 	 * @param {string} removeList - querySelector
 	 */
 	const detachIdentifiers = function ( removeList ) {
-		let elementList = removeList.length 
-			? queryToArray ( removeList.join(',') )
+		let elementList = removeList.length
+			? arrayFromQuery ( removeList.join(',') )
 			: []
 
 		elementList.forEach( function ( element ) {
@@ -104,7 +104,7 @@ let coreFunctions = (function () {
 		}
 	}
 
-	/** 
+	/**
 	 * Updates dataset and classNames of an element
 	 * @private
 	 * @param {element} element
@@ -133,7 +133,7 @@ let coreFunctions = (function () {
 		}
 
 		// Presence
-		let presence = roundAt ( props.surfacePresence, 3 )
+		let presence = roundAtDecimals ( props.surfacePresence, 3 )
 		element.dataset['onscreenness'] = String ( presence )
 
 		considerUpdate ( 'onscreen', presence === 1 )
@@ -141,7 +141,7 @@ let coreFunctions = (function () {
 		considerUpdate ( 'offscreen', presence === 0 )
 
 		// Overlapping
-		let overlapping = roundAt ( props.surfaceOverlap, 3 )
+		let overlapping = roundAtDecimals ( props.surfaceOverlap, 3 )
 		element.dataset['overlapping'] = String ( overlapping )
 
 		let horizontalOverhang = props.widthRatio > 1 && props.horizontalOverlap === 1 && props.verticalPresence === 1
@@ -153,7 +153,7 @@ let coreFunctions = (function () {
 		// Dynamics
 		let lastProps = propsMap.get( element )
 		if ( lastProps ) {
-			if ( signEquality ( lastProps.surfaceDecentering, props.surfaceDecentering ) ) {
+			if ( isEqualSigns ( lastProps.surfaceDecentering, props.surfaceDecentering ) ) {
 				// normal
 				mutations.nearing = Math.abs( lastProps.surfaceDecentering ) - Math.abs( props.surfaceDecentering )
 				mutations.timelapse = props.time - lastProps.time
@@ -172,7 +172,7 @@ let coreFunctions = (function () {
 		propsMap.set( element, props )
 		return mutations
 	}
-	
+
 	return {
 		detachIdentifiers: detachIdentifiers,
 		calculatePresence: calculatePresence,
