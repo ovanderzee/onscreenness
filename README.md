@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.com/ovanderzee/onscreenness.svg?branch=master)](https://travis-ci.com/ovanderzee/onscreenness)
-[![Coverage Status](https://coveralls.io/repos/github/ovanderzee/onscreenness/badge.svg?branch=master)](https://coveralls.io/github/ovanderzee/onscreenness?branch=master)
+[![Build Status](https://travis-ci.com/ovanderzee/onscreenness.svg?branch=main)](https://travis-ci.com/ovanderzee/onscreenness)
+[![Coverage Status](https://coveralls.io/repos/github/ovanderzee/onscreenness/badge.svg?branch=main)](https://coveralls.io/github/ovanderzee/onscreenness?branch=main)
 [![DeepScan grade](https://deepscan.io/api/teams/4340/projects/6093/branches/49020/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=4340&pid=6093&bid=49020)
 
 # onscreenness
