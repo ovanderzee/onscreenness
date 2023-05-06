@@ -1,24 +1,13 @@
-// jest.config.js
-
 module.exports = {
-
-  "coveragePathIgnorePatterns": [
-    "<rootDir>/lib",
-    "<rootDir>/test"
+  setupFilesAfterEnv: [
+    "<rootDir>test/setupTests.js"
   ],
-
-  "globalSetup": "<rootDir>test/_globalSetup.js",
-
-  "globalTeardown": "<rootDir>test/_globalTeardown.js",
-
-
-  "setupFiles": [
-    "<rootDir>/test/_setupFiles.js"
+  testEnvironment: 'jsdom',
+  testPathIgnorePatterns: [
+    "<rootDir>/temp/",
+    "<rootDir>/lib/"
   ],
-
-  "testEnvironment": "<rootDir>test/_puppeteer_env.js",
-
-  "transformIgnorePatterns": [
+  transformIgnorePatterns: [
     "node_modules/(?!(document-staging)/)",
   ],
 };
