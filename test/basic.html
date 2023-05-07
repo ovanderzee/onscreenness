@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <style type="text/css">
+		:root {
+			--demo-red: #A83973;
+			--demo-yellow: #CCCC29;
+			--demo-green: #39A871;
+			--demo-blue: #3939A8;
+		}
+		body {
+			margin: 0;
+			font-size: 16px;
+			color: #333;
+		}
+		header, form, section, footer {
+			margin: 0;
+			padding: 0 3em;
+			overflow: auto;
+		}
+
+		header, form {
+			background: #ccc;
+			color: #333;
+		}
+		h2 span {
+			font: inherit;
+			text-align: center;
+			background: var(--demo-red);
+			color: white;
+			border: .133em solid white;
+			padding: .133em .333em;
+			margin: .133em .333em;
+		}
+		button {
+			font-size: 83%;
+			padding: 0.333em;
+			margin: 0 0.333em 0.333em 0;
+		}
+
+		section {
+			border: 1px solid mediumvioletred;
+			margin: 1em 3em;
+			padding: 0 1em;
+		}
+		.example {
+			border: 1px solid black;
+			margin: 1em 0;
+			padding: 2.333em;
+			background: lightsteelblue;
+		}
+		section[data-onscreenness]:before,
+		div[data-onscreenness]:after {
+			content: 'onscreenness: ' attr(data-onscreenness) ', overlapping: ' attr(data-overlapping);
+			display: block;
+			margin: .25em auto;
+		}
+
+		.offscreen, .crossscreen, .onscreen {
+			color: #fff;
+		}
+		.offscreen {
+			background: var(--demo-red);
+		}
+		.crossscreen {
+			background: var(--demo-green);
+		}
+		.onscreen {
+			background: var(--demo-blue);
+		}
+		.overscreen {
+			background: var(--demo-yellow);
+		}
+
+		footer {
+			background: #333;
+			color: #ccc;
+		}
+	</style>
+</head>
+<body>
+<header>
+    <h2>Basic Example <span>test</span></h2>
+</header>
+<form method="GET">
+    <button id="collect-example" type="button">
+        Set initial collection
+    </button>
+    <button id="exclude-example" type="button">
+        Exclude 2nd ex. element
+    </button>
+    <button id="collect-section" type="button">
+        Add section
+    </button>
+    <button id="remove-section" type="button">
+        Remove section
+    </button>
+    <button id="reset" type="button">
+        Reset collection
+    </button>
+    <button id="callback" type="button">
+        Callback
+    </button>
+</form>
+<section>
+    <div id="first" class="example">Basic Example Element</div>
+    <div id="second" class="example">Basic Example Element</div>
+    <div id="third" class="example">Basic Example Element</div>
+    <div id="fourth" class="example" data-onscreenness>Data attribute Example Element</div>
+    <div id="fifth" class="example">Basic Example Element</div>
+    <div id="sixth" class="example">Basic Example Element</div>
+    <div id="seventh" class="example">Basic Example Element</div>
+    <div id="eighth" class="example">Basic Example Element</div>
+</section>
+<footer>
+    <h4>Basic functionality playground</h4>
+</footer>
+<script type="module">
+		import onScreenness from '../src/index.js'
+		document.getElementById('collect-example').addEventListener('click', () => {
+			onScreenness.collect('.example')
+		}, false)
+		document.getElementById('exclude-example').addEventListener('click', () => {
+			onScreenness.exclude('#second')
+		}, false)
+		document.getElementById('collect-section').addEventListener('click', () => {
+			onScreenness.collect('section')
+		}, false)
+		document.getElementById('remove-section').addEventListener('click', () => {
+			onScreenness.remove('section')
+		}, false)
+		document.getElementById('reset').addEventListener('click', () => {
+			onScreenness.reset()
+		}, false)
+		document.getElementById('callback').addEventListener('click', () => {
+			let onScreenNotification = function ( props ) {
+				if ( props.addClass === 'onscreen') {
+					console.log(`${this.id} is fully visible to the user`)
+				}
+			}
+			onScreenness.collect('#seventh', onScreenNotification)
+		}, false)
+	</script>
+</body>
+</html>

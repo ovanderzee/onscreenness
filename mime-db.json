@@ -1,0 +1,154 @@
+{
+  "application/gml+xml": {
+    "extensions": ["gml"]
+  },
+  "application/gpx+xml": {
+    "extensions": ["gpx"]
+  },
+  "text/javascript": {
+    "extensions": ["js","mjs"]
+  },
+  "application/json": {
+    "extensions": ["json","map"]
+  },
+  "application/json5": {
+    "extensions": ["json5"]
+  },
+  "application/octet-stream": {
+    "extensions": ["bin","dms","lrf","mar","so","dist","distz","pkg","bpk","dump","elc","deploy","exe","dll","deb","dmg","iso","img","msi","msp","msm","buffer"]
+  },
+  "application/pdf": {
+    "extensions": ["pdf"]
+  },
+  "application/rss+xml": {
+    "extensions": ["rss"]
+  },
+  "application/rtf": {
+    "extensions": ["rtf"]
+  },
+  "application/xml": {
+    "extensions": ["xml","xsl","xsd","rng"]
+  },
+  "application/x-tar": {
+    "extensions": ["tar"]
+  },
+  "application/zip": {
+    "extensions": ["zip"]
+  },
+  "application/gzip": {
+    "extensions": ["gz"]
+  },
+
+  "application/vnd.ms-excel": {
+    "extensions": ["xls","xlm","xla","xlc","xlt","xlw"]
+  },
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+    "extensions": ["xlsx"]
+  },
+  "application/msword": {
+    "extensions": ["doc","dot"]
+  },
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document": {
+    "extensions": ["docx"]
+  },
+  "application/vnd.ms-powerpoint": {
+    "extensions": ["ppt","pps","pot"]
+  },
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation": {
+    "extensions": ["pptx"]
+  },
+
+  "audio/basic": {
+    "extensions": ["au","snd"]
+  },
+  "audio/mp3": {
+    "extensions": ["mp3"]
+  },
+  "audio/mpeg": {
+    "extensions": ["mpga","mp2","mp2a","mp3","m2a","m3a"]
+  },
+  "audio/wav": {
+    "extensions": ["wav"]
+  },
+  "audio/wave": {
+    "extensions": ["wav"]
+  },
+  "audio/webm": {
+    "extensions": ["weba"]
+  },
+  "audio/x-aac": {
+    "extensions": ["aac"]
+  },
+  "audio/x-aiff": {
+    "extensions": ["aif","aiff","aifc"]
+  },
+  "audio/x-flac": {
+    "extensions": ["flac"]
+  },
+  "audio/x-ms-wma": {
+    "extensions": ["wma"]
+  },
+  "audio/x-wav": {
+    "extensions": ["wav"]
+  },
+
+  "image/jp2": {
+    "extensions": ["jp2","jpg2"]
+  },
+  "image/jpeg": {
+    "extensions": ["jpeg","jpg","jpe"]
+  },
+  "image/gif": {
+    "extensions": ["png"]
+  },
+  "image/heic": {
+    "extensions": ["heic"]
+  },
+  "image/png": {
+    "extensions": ["png"]
+  },
+  "image/svg+xml": {
+    "extensions": ["svg","svgz"]
+  },
+  "image/webp": {
+    "extensions": ["webp"]
+  },
+
+  "text/css": {
+    "extensions": ["css"]
+  },
+  "text/csv": {
+    "extensions": ["csv"]
+  },
+  "text/html": {
+    "extensions": ["htm","html","shtml"]
+  },
+  "text/markdown": {
+    "extensions": ["markdown","md"]
+  },
+  "text/mathml": {
+    "extensions": ["mml"]
+  },
+  "text/plain": {
+    "extensions": ["txt","text","conf","def","list","log","in","ini"]
+  },
+  "text/yaml": {
+    "extensions": ["yaml","yml"]
+  },
+
+  "video/3gpp": {
+    "extensions": ["3gp","3gpp"]
+  },
+  "video/mp4": {
+    "extensions": ["mp4","mp4v","mpg4"]
+  },
+  "video/quicktime": {
+    "extensions": ["qt","mov"]
+  },
+  "video/webm": {
+    "extensions": ["webm"]
+  },
+  "video/x-msvideo": {
+    "extensions": ["avi"]
+  }
+}

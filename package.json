@@ -4,6 +4,7 @@
   "description": "Supply visibility classes and data to selected elements on your webpage.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
+  "type": "module",
   "scripts": {
     "build:src": "cf dist && rollup --config",
     "build:docs": "documentation build src/*.js --format md > API.md",
