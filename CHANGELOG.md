@@ -1,7 +1,14 @@
 
 ## Version History
 
-1.5,0
+2.0.0
+
+* build with esbuild
+* e2e tests
+* make /src importable (documentStaging, myLib)
+* export items
+
+1.5.0
 
 * More classnames:
   * nearingscreen
